@@ -7,7 +7,7 @@ import { MagnifyingGlassIcon, GlobeAmericasIcon, Bars3BottomRightIcon, UserCircl
 
 function Navbar () {
   return (
-    <div className='flex bg-slate-900 py-3 px-5 items-center'>
+    <div className='flex bg-slate-900 py-3 px-5 items-center mx-auto'>
 
         {/* Logo  */}
         <div className=''>

@@ -1,13 +1,4 @@
 import React from 'react'
-import Image from 'next/image'
-import Twitter from '@/public/images/social_twitter.png'
-import Facebook from '@/public/images/social_facebook.png'
-import Instagram from '@/public/images/social_instagram.png'
-import Discord from '@/public/images/social_discord.png'
-// import Youtube from '@/public/images/social_youtube.png'
-// import Github from '@/public/images/social_github.png'
-// import Twitch from '@/public/images/social_twitch.png'
-// import Tiktok from '@/public/images/social_tiktok.png'
 import { SocialIcon } from 'react-social-icons'
 
 
