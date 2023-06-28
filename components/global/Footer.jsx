@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div><footer className='bg-slate-900 text-slate-200 py-10 px-10'>
+    <footer className='bg-slate-900 text-slate-200 py-10 px-10'>
         
     <div className='justify-between mx-auto gap-16 sm:flex'>
 
@@ -79,7 +79,7 @@ function Footer() {
 
     </div>
 
-</footer></div>
+</footer>
   )
 }
 

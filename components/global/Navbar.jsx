@@ -2,21 +2,23 @@ import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import SocialLinks from './SocialLinks'
-import Logo from '../public/images/Logo.png'
+import Logo from '@/public/images/Logo.png'
 import { MagnifyingGlassIcon, GlobeAmericasIcon, Bars3BottomRightIcon, UserCircleIcon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 
 function Navbar () {
   return (
-    <div className='flex bg-slate-900 py-3 px-5 items-center mx-auto'>
+    <div className='bg-slate-900 sticky top-0 z-50 flex justify-between shadow-lg py-5 px-5 md:px-8 gap-1 w-full'>
 
         {/* Logo  */}
         <div className=''>
+            <Link href='/' passHref>
             <Image 
                 src={Logo}
                 alt='Logo'
                 style={{width: '220px', height: '70px'}}
                 className='cursor-pointer'            
             />
+            </Link>
         </div>
 
         {/* Social Links  */}
