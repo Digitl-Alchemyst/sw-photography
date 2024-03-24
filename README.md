@@ -1,34 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1><ul><b>
+   
+</b></ul></h1>
+<p align="center">
+  <br />
+  <img width="650" src="./public/global/banner.png" alt="VagaBlog Banner">
+  <br />
+</p>
 
-## Getting Started
+ <p svg align="center">
+<img src="https://readme-typing-svg.demolab.com?font=Noto+Serif&pause=3000&color=2FA4D7&center=true&vCenter=true&width=375&lines=Next+Alchemy+Boilerplate+14.1.0" alt=typing>
+ </p>
 
-First, run the development server:
+Basic boilerplate for Next.js projects using Typescript, Tailwind; to be added: testing features from Jest & React Testing Library & Commit Linting with Lint-Staged & Huksy
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<h2><ul><b>Features</b></ul></h2>
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+<h4>
+    Testing<br>
+        => Jest <br>
+        => React Testing Library <br>
+    Commits<br>
+        => Husky <br>
+        => Lint-Staged <br>
+    Imports<br>
+        => @ = ./src <br>
+        => @/c = ./src/components <br>
+        => @/h = ./src/hooks <br>
+        => @/l = ./src/lib <br>
+        => @/u = ./src/lib/util <br>
+        => # = ./ <br>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+</h4>
 
-To learn more about Next.js, take a look at the following resources:
+<h3><ul><b>Project State</b></ul></h3>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This biolerplate project is setup for Next.js 14.1.x [This project will be maintained to remain current with Next.js 14.1 until otherwise noted.] This is ready to use in its current state 
+<br>
+This project will be set up with Jest and React Testing Library for code testing, it has been configured to work with Typescript. Custom imports have been set up. Eslint settings are preconfigured using a moderately strict ruleset. Uses ESLint to parse to Typescript. Sets specific rules for for testing envrioment (files within the **tests** directory or files with names ending in .spec.js, .test.js, .ts, .jsx, or .tsx). Configured Import Resolver to handle custom import settings. Uses Lint-Staged & Husky to Lint & format with prettier all files before commiting updates.<br> <br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<h3>🚀 Tailwind CSS Extensions</h3><br>
+🌈 Neon Shadows <br>
+🌀 Slower Spin Animation <br>
+🙈 Scrollbar Hide <br>
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<h3><ul><b>How to use</b></ul></h3>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Install Node Modules
+
+    npm install
+
+## Run Application
+
+    npm run dev
+
+The app will start on [http://localhost:3000](http://localhost:3000) in your browser. 
+
+### Deploy
+
+Delop to your testing enviroment on vercel
+
+    vercel
+
+Deploy to your production enviroment on vercel
+
+    vercel --prod
+
+### Formatting and Checks
+
+Run ESLint
+
+    npm run lint
+
+Prettier Code Check
+
+    prettier --check.
+
+Prettier Code Format
+
+    prettier --write.
