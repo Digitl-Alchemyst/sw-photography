@@ -22,6 +22,7 @@
 # next.js
 /.next/
 /out/
+/studio/dist
 
 # production
 /build
@@ -29,24 +30,26 @@
 # misc
 .DS_Store
 *.pem
+.vscode
+.idea/
+*.iml
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
 
 # local env files
 .env*.local
 .env
+.env*.local
+.env
+.env.local
+studio/.env.development
 
 # Typescript
 *.tsbuildinfo
 
 # vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
 .vercel
