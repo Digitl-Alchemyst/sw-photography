@@ -10,7 +10,7 @@ const scriptFont = Alex_Brush({
 
 function Portfolio() {
   return (
-    <main className='w-full bg-steeldark-600 text-white '>
+    <main className='w-full bg-steeldark-600 text-steelpolished-400 '>
       <div className='flex flex-col items-center justify-center space-y-10 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-8 py-6'>
         <h1
           className={`text-center text-7xl font-bold ${scriptFont.className}`}
