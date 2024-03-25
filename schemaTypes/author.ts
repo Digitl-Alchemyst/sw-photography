@@ -1,15 +1,10 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity';
 
 export default defineType({
   name: 'author',
   title: 'Author',
   type: 'document',
   fields: [
-    defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
-    }),
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -20,12 +15,24 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'image',
-      title: 'Image',
+      name: 'name',
+      title: 'Name',
+      type: 'string',
+    }),
+    defineField({
+      name: 'authorImage',
+      title: 'Author Image',
       type: 'image',
       options: {
         hotspot: true,
       },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
     }),
     defineField({
       name: 'bio',
@@ -35,8 +42,70 @@ export default defineType({
         {
           title: 'Block',
           type: 'block',
-          styles: [{title: 'Normal', value: 'normal'}],
+          styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
+        },
+      ],
+    }),
+    defineField({
+      name: 'twitter',
+      title: 'Twitter',
+      type: 'string',
+    }),
+    defineField({
+      name: 'instagram',
+      title: 'Instagram',
+      type: 'string',
+    }),
+    defineField({
+      name: 'facebook',
+      title: 'Facebook',
+      type: 'string',
+    }),
+    defineField({
+      name: 'tiktok',
+      title: 'Tiktok',
+      type: 'string',
+    }),
+    defineField({
+      name: 'youtube',
+      title: 'Youtube',
+      type: 'string',
+    }),
+    defineField({
+      name: 'linkedin',
+      title: 'Linkedin',
+      type: 'string',
+    }),
+    defineField({
+      name: 'website',
+      title: 'Website',
+      type: 'string',
+    }),
+    defineField({
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+    }),
+    defineField({
+      name: 'featuredPhotos',
+      title: 'Featured Photos',
+      type: 'array',
+      of: [
+        {
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            },
+          ],
         },
       ],
     }),
@@ -47,4 +116,4 @@ export default defineType({
       media: 'image',
     },
   },
-})
+});
