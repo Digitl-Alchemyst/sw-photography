@@ -11,13 +11,15 @@ const scriptFont = Alex_Brush({
 function Portfolio() {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400 '>
-      <div className='flex flex-col items-center justify-center space-y-10 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-8 py-6'>
+      {/* Main Container  */}
+      <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l  from-steelpolished-300/10 to-steeldark-900  px-10 py-12'>
+        {/* Header */}
         <h1
           className={`text-center text-7xl font-bold ${scriptFont.className}`}
         >
           -Gallery-
         </h1>
-        <div className='grid w-full grid-cols-2 grid-rows-2 items-center justify-center gap-x-6 gap-y-8'>
+        <section className='grid w-full grid-cols-3 grid-rows-2 items-center justify-center gap-x-8 gap-y-8'>
           <GalleryCard
             title='Landscape'
             img='/gallery/forest.jpg'
@@ -29,6 +31,11 @@ function Portfolio() {
             url='/gallery/journalism'
           />
           <GalleryCard
+            title='Astro Photography'
+            img='/gallery/astro.jpg'
+            url='/gallery/astro'
+          />
+          <GalleryCard
             title='Urban'
             img='/gallery/city.webp'
             url='/gallery/urban'
@@ -38,7 +45,12 @@ function Portfolio() {
             img='/gallery/portrait.webp'
             url='/gallery/portrait'
           />
-        </div>
+          <GalleryCard
+            title='Wildlife'
+            img='/gallery/wildlife.webp'
+            url='/gallery/wildlife'
+          />
+        </section>
       </div>
     </main>
   );

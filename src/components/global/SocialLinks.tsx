@@ -1,10 +1,7 @@
-import React from 'react'
-import { SocialIcon } from 'react-social-icons'
+import React from 'react';
+import { SocialIcon } from 'react-social-icons';
 
-
-
-  
-  const SocialLinks = () => {
+const SocialLinks = () => {
   return (
     <div className='flex items-center justify-between'>
       <SocialIcon
@@ -12,7 +9,11 @@ import { SocialIcon } from 'react-social-icons'
         bgColor='transparent'
         fgColor='#7b7b7d'
         url='https://www.instagram.com/digital_alchemyst/'
-        style={{ height: 40, width: 40, }}
+        style={{
+          height: 40,
+          width: 40,
+        }}
+        className='transition-all duration-300 hover:text-accent2'
       />
       <SocialIcon
         network='twitter'
@@ -28,6 +29,13 @@ import { SocialIcon } from 'react-social-icons'
         url='https://www.facebook.com/DigitalAlchemyst'
         style={{ height: 40, width: 40 }}
       />
+      <SocialIcon
+        network='youtube'
+        bgColor='transparent'
+        fgColor='#7b7b7d'
+        url='https://www.youtube.com/@DigitalAlchemyst'
+        style={{ height: 40, width: 40 }}
+      />
       {/* <SocialIcon
             network="discord"
             bgColor="none"
@@ -35,13 +43,6 @@ import { SocialIcon } from 'react-social-icons'
             url='https://discord.gg/vagabondgpt'
             style={{ height: 40, width: 40, }}
         /> */}
-      <SocialIcon
-        network='youtube'
-        bgColor='transparent'
-        fgColor='#7b7b7d'
-        url='https://www.youtube.com/@DigitalAlchemyst'
-        style={{ height: 40, width: 40, }}
-      />
       {/* <SocialIcon
         network='twitch'
         bgColor='transparent'
@@ -51,6 +52,6 @@ import { SocialIcon } from 'react-social-icons'
       /> */}
     </div>
   );
-}
+};
 
-export default SocialLinks
+export default SocialLinks;

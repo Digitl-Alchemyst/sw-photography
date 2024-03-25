@@ -17,10 +17,19 @@ import Link from 'next/link';
 
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import Head from 'next/head';
 import { HiBuildingOffice2 } from 'react-icons/hi2';
 
+import { Alex_Brush, Satisfy, Allison } from 'next/font/google';
+
+const scriptFont = Alex_Brush({
+  subsets: ['latin'],
+  variable: '--my-font-family',
+  weight: '400',
+});
+
 const Contact = () => {
+
+  // Email Form Logic 
   const form = useRef();
 
   const sendEmail = (e) => {
@@ -48,15 +57,16 @@ const Contact = () => {
   return (
     <main className=' bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
-      <div className='mx-auto flex h-full w-full flex-col items-center justify-center bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-18 py-32'>
-
+      <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-18 py-22'>
         {/* Header */}
-        <h1 className='mb-12 text-center text-4xl font-bold underline decoration-steelflat-600 underline-offset-4'>
-          Let&apos;s <span className='text-accent'>connect</span>
+        <h1
+          className={`text-center text-7xl font-bold ${scriptFont.className}`}
+        >
+          -Let&apos;s <span className='text-accent'>Connect-</span>
         </h1>
 
         {/* Sub Container  */}
-        <div className='flex flex-row items-center justify-center space-x-16 rounded-xl border border-steelflat-600 bg-steeldark-400/40 px-16 py-16'>
+        <div className='flex flex-row items-center justify-center space-x-16 rounded-xl border border-steelflat-600/60 bg-steeldark-400/40 px-16 py-16 drop-shadow-lg shadow-xl shadow-steeldark-700/40'>
           {/* Contact Info */}
           <section className='mx-auto flex w-full flex-1 flex-col items-start space-y-4'>
             <h3 className='text-2xl font-bold'>
@@ -64,11 +74,11 @@ const Contact = () => {
             </h3>
 
             <p className='text-left'>
-              You may use your preferred method of communication to reach me.
-              Contact me to discuss your project, and photography or video
-              needs. I am always open to discuss new projects, creative ideas,
-              collaborations or other opportunities. Please feel free to to
-              reach out to me through your preferred mode of communication.
+              Feel free to get in touch with me however you prefer. Let&apos;s
+              chat about your project and any photography or video needs you
+              have. I&apos;m open to discussing new projects, creative ideas,
+              collaborations, or any other opportunities you have in mind. Just
+              reach out to me in whatever way works best for you.
             </p>
 
             {/* Link Tree  */}
@@ -90,14 +100,14 @@ const Contact = () => {
                 <Link
                   href='mailto:digitalalchemiststudios@gmail.com'
                   target='_blank'
-                  className='hover:text-accent2 cursor-pointer'
+                  className='cursor-pointer hover:text-accent2'
                 >
                   StevenRWatkins86@gmail.com
                 </Link>
                 <Link
                   href='mailto:digitalalchemiststudios@gmail.com'
                   target='_blank'
-                  className='hover:text-accent2 cursor-pointer'
+                  className='cursor-pointer hover:text-accent2'
                 >
                   DigialAlchemistStudios@gmail.com
                 </Link>
@@ -113,7 +123,7 @@ const Contact = () => {
                   <Link
                     href='tel:7204513767'
                     target='_blank'
-                    className='hover:text-accent2 cursor-pointer'
+                    className='cursor-pointer hover:text-accent2'
                   >
                     +1 (720) 451-3767
                   </Link>
@@ -123,7 +133,7 @@ const Contact = () => {
                   <Link
                     href='tel:7209303876'
                     target='_blank'
-                    className='hover:text-accent2 cursor-pointer'
+                    className='cursor-pointer hover:text-accent2'
                   >
                     +1 (720) 930-3876
                   </Link>
@@ -134,16 +144,16 @@ const Contact = () => {
             {/* Text Links  */}
             <div className='mb-4 flex items-center gap-x-6 text-lg'>
               <Link href='sms:7204513767'>
-                <BsFillChatLeftTextFill className='hover:text-accent2 h-7 w-7 cursor-pointer text-accent' />
+                <BsFillChatLeftTextFill className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
               </Link>
               <Link
                 href='https://signal.group/#CjQKIFmG5VRvMOLW8RsrO9Fo5C9nrJCfxV9TMKkW9qaexiVxEhBgwsiG6RorUJenFSjbISHI'
                 target='_blank'
               >
-                <BsSignal className='hover:text-accent2 h-7 w-7 cursor-pointer text-accent' />
+                <BsSignal className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
               </Link>
               <Link href='https://wa.me/7204513767?text=Hello' target='_blank'>
-                <BsWhatsapp className='hover:text-accent2 h-7 w-7 cursor-pointer text-accent' />
+                <BsWhatsapp className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
               </Link>
             </div>
 
@@ -155,49 +165,53 @@ const Contact = () => {
 
           {/* Contact Form  */}
           <div className='flex w-full flex-1 flex-col items-start justify-center space-y-4'>
-            <h3 className='mb-16 text-2xl font-bold'>
+            <h3 className='mb-6 text-2xl font-bold'>
               Contact <span className='text-accent'>Me</span>
             </h3>
             <form
               onSubmit={sendEmail}
               ref={form}
-              className='mx-auto flex w-full flex-1 flex-col gap-y-4 pb-50 xl:pb-0'
+              className='mx-auto flex w-full flex-1 flex-col gap-y-4 pb-50 xl:pb-0 text-steeldark-700'
             >
-              {/* Group */}
-              <div className='flex gap-x-6'>
+              {/* Input Group */}
+              <div className='flex w-full gap-x-6'>
                 <input
+                  required
                   type='text'
                   name='name'
                   placeholder='name'
-                  className='border border-white/20 bg-steelpolished-400 outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
+                  className='w-full border border-white/20 rounded-sm bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
                 />
                 <input
+                  required
                   type='text'
                   name='email'
                   placeholder='email'
-                  className='border border-white/20 bg-steelpolished-400 outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
+                  className='w-full border border-white/20 rounded-sm bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
                 />
               </div>
               <input
+                required
                 type='text'
                 name='subject'
                 placeholder='subject'
-                className='border border-white/20 bg-steelpolished-400 outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
+                className='border border-white/20 rounded-sm bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
               />
               <textarea
+                required
                 name='message'
                 placeholder='message'
-                className='h-[180px] w-full resize-none rounded-lg p-6 capitalize'
+                className='h-[180px] w-full resize-none rounded-lg p-3 capitalize'
               />
               <button
                 type='submit'
                 value='Send'
-                className='text-light hover:border-accent2 hover:bg-accent2 group flex max-w-[170px] items-center justify-center overflow-hidden rounded-lg border border-solid border-accent bg-steeldark-800/60 p-3 px-8 text-lg font-semibold transition-all duration-300 hover:text-steeldark-500 hover:neon-sky'
+                className='text-light text-steelpolished-300 group flex max-w-[170px] items-center justify-center overflow-hidden rounded-lg border border-solid border-accent bg-steeldark-800/60 p-3 px-8 text-lg font-semibold transition-all duration-75 hover:border-accent2 hover:bg-accent2 hover:text-steeldark-500 hover:neon-sky'
               >
                 <span className='transition-all duration-500 group-hover:-translate-x-[120%] group-hover:opacity-0'>
                   Let&apos;s Talk
                 </span>
-                <BsArrowRight className='absolute translate-x-[120%] text-[22px] opacity-0 transition-all delay-75 duration-500 group-hover:flex group-hover:-translate-x-0 group-hover:opacity-100' />
+                <BsArrowRight className='absolute translate-x-[120%] text-[22px] opacity-0 transition-all delay-25 duration-300 group-hover:flex group-hover:-translate-x-0 group-hover:opacity-100' />
               </button>
             </form>
           </div>

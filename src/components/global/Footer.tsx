@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <footer className='bg-steeldark-700 px-10 py-10 text-steelpolished-200 w-full'>
+    <footer className='w-full bg-steeldark-700 px-10 py-10 text-steelpolished-200'>
       <div className='mx-auto justify-between gap-16 sm:flex'>
         {/* COLUMN 1 */}
         <div className='mt-16 flex basis-1/2 flex-col sm:mt-0'>
@@ -19,7 +19,25 @@ function Footer() {
 
         {/* COLUMN 2 */}
         <div className='mt-16 basis-1/4 sm:mt-0'>
-          <h4 className='text-2xl font-bold text-steelflat-400'>Links</h4>
+          <h4 className='text-2xl font-bold text-steelflat-400'>Social Media</h4>
+          <p className='my-5  text-sm text-steelflat-600'>
+            <a
+              href='https://twitter.com/DigitlAlchemyst'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Instagram
+            </a>
+          </p>
+          <p className='my-5  text-sm text-steelflat-600'>
+            <a
+              href='https://twitter.com/DigitlAlchemyst'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Youtube
+            </a>
+          </p>
           <p className='my-5  text-sm text-steelflat-600'>
             <a
               href='https://twitter.com/DigitlAlchemyst'
@@ -36,6 +54,15 @@ function Footer() {
               rel='noopener noreferrer'
             >
               Facebook
+            </a>
+          </p>
+          <p className='my-5  text-sm text-steelflat-600'>
+            <a
+              href='https://facebook.com/DigitalAlchemyst'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              Twitch
             </a>
           </p>
           <p className='my-5  text-sm text-steelflat-600'>
@@ -80,15 +107,10 @@ function Footer() {
 
         {/* COLUMN 2 */}
         <div className='mt-16 basis-1/4 sm:mt-0'>
-          <h4 className='text-2xl font-bold text-steelflat-400'>Links</h4>
+          <h4 className='text-2xl font-bold text-steelflat-400'>Policies</h4>
           <p className='my-5  text-sm text-steelflat-600'>
             <a href='./' target='_blank' rel='noopener noreferrer'>
               Orders
-            </a>
-          </p>
-          <p className='my-5  text-sm text-steelflat-600'>
-            <a href='./' target='_blank' rel='noopener noreferrer'>
-              NFT Redemption
             </a>
           </p>
           <p className='my-5  text-sm text-steelflat-600'>
@@ -98,12 +120,22 @@ function Footer() {
           </p>
           <p className='my-5  text-sm text-steelflat-600'>
             <a href='./' target='_blank' rel='noopener noreferrer'>
-              Support
+              NFT Redemption
+            </a>
+          </p>
+          <p className='my-5  text-sm text-steelflat-600'>
+            <a href='./' target='_blank' rel='noopener noreferrer'>
+              Terms of Service
             </a>
           </p>
           <p className='my-5  text-sm text-steelflat-600'>
             <a href='./' target='_blank' rel='noopener noreferrer'>
               Privacy Policy
+            </a>
+          </p>
+          <p className='my-5  text-sm text-steelflat-600'>
+            <a href='./' target='_blank' rel='noopener noreferrer'>
+              Image/Video Licensing
             </a>
           </p>
         </div>

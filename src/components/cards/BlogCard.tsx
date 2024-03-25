@@ -3,13 +3,13 @@ import React from 'react';
 
 function BlogCard() {
   return (
-    <div className='flex flex-col space-y-2 rounded-md bg-steelpolished-600/40 px-6 py-4 text-steelpolished-300 shadow-2xl'>
+    <div className='flex flex-col space-y-2 rounded-md bg-steelpolished-600/40 px-6 py-4 text-steelpolished-300 shadow-2xl shadow-steeldark-700/40 drop-shadow-lg'>
       <div className='relative h-98 w-full'>
         <Image
           src='/blog/blog.jpg'
           alt='blog-image'
-fill
-          className='object-center rounded-md object-cover drop-shadow-xl transition-transform duration-200 ease-out hover:scale-105'
+          fill
+          className='rounded-md object-cover object-center drop-shadow-xl transition-transform duration-200 ease-out hover:scale-105'
         />
       </div>
       <div>

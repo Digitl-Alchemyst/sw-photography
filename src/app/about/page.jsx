@@ -13,23 +13,21 @@ const scriptFont = Alex_Brush({
 function About() {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
-
       {/* Main Container  */}
-      <div className='bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-30 py-20 space-y-12'>
-        
+      <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-30 py-20'>
         {/* Heading  */}
-        <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>
-          -About Me-
+        <h1
+          className={`text-center text-7xl font-bold ${scriptFont.className}`}
+        >
+          -About <span className='text-accent'>Me-</span>
         </h1>
 
         {/* Bio Section  */}
-        <section className='mx-auto flex h-full w-full flex-col items-center justify-center space-x-36   xl:flex-row'>
-
+        <section className='mx-auto flex h-full w-full flex-row items-center justify-center  space-x-36'>
           {/* Text & Counters */}
-          <div className='flex flex-col justify-center items-center w-5/6'>
-
+          <div className='flex w-5/6 flex-col items-center justify-center'>
             {/* Bio  */}
-            <p className=' rounded-lg border border-solid border-steelflat-200/30 bg-slate-700/80 px-4 py-6 text-steeldark-300'>
+            <p className=' rounded-lg border border-solid border-steelflat-200/30 bg-steeldark-600/80 px-4 py-6 text-steeldark-200 shadow-xl shadow-steeldark-700/40 drop-shadow-lg'>
               Throughout my life, I&apos;ve been drawn to the world of
               technology, and it was in web application development that I found
               my true passion. Starting with humble experiments in HTML and CSS,
@@ -52,12 +50,7 @@ function About() {
               create impactful solutions that push the boundaries of web
               application development.
             </p>
-
-
-
           </div>
-
-          
 
           {/* Profile Image  */}
           <div>
@@ -66,7 +59,7 @@ function About() {
               width={500}
               height={1200}
               alt='Profile'
-              className='rounded-full border-2 border-steeldark-300/80 opacity-55'
+              className='rounded-full border-2 border-steeldark-300/80 opacity-55 shadow-xl shadow-steeldark-700/40 drop-shadow-lg'
             />
           </div>
         </section>

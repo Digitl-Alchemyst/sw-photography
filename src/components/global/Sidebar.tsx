@@ -12,11 +12,11 @@ const NavLinks = [
     title: 'Gallery',
     url: '/gallery',
   },
-  // {
-  //   id: 3,
-  //   title: 'Booking',
-  //   url: '/booking',
-  // },
+  {
+    id: 3,
+    title: 'Booking',
+    url: '/booking',
+  },
   // {
   //   id: 4,
   //   title: 'Shop',
@@ -54,7 +54,7 @@ const Alex = Satisfy({
 const Sidebar = () => {
   return (
     <div
-      className={`flex h-full flex-col bg-steeldark-900 py-5 ${Alex.className}`}
+      className={`flex h-full min-w-fit flex-col bg-steeldark-900 py-5 ${Alex.className}`}
     >
       <SocialLinks />
       <div className='mt-10 flex flex-col space-y-16 px-16'>
