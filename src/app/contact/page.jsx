@@ -48,14 +48,15 @@ const Contact = () => {
   return (
     <main className=' bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
-      <div className='mx-auto flex h-full w-5/6 flex-col items-center justify-center px-18 py-32'>
+      <div className='mx-auto flex h-full w-full flex-col items-center justify-center bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-18 py-32'>
+
         {/* Header */}
         <h1 className='mb-12 text-center text-4xl font-bold underline decoration-steelflat-600 underline-offset-4'>
           Let&apos;s <span className='text-accent'>connect</span>
         </h1>
 
         {/* Sub Container  */}
-        <div className='flex flex-row items-center justify-center space-x-16 rounded-xl border border-steelflat-600 bg-steeldark-400/30 px-16 py-16'>
+        <div className='flex flex-row items-center justify-center space-x-16 rounded-xl border border-steelflat-600 bg-steeldark-400/40 px-16 py-16'>
           {/* Contact Info */}
           <section className='mx-auto flex w-full flex-1 flex-col items-start space-y-4'>
             <h3 className='text-2xl font-bold'>
@@ -153,8 +154,8 @@ const Contact = () => {
           </section>
 
           {/* Contact Form  */}
-          <div className='flex flex-col w-full flex-1 items-start space-y-4 justify-center'>
-            <h3 className='text-2xl font-bold mb-16'>
+          <div className='flex w-full flex-1 flex-col items-start justify-center space-y-4'>
+            <h3 className='mb-16 text-2xl font-bold'>
               Contact <span className='text-accent'>Me</span>
             </h3>
             <form
