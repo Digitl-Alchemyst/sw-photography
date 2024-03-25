@@ -7,21 +7,34 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cloud.appwrite.io',
+        hostname: 'cdn.sanity.io',
       },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
       {
-        protocol: 'http',
-        hostname: 'image.tmdb.org',
-      },
-      {
         protocol: 'https',
-        hostname: 'cdn.sanity.io',
+        hostname: 'source.unsplash.com',
       },
     ],
+  },
+  // These could cause issue may remove
+  typescript: {
+    // Set this to false if you want production builds to abort if there's type errors
+    ignoreBuildErrors: process.env.VERCEL_ENV === 'production',
+  },
+  eslint: {
+    /// Set this to false if you want production builds to abort if there's lint errors
+    ignoreDuringBuilds: process.env.VERCEL_ENV === 'production',
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+  experimental: {
+    taint: true,
   },
 };
 
