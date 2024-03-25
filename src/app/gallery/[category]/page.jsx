@@ -3,7 +3,8 @@ import React from 'react'
 function Category() {
   return (
     <div>
-        Category
+        Category <br />
+        This page can be dynamically generated from a database.
     
     </div>
   )

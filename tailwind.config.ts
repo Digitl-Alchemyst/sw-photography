@@ -27,6 +27,8 @@ const config: Config = {
         '15': '15',
       },
       colors: {
+        accent: '#799ed9',
+        accent2: '#6b58b8',
         steelpolished: {
           100: '#f4f4f5',
           200: '#e9e9ec',
@@ -39,15 +41,15 @@ const config: Config = {
           900: '#282829',
         },
         steelflat: {
-          100: "#e5e5e5",
-          200: "#cacacb",
-          300: "#b0b0b1",
-          400: "#959597",
-          500: "#7b7b7d",
-          600: "#626264",
-          700: "#4a4a4b",
-          800: "#313132",
-          900: "#191919"
+          100: '#e5e5e5',
+          200: '#cacacb',
+          300: '#b0b0b1',
+          400: '#959597',
+          500: '#7b7b7d',
+          600: '#626264',
+          700: '#4a4a4b',
+          800: '#313132',
+          900: '#191919',
         },
         steeldark: {
           100: '#d4d4d5',
@@ -333,7 +335,7 @@ const config: Config = {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
         },
-        accent: {
+        accent3: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',
         },

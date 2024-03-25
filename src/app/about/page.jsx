@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import React from 'react'
 import CountUp from 'react-countup';
 
@@ -8,6 +9,9 @@ function About() {
       <div className='mx-auto flex h-full w-full flex-col items-center gap-x-6 xl:flex-row xl:justify-center'>
 
         {/* Text & Counters */}
+        <div>
+          <Image src='/Steven2.jpg' width={200} height={200} alt='Profile' />
+        </div>
         <div className='flex flex-col justify-center xl:ml-80 '>
           
           {/* Heading & Bio  */}

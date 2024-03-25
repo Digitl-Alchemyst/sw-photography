@@ -6,7 +6,7 @@ import { SocialIcon } from 'react-social-icons'
   
   const SocialLinks = () => {
   return (
-    <div className='flex items-center justify-between px-3'>
+    <div className='flex items-center justify-between'>
       <SocialIcon
         network='instagram'
         bgColor='transparent'
