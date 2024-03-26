@@ -96,3 +96,13 @@ interface Comment {
 }
 
 
+// Query Payloads
+export interface blogListPayload {
+  title?: string;
+  author: Author;
+  blogCategories: Category[];
+  snippet?: string;
+  publistedAt?: Date;
+  tripDate?: Date;
+  slug?: string;
+}

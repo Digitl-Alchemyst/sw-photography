@@ -1,7 +1,7 @@
 import BlogCard from '@/components/cards/BlogCard'
 import React from 'react'
 import { Alex_Brush, Satisfy, Allison } from 'next/font/google';
-import { groq } from 'next-sanity';
+import { queryBlogList } from '@/lib/sanity.query';
 import { client } from '@/lib/sanity.client';
 import BlogCategories from '@/components/blog/BlogCategories';
 
@@ -11,23 +11,9 @@ const scriptFont = Alex_Brush({
   weight: '400',
 });
 
-
-const queryBlog = groq`
-  *[_type=='blog'] {
-    ...,
-    author->,
-    categories[]->,
-    publistedAt,
-    description,
-    title,
-    slug,
-    tripDate,    
-  } 
-  | order(_createdAt desc)
-`;
 export default async function Blog() {
 
-  const blogs = await client.fetch(queryBlog);
+  const blogs = await client.fetch(queryBlogList);
 
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
@@ -43,7 +29,7 @@ export default async function Blog() {
         <div>
         <BlogCategories />
         <hr className='border-accent mb-8' />
-        <section className='mx-auto mt-8 grid grid-cols-1 gap-8 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
+        <section className='mx-auto mt-8 grid grid-cols-1 gap-8 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 lg:grid-cols-3'>
           {blogs && blogs.length > 0 && <BlogCard blogs={blogs} />}
         </section>
         </div>

@@ -2,12 +2,12 @@ import {
   type QueryParams,
   type QueryResponseInitial,
   type UseQueryOptionsDefinedInitial,
-} from '@sanity/react-loader'
-import * as queryStore from '@sanity/react-loader'
+} from '@sanity/react-loader';
+import * as queryStore from '@sanity/react-loader';
 
-import { SettingsPayload } from '@/types'
+import { SettingsPayload } from '@/types';
 
-import { settingsQuery } from '../lib/queries'
+import { settingsQuery } from '../../lib/sanity.queries';
 
 /**
  * Exports to be used in client-only or components that render both server and client
@@ -24,19 +24,19 @@ export const useQuery = <
     query,
     params,
     options,
-  )
+  );
 
   // Always throw errors if there are any
   if (snapshot.error) {
-    throw snapshot.error
+    throw snapshot.error;
   }
 
-  return snapshot
-}
+  return snapshot;
+};
 
 /**
  * Loaders that are used in more than one place are declared here, otherwise they're colocated with the component
  */
 export function useSettings(initial: QueryResponseInitial<SettingsPayload>) {
-  return useQuery<SettingsPayload>(settingsQuery, {}, { initial })
+  return useQuery<SettingsPayload>(settingsQuery, {}, { initial });
 }

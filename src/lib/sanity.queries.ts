@@ -1,5 +1,19 @@
 import { groq } from 'next-sanity'
 
+export const queryBlogList = groq`
+  *[_type=='blog'] {
+    ...,
+    author->,
+    blogCategories[]->,
+    publistedAt,
+    snippet,
+    title,
+    slug,
+    tripDate,    
+  } 
+  | order(_createdAt desc)
+`;
+
 export const homePageQuery = groq`
   *[_type == "home"][0]{
     _id,

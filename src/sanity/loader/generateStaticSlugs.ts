@@ -1,9 +1,11 @@
-import 'server-only'
+/* eslint-disable import/prefer-default-export */
+import 'server-only';
 
-import { groq } from 'next-sanity'
+import { groq } from 'next-sanity';
 
-import { client } from '@/sanity/lib/client'
-import { token } from '@/sanity/lib/token'
+import { client } from '@/l/sanity.client';
+
+import { readToken as token } from '@/lib/sanity.tokens';
 
 // Used in `generateStaticParams`
 export function generateStaticSlugs(type: string) {
@@ -23,5 +25,5 @@ export function generateStaticSlugs(type: string) {
           tags: [type],
         },
       },
-    )
+    );
 }

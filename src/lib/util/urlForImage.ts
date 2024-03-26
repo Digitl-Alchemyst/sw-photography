@@ -1,11 +1,19 @@
 import { client } from '@/lib/sanity.client';
-import imageUrlBuilder from '@sanity/image-url';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import createImageUrlBuilder from '@sanity/image-url';
+import type { Image } from 'sanity';
 
-const builder = imageUrlBuilder(client);
+const imageBuilder = createImageUrlBuilder(client);
 
-function urlForImage(source: SanityImageSource) {
-  return builder.image(source);
+export default function urlForImage(source: Image | undefined) {
+  // Ensure that source image contains a valid reference
+  if (!source?.asset?._ref) {
+    return undefined;
+  }
+
+  return imageBuilder?.image(source).auto('format').fit('max');
 }
 
-export default urlForImage;
+
+export function urlForOpenGraphImage(image: Image | undefined) {
+  return urlForImage(image)?.width(1200).height(627).fit('crop').url();
+}
