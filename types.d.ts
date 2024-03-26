@@ -97,7 +97,7 @@ interface Comment {
 
 
 // Query Payloads
-export interface blogListPayload {
+interface blogListPayload {
   title?: string;
   author: Author;
   blogCategories: Category[];

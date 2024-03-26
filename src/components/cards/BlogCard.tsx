@@ -2,13 +2,13 @@ import Image from 'next/image';
 import ClientSideRoute from '@/c/providers/ClientSideRoute';
 import urlForImage from '@/u/urlForImage';
 import resolveHref from '@/lib/util/resolveHref';
-import { ArrowUpRightIcon, ShareIcon } from '@heroicons/react/24/solid';
-import { Image as Img } from 'sanity';
+import { ArrowUpRightIcon } from '@heroicons/react/24/solid';
 
 type Props = {
   blogs: Blog[] | undefined;
+
 };
-function BlogCard({ blogs }: Props) {
+function BlogCard({ blogs,  }: Props) {
   if (!blogs) {
     return null;
   }

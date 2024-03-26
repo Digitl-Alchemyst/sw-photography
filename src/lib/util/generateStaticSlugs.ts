@@ -8,7 +8,7 @@ import { client } from '@/l/sanity.client';
 import { readToken as token } from '@/lib/sanity.tokens';
 
 // Used in `generateStaticParams`
-export function generateStaticSlugs(type: string) {
+export async function generateStaticSlugs(type: string) {
   // Not using loadQuery as it's optimized for fetching in the RSC lifecycle
   return client
     .withConfig({
