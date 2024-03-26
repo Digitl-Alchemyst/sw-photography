@@ -1,15 +1,9 @@
 /* eslint-disable react/function-component-definition */
-import { groq } from 'next-sanity';
-import { client } from '@/lib/sanity.client';
+import { sanityFetch } from '@/l/sanity.fetch';
+import { queryBlogListByCategory } from '@/l/sanity.queries';
 import BlogCard from '@/c/cards/BlogCard';
-import BlogCategories from '@/components/blog/BlogCategories';
-import { Alex_Brush } from 'next/font/google'; // Adjusted font import, you can add others as needed
-
-const scriptFont = Alex_Brush({
-  subsets: ['latin'],
-  variable: '--my-font-family',
-  weight: '400',
-});
+import BlogCategories from '@/components/nav/BlogCategories';
+import { headerFontStyle } from '@/l/util/headerFontStyles';
 
 type Props = {
   params: {
@@ -17,50 +11,61 @@ type Props = {
   };
 };
 
-// generateStaticParams();
-const queryBlog = groq`
-  *[_type == 'blog' && references(categories, *[_type == 'blogCategory' && slug.current == $slug]._id)] {
-    ...,
-    author->,
-    categories[]->,
-    description,
-    publistedAt,
-  } | order(_createdAt desc)
-`;
-
 export const revalidate = 18;
-
-// export async function generateStaticParams() {
-//   const query = groq`*[_type=='blogCategory'] { slug }`;
-
-//   const slugs: Blog[] = await client.fetch(query);
-//   const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
-
-//   return slugRoutes.map((slug) => ({
-//     slug,
-//   }));
-// }
 
 export default async function BlogCategoryPage({ params: { slug } }: Props) {
 
+  const blogs = await getBlogListByCategory(slug);
 
-  const blogs = await client.fetch(queryBlog, { slug });
+  return (
+    <main className='w-full bg-steeldark-600 text-steelpolished-400'>
+      <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10 py-12'>
+        <h1
+          className={`text-center text-7xl font-bold ${headerFontStyle.className}`}
+        >
+          -Blog-
+        </h1>
+        <div>
+          <BlogCategories />
+          <hr className='mb-8 border-accent' />
+          <section className='mx-auto mt-8 grid grid-cols-1 gap-8 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
 
- return (
-   <main className='w-full bg-steeldark-600 text-steelpolished-400'>
-     <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10 py-12'>
-       <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>
-         -Blog-
-       </h1>
-       <div>
-         <BlogCategories />
-         <hr className='mb-8 border-accent' />
-         <section className='mx-auto mt-8 grid grid-cols-1 gap-8 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-           {/* Pass the filtered blogs array to BlogCard */}
-           <BlogCard blogs={blogs} />
-         </section>
-       </div>
-     </div>
-   </main>
- );
+            {/* Conditional rendering based on the presence of blog posts */}
+            {blogs && Array.isArray(blogs) && blogs.length > 0 ? (
+              // If there are blog posts, map through the BlogCard component for each blog post
+              blogs.map((blog, index) => <BlogCard blogs={blogs} key={index} />)
+            ) : (
+              // If there are no blog posts, render a message
+              <div className='flex flex-col items-center justify-center space-y-4'>
+                <h1 className='text-center text-3xl'>
+                  There are no blog posts at this time.
+                </h1>
+                <p className='text-lg'>Please check back again later.</p>
+              </div>
+            )}
+          </section>
+        </div>
+      </div>
+    </main>
+  );
 }
+
+// Call the Sanity Fetch Function for the Blog List filtered by category
+async function getBlogListByCategory(slug: string) {
+  try {
+    // Fetch blog data from Sanity
+    const blogs = await sanityFetch({
+      query: queryBlogListByCategory,
+      params: {
+        slug: slug, // Pass the slug parameter to the query
+      },
+      tags: ['blog-list'],
+    });
+
+    return blogs;
+  } catch (error) {
+    console.error('Failed to fetch blogs:', error);
+    return []; // Return an empty array in case of an error
+  }
+}
+

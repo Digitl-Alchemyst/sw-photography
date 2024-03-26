@@ -7,6 +7,8 @@ export default function resolveHref(
       return '/'
     case 'blog':
       return slug ? `/blog/${slug}` : undefined
+    case 'blogcategory':
+      return slug ? `/blogcategory/${slug}` : undefined
     case 'gallery':
       return slug ? `/gallery/${slug}` : undefined
     default:

@@ -7,7 +7,7 @@ export const queryBlogList = groq`
     mainImage,
     author->,
     blogCategories[]->,
-    publistedAt,
+    _createdAt,
     snippet,
     title,
     slug,
@@ -16,4 +16,23 @@ export const queryBlogList = groq`
   | order(_createdAt desc)
 `;
 
+export const queryBlogListByCategory = groq`
+  *[_type == 'blog' && references(categories, *[_type == 'blogCategory' && slug.current == $slug]._id)] {
+    mainImage,
+    author->,
+    blogCategories[]->,
+    _createdAt,
+    snippet,
+    title,
+    slug,
+    tripDate,
+  } | order(_createdAt desc)
+`;
 
+export const queryBlogCategories = groq`
+  *[_type=='blogCategory'] {
+    ...,
+    title,
+    order,
+  } 
+`;

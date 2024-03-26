@@ -4,29 +4,37 @@ import urlForImage from '@/u/urlForImage';
 import resolveHref from '@/lib/util/resolveHref';
 import { ArrowUpRightIcon } from '@heroicons/react/24/solid';
 
+// Props passed down from blog/page.tsx
 type Props = {
   blogs: Blog[] | undefined;
-
 };
-function BlogCard({ blogs,  }: Props) {
-  if (!blogs) {
-    return null;
-  }
 
-  return (
-    <div>
+// Utility function to format date
+const formatDate = (date: string | number | Date) => {
+  return new Date(date).toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+};
+
+function BlogCard({ blogs,  }: Props) {
+
+  // If blogs is falsy (undefined or null), return null to avoid rendering
+  return blogs ? (
+    <>
       {/* Map through BlogPost */}
-      {blogs.map((post) => (
-        // CLient Side Route Link Wrapper
+      {blogs.map((post, index) => (
+        // Wrap the blog card with a ClientSideRoute component for client-side routing
         <ClientSideRoute
           route={resolveHref('blog', post.slug.current) || ''}
-          key={post._id}
+          key={index}
         >
           {/* Blog Card  */}
           <div className='group flex w-112 cursor-pointer flex-col rounded-md border border-steelflat-400 bg-steelpolished-600/40 px-6 py-4 text-steelpolished-300 shadow-2xl  shadow-steeldark-700/40 drop-shadow-lg'>
             {/* Image Title & Category */}
             <div className='relative h-98 w-full drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105'>
-              {/* Image  */}
+              {/* Main Image  */}
               <Image
                 className='rounded-t-md object-cover object-center drop-shadow-xl lg:object-center'
                 src={urlForImage(post.mainImage as any)?.url() || ''}
@@ -49,18 +57,16 @@ function BlogCard({ blogs,  }: Props) {
             <div className='mt-0 flex-1 rounded-b-md bg-slate-400'>
               <div className='flex items-center justify-between p-1'>
                 <div className='flex flex-col space-y-1 '>
+                  {/* Blog post author */}
                   <h3 className='text-sm font-semibold text-steeldark-700 md:text-lg'>
                     By: {post.author.name}
                   </h3>
+                  {/* Blog post date */}
                   <h4 className='text-sm font-light text-steeldark-400 md:text-base'>
-                    {new Date(post._createdAt).toLocaleDateString('en-US', {
-                      day: 'numeric',
-                      month: 'long',
-                      year: 'numeric',
-                    })}
+                    {formatDate(post._createdAt)}
                   </h4>
                 </div>
-                {/* Cateogy  */}
+                {/* Blog Cateogies  */}
                 <div className='flex flex-col items-center gap-y-2 md:flex-row md:gap-x-2'>
                   {post.blogCategories &&
                     post.blogCategories.map((blogCategory) => (
@@ -75,21 +81,21 @@ function BlogCard({ blogs,  }: Props) {
                     ))}
                 </div>
               </div>
+              {/* Blog post snippet */}
               <p className='line-clamp-3 px-2 py-1 text-sm'>{post.snippet}</p>
             </div>
+            {/* Read article link */}
             <div className='mr-6 flex justify-end drop-shadow-sm'>
               <p className='ml-4 mt-3 flex items-center font-bold group-hover:underline'>
                 Read Article
                 <ArrowUpRightIcon className='group ml-2 h-4 w-4' />
               </p>
-
-              {/* <ShareIcon className='mr-4 mt-4 h-6 w-6 transition-transform duration-200 ease-out hover:scale-110 hover:text-untele' /> */}
             </div>
           </div>
         </ClientSideRoute>
       ))}
-    </div>
-  );
+    </>
+  ) : null;
 }
 
 export default BlogCard;

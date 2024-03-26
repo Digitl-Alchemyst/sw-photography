@@ -6,9 +6,8 @@ import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
 import { client } from '@/l/sanity.client';
 import urlForImage from '@/lib/util/urlForImage';
-import Link from 'next/link';
 import ClientSideRoute from '@/c/providers/ClientSideRoute';
-// import Comments from '@/c/post/Comments';
+
 
 export { generateMetadata } from '@/lib/util/generateMetadata';
 
@@ -149,7 +148,6 @@ async function Article({ params: { slug } }: Props) {
         <section className='mx-auto mt-12 max-w-[85vw] rounded-lg border border-untele bg-slate-700/30 px-10 py-5 md:max-w-[70vw]'>
           <PortableText value={post.body} components={RichTextComponents} />
         </section>
-        <div className=''>{/* <Comments post={post}/> */}</div>
       </article>
     </>
   );
