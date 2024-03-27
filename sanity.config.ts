@@ -6,8 +6,12 @@ import { schemaTypes } from './schemaTypes';
 import { apiVersion, dataset, projectId, studioUrl, title } from '@/lib/sanity/api';
 import Logo from '@/c/studio/Logo';
 import StudioNavbar from '@/c/studio/StudioNavbar';
-import { myTheme } from '@/l/sanity/theme';
 
+// 1. Add the import to the theme.js you downloaded
+import {theme as _theme} from '@/l/sanity/theme'
+
+// 2. Assign typings to the theme
+const theme = _theme as import('sanity').StudioTheme
 export default defineConfig({
   basePath: studioUrl,
 
