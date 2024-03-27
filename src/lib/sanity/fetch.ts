@@ -3,7 +3,7 @@ import 'server-only';
 import type { QueryParams } from '@sanity/client';
 import { draftMode } from 'next/headers';
 import { client } from './client';
-import { readToken } from '@/lib/sanity/api';
+import { readToken } from '@/l/sanity/tokens';
 
 const DEFAULT_PARAMS = {} as QueryParams;
 const DEFAULT_TAGS = [] as string[];
@@ -26,12 +26,12 @@ export default async function sanityFetch<QueryResponse>({
     cache: 'no-store',
 
     ...(isDraftMode && {
-      // cache: 'no-store',
+      cache: 'no-store',
       token: readToken,
       perspective: 'previewDrafts',
     }),
     next: {
-      revalidate: 30,
+      // revalidate: 30,
       ...(isDraftMode && { revalidate: 30 }),
       tags,
     },

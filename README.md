@@ -50,7 +50,8 @@ This project will be set up with Jest and React Testing Library for code testing
 # Project Name
 
 ## To-Do List
-- [ ] Refactor Date formatting into reuseable component.
+- [x] Refactor Date formatting into reuseable component.
+- [ ] Base URL Resolver.
 
 ### Documentation
 - [ ] Add comments to all public functions

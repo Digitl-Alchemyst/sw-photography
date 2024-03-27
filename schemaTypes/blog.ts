@@ -35,6 +35,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'readTime',
+      title: 'Article Read Time',
+      type: 'string',
+    }),
+    defineField({
       name: 'snippet',
       title: 'Snippet',
       type: 'text',

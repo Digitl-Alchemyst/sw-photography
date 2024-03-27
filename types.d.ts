@@ -14,6 +14,7 @@ interface Blog extends Base {
   slug: Slug;
   title: string;
   keywords: string;
+  readTime: string;
   snippet: string;
   videoLink: string;
   hasEmbeddedVideo: string;

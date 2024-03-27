@@ -1,6 +1,4 @@
-/* eslint-disable react/self-closing-comp */
 /* eslint-disable import/prefer-default-export */
-/* eslint-disable react/function-component-definition */
 import Image from 'next/image';
 import Link from 'next/link';
 import urlForImage from '@/lib/util/urlForImage';
@@ -10,26 +8,40 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export const RichTextComponents = {
   types: {
+
     image: ({ value }: any) => {
       const alt = value.alt;
       return (
-        <div className='my-3 space-y-2'>
+        <div className='my-3 space-y-1'>
           <div className='relative h-144 w-full rounded-lg '>
             <Image
-              className='mx-auto object-contain'
-              src={urlForImage(value).url()}
-              alt='Blog Post Image'
+              className='mx-auto object-contain border border-accent/70'
+              src={urlForImage(value)?.url() || ''}
+              alt={alt}
               fill
             />
           </div>
           <div className='flex justify-center'>
-            <p className='rounded-lg border border-untele bg-slate-900/20 px-4 py-1 font-semibold'>
+            <p className='rounded-lg border border-accent bg-steeldark-900/20 px-4 py-1 font-light text-sm text-steelpolished-400'>
               {alt}
             </p>
           </div>
         </div>
       );
     },
+
+    codeBlock: ({ value }: any) => {
+      const code = value.code;
+      const language = value.language;
+      return (
+        <div className='mx-auto my-10 flex max-w-full justify-center'>
+          <SyntaxHighlighter language={language} style={dark}>
+            {code}
+          </SyntaxHighlighter>
+        </div>
+      );
+    },
+
     youtubeEmbed: ({ value }: any) => {
       const videoId = value.videoId;
       return (
@@ -42,10 +54,11 @@ export const RichTextComponents = {
             title='YouTube Video Embed'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
             allowFullScreen
-          ></iframe>
+          />
         </div>
       );
     },
+
     twitterEmbed: ({ value }: any) => {
       const tweetId = value.tweetId;
       return (
@@ -55,11 +68,12 @@ export const RichTextComponents = {
         </div>
       );
     },
+
     instagramEmbed: ({ value }: any) => {
       const postId = value.postId;
       return (
         <div className='mx-auto my-10 flex max-w-full justify-center'>
-          {/* Render Twitter embed using the ID and username */}
+          {/* Render Instagram embed using the post ID */}
           <blockquote
             className='instagram-media min-w-fit max-w-xl'
             data-instgrm-captioned
@@ -76,11 +90,12 @@ export const RichTextComponents = {
               </Link>
             </div>
           </blockquote>
-          <script async src='//www.instagram.com/embed.js'></script>
+          <script async src='//www.instagram.com/embed.js'/>
         </div>
       );
     },
   },
+
   list: {
     bullet: ({ children }: any) => (
       <ul className='ml-10 list-disc space-y-5 py-5'>{children}</ul>
@@ -89,6 +104,7 @@ export const RichTextComponents = {
       <ol className='mt-lg list-decimal'>{children}</ol>
     ),
   },
+
   block: {
     h1: ({ children }: any) => (
       <h1 className='py-6 text-4xl font-bold md:text-5xl'>{children}</h1>
@@ -103,6 +119,7 @@ export const RichTextComponents = {
       <h4 className='py-6 text-xl font-bold md:text-2xl'>{children}</h4>
     ),
   },
+
   marks: {
     link: ({ children, value }: any) => {
       const rel = !value.href.startsWith('/')
@@ -112,17 +129,19 @@ export const RichTextComponents = {
         <Link
           href={value.href}
           rel={rel}
-          className='underline decoration-untele hover:decoration-sky-600'
+          className='underline decoration-accent hover:text-accent2'
         >
           {children}
         </Link>
       );
     },
+
     blockquote: ({ children }: any) => (
-      <blockquote className='boreder-l-untele my-5 border-l-4 py-5 pl-5'>
+      <blockquote className='boreder-l-accent my-5 border-l-4 py-5 pl-5'>
         {children}
       </blockquote>
     ),
+
     code: ({ children }: any) => (
       <div>
         <SyntaxHighlighter language='json' style={dark}>
@@ -130,5 +149,14 @@ export const RichTextComponents = {
         </SyntaxHighlighter>
       </div>
     ),
+
+    em: ({ children }: any) => <em className='italic'>{children}</em>,
+    strong: ({ children }: any) => <strong>{children}</strong>,
+    underline: ({ children }: any) => <u>{children}</u>,
+    strikethrough: ({ children }: any) => <s>{children}</s>,
+    superscript: ({ children }: any) => <sup>{children}</sup>,
+    subscript: ({ children }: any) => <sub>{children}</sub>,
+
   },
+
 };

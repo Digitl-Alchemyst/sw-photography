@@ -11,6 +11,8 @@ export default function resolveHref(
       return slug ? `/blogcategory/${slug}` : undefined
     case 'gallery':
       return slug ? `/gallery/${slug}` : undefined
+    case 'author':
+      return slug ? `/author/${slug}` : undefined
     default:
       console.warn('Invalid document type:', documentType)
       return undefined
