@@ -1,77 +1,110 @@
 <h1><ul><b>
-   
+   Steven Watkins Photography
 </b></ul></h1>
 <p align="center">
   <br />
-  <img width="650" src="./public/global/banner.png" alt="VagaBlog Banner">
+  <img width="650" src="./public/global/SW-Photog.png" alt="Logo">
   <br />
 </p>
 
  <p svg align="center">
-<img src="https://readme-typing-svg.demolab.com?font=Noto+Serif&pause=3000&color=2FA4D7&center=true&vCenter=true&width=375&lines=Next+Alchemy+Boilerplate+14.1.0" alt=typing>
+<img src="https://readme-typing-svg.demolab.com?font=Noto+Serif&pause=3000&color=2FA4D7&center=true&vCenter=true&width=375&lines=Next.JS+Sanity+Photography+Portfolio+" alt=typing>
  </p>
 
-Basic boilerplate for Next.js projects using Typescript, Tailwind; to be added: testing features from Jest & React Testing Library & Commit Linting with Lint-Staged & Huksy
 
-<br>
+
+
+<p align="center">
+This is a Photography portfolio website built with Next.js & Typescript and Sanity.io. It has a photo gallery and a blog section managed with the Sanity Content Lake.
+<br />
+<br /> 
+  <a href="https://github.com/vercel/next.js">
+    <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js badge">
+  </a>
+  <a href="https://github.com/microsoft/TypeScript">
+    <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="Typescript badge">
+  </a>
+  <a href="https://github.com/tailwindlabs/tailwindcss">
+    <img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind badge">
+  </a>
+<br />
+</p>
+
+<h3><ul><b>Project Demo</b></ul></h3>
+
+<a href="" target="blank"><img align="center" src="" alt="logo" height="55" width="250" /></a>
+
+[Demo Video](https://www.youtube.com/@DigitalAlchemyst)
 
 <h2><ul><b>Features</b></ul></h2>
 
 <h4>
-    Testing<br>
-        => Jest <br>
-        => React Testing Library <br>
-    Commits<br>
+<h3><ul><b>Envrioment</b></ul></h3>
+        📟 Next.js <br>
+        🎓 Typescript <br>
+        🚀 Tailwind CSS <br>        
+<h3><ul><b>Libraries & Plugins</b></ul></h3>
+💎 OxyLabs E-Commerce Scrapper <br>
+        📁 ShadCN UI Library<br>
+<h3><ul><b>Concepts</b></ul></h3>
+<h3><ul><b>Commits</b></ul></h3>
         => Husky <br>
         => Lint-Staged <br>
-    Imports<br>
+<h3><ul><b>Testing</b></ul></h3>
+        => Jest <br>
+        => React Testing Library <br>
+<h3><ul><b>🚀 Tailwind CSS Extensions</b></ul></h3>
+        🌈 Neon Shadows <br>
+        🌀 Slower Spin Animation <br>
+        🙈 Scrollbar Hide <br>
+<h3><ul><b>Custom Imports</b></ul></h3>
         => @ = ./src <br>
+        => # = ./ <br>
         => @/c = ./src/components <br>
         => @/h = ./src/hooks <br>
         => @/l = ./src/lib <br>
         => @/u = ./src/lib/util <br>
-        => # = ./ <br>
-
-
 </h4>
+<br />
 
 <h3><ul><b>Project State</b></ul></h3>
+        => Initial Development <br>
+<br />
 
-This biolerplate project is setup for Next.js 14.1.x [This project will be maintained to remain current with Next.js 14.1 until otherwise noted.] This is ready to use in its current state 
-<br>
-This project will be set up with Jest and React Testing Library for code testing, it has been configured to work with Typescript. Custom imports have been set up. Eslint settings are preconfigured using a moderately strict ruleset. Uses ESLint to parse to Typescript. Sets specific rules for for testing envrioment (files within the **tests** directory or files with names ending in .spec.js, .test.js, .ts, .jsx, or .tsx). Configured Import Resolver to handle custom import settings. Uses Lint-Staged & Husky to Lint & format with prettier all files before commiting updates.<br> <br>
-
-<h3>🚀 Tailwind CSS Extensions</h3><br>
-🌈 Neon Shadows <br>
-🌀 Slower Spin Animation <br>
-🙈 Scrollbar Hide <br>
-
-
-# Project Name
+<h3><ul><b>To-Do List</b></ul></h3>
 
 ## To-Do List
-- [x] Refactor Date formatting into reuseable component.
-- [ ] Base URL Resolver.
+
+- [ ] Preview Mode.
 
 ### Documentation
+
 - [ ] Add comments to all public functions
 - [ ] Update the README with installation instructions
 - [ ] Create a CONTRIBUTING guide
 
 ### Features
-- [ ] Implement user authentication
+
+- [ ]
 - [ ] Add search functionality
 - [ ] Design a responsive layout
 - [ ] Comments Section on Articles
 
 ### Bugs
 
-
 ### Refactoring
+
+- [x] Refactor Date formatting into reuseable component.
+- [ ] Base URL Resolver.
 - [ ] Refactor the database connection logic
 - [ ] Optimize the data retrieval process
 
-<h3><ul><b>How to use</b></ul></h3>
+### Libraries & Plugins to Implement
+        
+
+<h2><ul><b>How to use</b></ul></h2>
+
+## Getting Started
 
 ## Install Node Modules
 
@@ -81,7 +114,7 @@ This project will be set up with Jest and React Testing Library for code testing
 
     npm run dev
 
-The app will start on [http://localhost:3000](http://localhost:3000) in your browser. 
+The app will start on [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Deploy
 
@@ -107,13 +140,12 @@ Prettier Code Format
 
     prettier --write.
 
+<h2><ul><b>Documentation</b></ul></h2>
 
 ## Table of Contents
 
-- [Features](#features)
 - [Table of Contents](#table-of-contents)
-- [Project Overview](#project-overview)
-  - [Important files and folders](#important-files-and-folders)
+- [Important files and folders](#important-files-and-folders)
 - [Configuration](#configuration)
   - [Step 1. Set up the environment](#step-1-set-up-the-environment)
   - [Step 2. Set up the project locally](#step-2-set-up-the-project-locally)
@@ -124,24 +156,18 @@ Prettier Code Format
   - [How can I remove the "Next steps" block from my personal site?](#how-can-i-remove-the-next-steps-block-from-my-personal-website)
 - [Next steps](#next-steps)
 
-## Project Overview
-
-| [Personal Website](https://template-nextjs-personal-website.sanity.build/)                                                | [Studio](https://template-nextjs-personal-website.sanity.build/studio)                                                 |
-| ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| ![Personal Website](https://user-images.githubusercontent.com/6951139/206395107-e58a796d-13a9-400a-94b6-31cb5df054ab.png) | ![Sanity Studio](https://user-images.githubusercontent.com/6951139/206395521-8a5f103d-4a0c-4da8-aff5-d2a1961fb2c0.png) |
-
 ### Important files and folders
 
-| File(s)                                                    | Description                                             |
-| ---------------------------------------------------------- | ------------------------------------------------------- |
-| `sanity.config.ts`                                         | Config file for Sanity Studio                           |
-| `sanity.cli.ts`                                            | Config file for Sanity CLI                              |
-| `/app/studio/[[...tool]]/Studio.tsx`                       | Where Sanity Studio is mounted                          |
-| `/app/api/revalidate/route.ts`                             |  Serverless route for triggering ISR                    |
-| `/app/api/draft/route.ts`                                  | Serverless route for triggering Draft mode              |
-| `/sanity/schemas`                                          | Where Sanity Studio gets its content types from         |
-| `/sanity/plugins`                                          | Where the advanced Sanity Studio customization is setup |
-| `/sanity/loader/loadQuery.ts`,`/sanity/loader/useQuery.ts` | Configuration for the Sanity Content Lake client        |
+| File(s) | Description |
+| --- | --- |
+| `sanity.config.ts` | Config file for Sanity Studio |
+| `sanity.cli.ts` | Config file for Sanity CLI |
+| `/app/studio/[[...tool]]/Studio.tsx` | Where Sanity Studio is mounted |
+| `/app/api/revalidate/route.ts` |  Serverless route for triggering ISR |
+| `/app/api/draft/route.ts` | Serverless route for triggering Draft mode |
+| `/sanity/schemas` | Where Sanity Studio gets its content types from |
+| `/sanity/plugins` | Where the advanced Sanity Studio customization is setup |
+| `/sanity/loader/loadQuery.ts`,`/sanity/loader/useQuery.ts` | Configuration for the Sanity Content Lake client |
 
 ## Configuration
 
