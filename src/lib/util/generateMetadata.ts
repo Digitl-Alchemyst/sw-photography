@@ -40,7 +40,7 @@ export async function generateMetadata({ params: {slug} }: Props ) {
       url: `https://untelevised.media/post/${slug}`,
       //   siteName: 'UnTelevised Media',
       images: {
-        url: urlForImage(post.mainImage).url(),
+        url: urlForImage(post.mainImage as any)?.url() || '',
         //   width: 800,
         //   height: 600,
         // alt: post.mainImage.alt,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params: {slug} }: Props ) {
       creator: '@UnTelevisedLive',
       //   creatorId: '1467726470533754880',
       images: {
-        url: urlForImage(post.mainImage).url(),
+        url: urlForImage(post.mainImage as any)?.url() || '',
         // alt: post.mainImage.alt,
       },
     },
