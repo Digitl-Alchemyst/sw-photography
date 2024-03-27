@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import ClientSideRoute from '@/c/providers/ClientSideRoute';
 import urlForImage from '@/u/urlForImage';
-import resolveHref from '@/lib/util/resolveHref';
+import resolveHref from '@/l/util/resolveHref';
 import { ArrowUpRightIcon } from '@heroicons/react/24/solid';
+import formatDate from '@/l/util/formatDate';
 
 // Props passed down from blog/page.tsx
 type Props = {
@@ -10,13 +11,6 @@ type Props = {
 };
 
 // Utility function to format date
-const formatDate = (date: string | number | Date) => {
-  return new Date(date).toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-};
 
 function BlogCard({ blogs,  }: Props) {
 
@@ -26,10 +20,7 @@ function BlogCard({ blogs,  }: Props) {
       {/* Map through BlogPost */}
       {blogs.map((post, index) => (
         // Wrap the blog card with a ClientSideRoute component for client-side routing
-        <ClientSideRoute
-          route={resolveHref('blog', post.slug.current) || ''}
-          key={index}
-        >
+        <ClientSideRoute route={resolveHref('blog', post.slug.current) || ''} key={index}>
           {/* Blog Card  */}
           <div className='group flex w-112 cursor-pointer flex-col rounded-md border border-steelflat-400 bg-steelpolished-600/40 px-6 py-4 text-steelpolished-300 shadow-2xl  shadow-steeldark-700/40 drop-shadow-lg'>
             {/* Image Title & Category */}
@@ -74,9 +65,7 @@ function BlogCard({ blogs,  }: Props) {
                         key={blogCategory._id}
                         className='hidden rounded-lg border border-steeldark-900 bg-accent/70 px-3 py-2 text-center text-xs font-light text-steeldark-900 md:flex lg:text-sm'
                       >
-                        <p className='text-xs font-semibold'>
-                          {blogCategory.title}
-                        </p>
+                        <p className='text-xs font-semibold'>{blogCategory.title}</p>
                       </div>
                     ))}
                 </div>
