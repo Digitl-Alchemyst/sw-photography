@@ -7,7 +7,7 @@ import SocialShare from '@/components/global/SocialShare';
 import { client } from '@/lib/sanity/client';
 import urlForImage from '@/lib/util/urlForImage';
 import ClientSideRoute from '@/c/providers/ClientSideRoute';
-import { sanityFetch } from '@/lib/sanity/fetch';
+import sanityFetch from '@/lib/sanity/fetch';
 import { queryBlogPostBySlug } from '@/lib/sanity/queries';
 
 export { generateMetadata } from '@/lib/util/generateMetadata';

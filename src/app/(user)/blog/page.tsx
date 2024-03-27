@@ -1,5 +1,5 @@
-import { sanityFetch } from '@/lib/sanity/fetch';
-import { queryBlogList } from '@/lib/sanity/queries';
+import sanityFetch from '@/l/sanity/fetch';
+import { queryBlogList } from '@/l/sanity/queries';
 import BlogCategories from '@/c/nav/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
 import { headerFontStyle } from '@/l/util/headerFontStyles';
@@ -20,7 +20,7 @@ export default async function Blog() {
         <div>
           <BlogCategories />
           <hr className='mb-8 border-accent' />
-          <section className='mx-auto mt-8 grid grid-cols-1 gap-8 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 lg:grid-cols-3'>
+          <section className={blogs.length > 0 ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12' : 'mx-auto mt-8  px-10 pb-24'}>
             {/* Conditional rendering based on the presence of blog posts */}
             {blogs && blogs.length > 0 ? (
               // If there are blog posts, render the BlogCard component for each blog post
