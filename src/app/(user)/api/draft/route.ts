@@ -1,22 +1,32 @@
-import { validatePreviewUrl } from '@sanity/preview-url-secret'
-import { draftMode } from 'next/headers'
-import { redirect } from 'next/navigation'
+/* eslint-disable import/prefer-default-export */
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { draftMode } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import { client } from '@/sanity/lib/client'
-import { token } from '@/sanity/lib/token'
+import { validatePreviewUrl } from '@sanity/preview-url-secret';
 
-const clientWithToken = client.withConfig({ token })
+import { client } from '@/l/sanity.client';
+import { readToken as token } from '@/lib/sanity.tokens';
 
-export async function GET(request: Request) {
-  const { isValid, redirectTo = '/' } = await validatePreviewUrl(
+const clientWithToken = client.withConfig({ token });
+
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  // Ensure req.url is defined before passing it to validatePreviewUrl
+  const url = req.url || '';
+
+  const { isValid, redirectTo } = await validatePreviewUrl(
     clientWithToken,
-    request.url,
-  )
+    url, // Use the guaranteed non-undefined url here
+  );
   if (!isValid) {
-    return new Response('Invalid secret', { status: 401 })
+    return new Response('Invalid secret', { status: 401 });
   }
 
-  draftMode().enable()
+  // Enable draft mode
+  draftMode().enable();
 
-  redirect(redirectTo)
+  // Redirect to root path
+  if (redirectTo) {
+    redirect(redirectTo);
+  }
 }

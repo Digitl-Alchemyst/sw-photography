@@ -1,5 +1,7 @@
 import GalleryCard from '@/components/cards/GalleryCard';
 import React from 'react';
+import { groq } from 'next-sanity';
+import { client } from '@/lib/sanity.client';
 import { Alex_Brush, Satisfy, Allison } from 'next/font/google';
 
 const scriptFont = Alex_Brush({
@@ -8,6 +10,35 @@ const scriptFont = Alex_Brush({
   weight: '400',
 });
 
+const queryPost = groq`
+  *[_type=='post'] {
+    ...,
+    author->,
+    categories[]->,
+    description,
+    publistedAt,
+  } 
+  | order(_createdAt desc)
+`;
+const queryLiveEvent = groq`
+  *[_type=='liveEvent'] {
+    ...,
+    description,
+    title,
+    slug,
+    eventDate,
+    keyEvent[]->,
+      relatedArticles[]-> {
+        slug,
+        _id,
+        title,
+        _createdAt,
+        description,
+        eventDate,
+    }
+  } 
+  | order(_createdAt desc)
+`;
 function Portfolio() {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400 '>

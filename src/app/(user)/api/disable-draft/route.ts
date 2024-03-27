@@ -1,8 +1,16 @@
-import { draftMode } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+/* eslint-disable import/prefer-default-export */
 
-export function GET(request: NextRequest) {
-  draftMode().disable()
-  const url = new URL(request.nextUrl)
-  return NextResponse.redirect(new URL('/', url.origin))
+import { draftMode } from 'next/headers';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  // Disable draft mode
+  draftMode().disable();
+
+  const url = new URL(req.url || '');
+
+  // Corrected line
+  if (url.origin) {
+    res.redirect(new URL('/', url.origin).toString());
+  }
 }
