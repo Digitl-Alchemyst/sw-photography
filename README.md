@@ -32,7 +32,7 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 
 <h3><ul><b>Project Demo</b></ul></h3>
 
-<a href="" target="blank"><img align="center" src="" alt="logo" height="55" width="250" /></a>
+<a href="https://sw-photography.vercel.app/" target="blank"><img align="center" src="./public/global/SW-Photog.png" alt="logo" height="55" width="250" /></a>
 
 [Demo Video](https://www.youtube.com/@DigitalAlchemyst)
 
