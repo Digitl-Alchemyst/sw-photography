@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, IBM_Plex_Mono, PT_Serif } from 'next/font/google';
-import './globals.css';
+import '@/app/globals.css'
 import Footer from '@/c/global/Footer';
 import Sidebar from '@/c/global/Sidebar';
 

@@ -6,15 +6,15 @@ import Image from 'next/image';
 const StudioNavbar = (props: any) => {
   return (
     <div className=''>
-      <div className='z-10 flex items-center justify-between px-5 py-4'>
+      <div className='z-10 flex items-center justify-between px-5 py-1'>
         <Link href='/' className='flex items-center font-bold text-accent'>
           <ArrowUturnLeftIcon className='mr-2 h-6 w-6' />{' '}
           <span>Go To Website</span>
         </Link>
         <Image
           src='/Logo.png'
-          width={300}
-          height={100}
+          width={150}
+          height={50}
           alt=''
           className='hidden md:flex'
         />
