@@ -1,13 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { createClient } from 'next-sanity';
 
-import {
-  apiVersion,
-  dataset,
-  projectId,
-  revalidateSecret,
-  studioUrl,
-} from '@/lib/sanity/sanity.tokens';
+import { apiVersion, dataset, projectId, revalidateSecret, studioUrl } from '@/lib/sanity/api';
 
 export const client = createClient({
   projectId: projectId,

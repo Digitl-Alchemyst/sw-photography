@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { groq } from 'next-sanity';
-import { client } from '@/lib/sanity/sanity.client';
+import { client } from '@/lib/sanity/client';
 import urlForImage from '@/u/urlForImage';
 // import type { Metadata } from 'next';
 

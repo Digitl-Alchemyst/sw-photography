@@ -3,9 +3,9 @@ import 'server-only';
 
 import { groq } from 'next-sanity';
 
-import { client } from '@/lib/sanity/sanity.client';
+import { client } from '@/lib/sanity/client';
 
-import { readToken as token } from '@/lib/sanity/sanity.tokens';
+import { readToken as token } from '@/lib/sanity/api';
 
 // Used in `generateStaticParams`
 // This may end up unused

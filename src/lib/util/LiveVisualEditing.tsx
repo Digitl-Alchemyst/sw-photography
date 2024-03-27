@@ -4,7 +4,7 @@ import { useLiveMode } from '@sanity/react-loader';
 import { VisualEditing } from 'next-sanity';
 import { useEffect } from 'react';
 
-import { client } from '@/lib/sanity/sanity.client';
+import { client } from '@/lib/sanity/client';
 
 // Always enable stega in Live Mode
 // This function may be unused in the final version hanging on to it to see if it's needed for draft mode
