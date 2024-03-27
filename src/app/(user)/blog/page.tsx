@@ -4,12 +4,14 @@ import BlogCategories from '@/c/nav/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
 import { headerFontStyle } from '@/l/util/headerFontStyles';
 
+
 export const revalidate = 60;
 export const fetchCache = 'force-cache';
 // export const dynamic = 'force-dynamic';
+
+
 export default async function Blog() {
-  
-const blogs = await getBlogList();
+  const blogs = await getBlogList();
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
@@ -26,9 +28,11 @@ const blogs = await getBlogList();
           <hr className='mb-8 border-accent' />
           <section className='mx-auto mt-8 grid grid-cols-1 gap-8 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 lg:grid-cols-3'>
             {/* Conditional rendering based on the presence of blog posts */}
-            {blogs && blogs.length > 0 ? (
+            {Array.isArray(blogs) && blogs.length > 0 ? (
               // If there are blog posts, render the BlogCard component for each blog post
-              <BlogCard blogs={blogs} key={blogs._id} />
+              blogs.map((blog, index) => (
+                <BlogCard blogs={blogs} key={index} />
+              ))
             ) : (
               // If there are no blog posts, render a message
               <div className='flex flex-col items-center justify-center space-y-4'>
@@ -44,6 +48,8 @@ const blogs = await getBlogList();
     </main>
   );
 }
+
+
 
 // Call the Sanity Fetch Function for the Blog List
 async function getBlogList() {

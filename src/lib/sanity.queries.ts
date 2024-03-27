@@ -29,6 +29,13 @@ export const queryBlogListByCategory = groq`
   } | order(_createdAt desc)
 `;
 
+  export const queryBlogPostBySlug = groq`
+    *[_type == "blog" && slug.current == $slug][0] {
+      ...,
+      author->,
+      blogCategories[]->,
+    }`;
+
 export const queryBlogCategories = groq`
   *[_type=='blogCategory'] {
     ...,
