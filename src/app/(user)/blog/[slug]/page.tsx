@@ -4,11 +4,11 @@ import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { client } from '@/lib/sanity/sanity.client';
+import { client } from '@/lib/sanity/client';
 import urlForImage from '@/lib/util/urlForImage';
 import ClientSideRoute from '@/c/providers/ClientSideRoute';
-import { sanityFetch } from '@/lib/sanity/sanity.fetch';
-import { queryBlogPostBySlug } from '@/lib/sanity/sanity.queries';
+import { sanityFetch } from '@/lib/sanity/fetch';
+import { queryBlogPostBySlug } from '@/lib/sanity/queries';
 
 export { generateMetadata } from '@/lib/util/generateMetadata';
 
@@ -55,23 +55,16 @@ export default async function Article({ params: { slug } }: Props) {
                       })}
                     </p>
                   </div>
-                  <ClientSideRoute
-                    route={`/author/${post.author.slug?.current}`}
-                  >
+                  <ClientSideRoute route={`/author/${post.author.slug?.current}`}>
                     <div className='flex items-center justify-start space-x-3 py-2'>
                       <Image
                         className='rounded-full object-cover object-center'
-                        src={
-                          urlForImage(post.author.authorImage as any)?.url() ||
-                          ''
-                        }
+                        src={urlForImage(post.author.authorImage as any)?.url() || ''}
                         width={50}
                         height={50}
                         alt=''
                       />
-                      <h3 className='text-lg font-semibold'>
-                        {post.author.name}
-                      </h3>
+                      <h3 className='text-lg font-semibold'>{post.author.name}</h3>
                     </div>
                   </ClientSideRoute>
                 </div>
@@ -95,10 +88,7 @@ export default async function Article({ params: { slug } }: Props) {
           </div>
         </section>
 
-        <SocialShare
-          url={`https://untelevised.media/post/${slug}`}
-          title={post.title}
-        />
+        <SocialShare url={`https://untelevised.media/post/${slug}`} title={post.title} />
 
         <div className='mt-4 flex justify-center'>
           <Image
