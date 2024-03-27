@@ -3,7 +3,7 @@ import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { presentationTool } from 'sanity/presentation';
 import { schemaTypes } from './schemaTypes';
-import { apiVersion, dataset, projectId, studioUrl, title } from '@/l/sanity/tokens';
+import { apiVersion, dataset, projectId, studioUrl, title } from '@/lib/sanity/api';
 import Logo from '@/c/studio/Logo';
 import StudioNavbar from '@/c/studio/StudioNavbar';
 import { myTheme } from '@/l/sanity/theme';
@@ -41,5 +41,5 @@ export default defineConfig({
       navbar: StudioNavbar,
     },
   },
-  theme: myTheme,
+  // theme: myTheme,
 });

@@ -3,7 +3,7 @@ import 'server-only';
 import type { QueryParams } from '@sanity/client';
 import { draftMode } from 'next/headers';
 import { client } from './client';
-import { readToken } from '@/lib/sanity/tokens';
+import { readToken } from '@/lib/sanity/api';
 
 const DEFAULT_PARAMS = {} as QueryParams;
 const DEFAULT_TAGS = [] as string[];
