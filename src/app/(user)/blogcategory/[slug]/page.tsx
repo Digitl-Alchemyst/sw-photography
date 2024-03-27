@@ -1,6 +1,6 @@
 /* eslint-disable react/function-component-definition */
-import { sanityFetch } from '@/l/sanity.fetch';
-import { queryBlogListByCategory } from '@/l/sanity.queries';
+import { sanityFetch } from '@/lib/sanity/sanity.fetch';
+import { queryBlogListByCategory } from '@/lib/sanity/sanity.queries';
 import BlogCard from '@/c/cards/BlogCard';
 import BlogCategories from '@/components/nav/BlogCategories';
 import { headerFontStyle } from '@/l/util/headerFontStyles';
@@ -14,7 +14,6 @@ type Props = {
 export const revalidate = 18;
 
 export default async function BlogCategoryPage({ params: { slug } }: Props) {
-
   const blogs = await getBlogListByCategory(slug);
 
   return (
@@ -29,7 +28,6 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
           <BlogCategories />
           <hr className='mb-8 border-accent' />
           <section className='mx-auto mt-8 grid grid-cols-1 gap-8 gap-x-10 gap-y-12 px-10 pb-24 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-
             {/* Conditional rendering based on the presence of blog posts */}
             {blogs && Array.isArray(blogs) && blogs.length > 0 ? (
               // If there are blog posts, map through the BlogCard component for each blog post
@@ -68,4 +66,3 @@ async function getBlogListByCategory(slug: string) {
     return []; // Return an empty array in case of an error
   }
 }
-

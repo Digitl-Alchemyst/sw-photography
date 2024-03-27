@@ -1,7 +1,7 @@
 import ClientSideRoute from '@/c/providers/ClientSideRoute';
-import { sanityFetch } from '@/lib/sanity.fetch';
+import sanityFetch from '@/lib/sanity/sanity.fetch';
 import resolveHref from '@/lib/util/resolveHref';
-import { queryBlogCategories } from '@/l/sanity.queries';
+import { queryBlogCategories } from '@/lib/sanity/sanity.queries';
 import formatCategoryTitle from '@/l/util/formatTitleForURL';
 
 export const revalidate = 60;

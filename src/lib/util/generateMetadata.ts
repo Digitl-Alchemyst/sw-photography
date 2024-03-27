@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { groq } from 'next-sanity';
-import { client } from '@/l/sanity.client';
+import { client } from '@/lib/sanity/sanity.client';
 import urlForImage from '@/u/urlForImage';
 // import type { Metadata } from 'next';
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: {slug} }: Props ) {
+export async function generateMetadata({ params: { slug } }: Props) {
   // Fetch the post data based on the slug
   const query = groq`
     *[_type == "blog" && slug.current == $slug][0] {

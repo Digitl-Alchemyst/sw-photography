@@ -1,14 +1,12 @@
-import { sanityFetch } from '@/l/sanity.fetch';
-import { queryBlogList } from '@/l/sanity.queries';
+import { sanityFetch } from '@/lib/sanity/sanity.fetch';
+import { queryBlogList } from '@/lib/sanity/sanity.queries';
 import BlogCategories from '@/c/nav/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
 import { headerFontStyle } from '@/l/util/headerFontStyles';
 
-
 export const revalidate = 60;
 export const fetchCache = 'force-cache';
 // export const dynamic = 'force-dynamic';
-
 
 export default async function Blog() {
   const blogs = await getBlogList();
@@ -46,8 +44,6 @@ export default async function Blog() {
     </main>
   );
 }
-
-
 
 // Call the Sanity Fetch Function for the Blog List
 async function getBlogList(): Promise<Blog[]> {

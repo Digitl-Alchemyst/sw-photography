@@ -4,11 +4,11 @@ import { groq } from 'next-sanity';
 import { PortableText } from '@portabletext/react';
 import { RichTextComponents } from '@/components/providers/RichTextComponents';
 import SocialShare from '@/components/global/SocialShare';
-import { client } from '@/l/sanity.client';
+import { client } from '@/lib/sanity/sanity.client';
 import urlForImage from '@/lib/util/urlForImage';
 import ClientSideRoute from '@/c/providers/ClientSideRoute';
-import { sanityFetch } from '@/l/sanity.fetch';
-import { queryBlogPostBySlug } from '@/l/sanity.queries';
+import { sanityFetch } from '@/lib/sanity/sanity.fetch';
+import { queryBlogPostBySlug } from '@/lib/sanity/sanity.queries';
 
 export { generateMetadata } from '@/lib/util/generateMetadata';
 
@@ -22,11 +22,8 @@ export const revalidate = 60;
 export const fetchCache = 'force-cache';
 // export const dynamic = 'force-dynamic';
 
-
 export default async function Article({ params: { slug } }: Props) {
-  
-  
-  const post = await getBlogPostBySlug(slug) as Blog;
+  const post = (await getBlogPostBySlug(slug)) as Blog;
 
   return (
     <>
@@ -71,7 +68,7 @@ export default async function Article({ params: { slug } }: Props) {
                         width={50}
                         height={50}
                         alt=''
-                        />
+                      />
                       <h3 className='text-lg font-semibold'>
                         {post.author.name}
                       </h3>
@@ -153,15 +150,15 @@ async function getBlogPostBySlug(slug: string) {
 
 // Generate the static params for the blog list
 export async function generateStaticParams() {
-    const query = groq`*[_type=='blog']
+  const query = groq`*[_type=='blog']
     {
       slug
     }`;
-  
-    const slugs: Blog[] = await client.fetch(query);
-    const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
-  
-    return slugRoutes.map((slug) => ({
-      slug,
-    }));
-  }
+
+  const slugs: Blog[] = await client.fetch(query);
+  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
+
+  return slugRoutes.map((slug) => ({
+    slug,
+  }));
+}

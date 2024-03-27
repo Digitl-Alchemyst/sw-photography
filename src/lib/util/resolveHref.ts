@@ -16,3 +16,5 @@ export default function resolveHref(
       return undefined
   }
 }
+
+// Returns the proper href for a given document type and slug to be used in URL parameters for navigating between Sanity CDN pages.

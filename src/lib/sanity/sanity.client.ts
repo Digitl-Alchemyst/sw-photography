@@ -7,12 +7,12 @@ import {
   projectId,
   revalidateSecret,
   studioUrl,
-} from '@/sanity/lib/api';
+} from '@/lib/sanity/sanity.tokens';
 
 export const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2022-11-15',
+  projectId: projectId,
+  dataset: dataset,
+  apiVersion: apiVersion,
   // If webhook revalidation is setup we want the freshest content, if not then it's best to use the speedy CDN
   useCdn: revalidateSecret ? false : true,
   perspective: 'published',

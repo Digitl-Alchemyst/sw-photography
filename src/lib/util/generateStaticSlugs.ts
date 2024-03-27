@@ -3,11 +3,12 @@ import 'server-only';
 
 import { groq } from 'next-sanity';
 
-import { client } from '@/l/sanity.client';
+import { client } from '@/lib/sanity/sanity.client';
 
-import { readToken as token } from '@/lib/sanity.tokens';
+import { readToken as token } from '@/lib/sanity/sanity.tokens';
 
 // Used in `generateStaticParams`
+// This may end up unused
 export async function generateStaticSlugs(type: string) {
   // Not using loadQuery as it's optimized for fetching in the RSC lifecycle
   return client

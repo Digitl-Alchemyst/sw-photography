@@ -5,8 +5,8 @@ import { redirect } from 'next/navigation';
 
 import { validatePreviewUrl } from '@sanity/preview-url-secret';
 
-import { client } from '@/l/sanity.client';
-import { readToken as token } from '@/lib/sanity.tokens';
+import { client } from '@/lib/sanity/sanity.client';
+import { readToken as token } from '@/lib/sanity/sanity.tokens';
 
 const clientWithToken = client.withConfig({ token });
 
