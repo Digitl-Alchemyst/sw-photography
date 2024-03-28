@@ -1,7 +1,7 @@
 import GalleryCard from '@/components/cards/GalleryCard';
 import React from 'react';
 import { groq } from 'next-sanity';
-import { client } from '@/lib/sanity.client';
+import { client } from '@/lib/sanity/client';
 import { Alex_Brush, Satisfy, Allison } from 'next/font/google';
 
 const scriptFont = Alex_Brush({
