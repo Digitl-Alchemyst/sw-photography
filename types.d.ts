@@ -66,8 +66,10 @@ interface blogCategory extends Base {
 }
 
 interface galleryCategory extends Base {
+  order: number;
   description: string;
   title: string;
+  featuredImage: Image;
 }
 
 interface MainImage {

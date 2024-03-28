@@ -43,3 +43,13 @@ export const queryBlogCategories = groq`
     order,
   } 
 `;
+
+export const queryGalleryCategories = groq`
+  *[_type=='galleryCategory'] {
+    ...,
+    title,
+    order,
+    featuredImage,
+    slug
+  } 
+`;

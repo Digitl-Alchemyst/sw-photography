@@ -28,10 +28,17 @@ export default async function BlogCategories() {
 
 // Call the Sanity Fetch Function for the Blog Categories
 async function getBlogCategories() {
+  try {
+    // Fetch Gallery Category List from Sanity
   const categories: blogCategory[] = await sanityFetch({
     query: queryBlogCategories,
     tags: ['blog-categories'],
   });
 
   return categories.sort((a: { order: number }, b: { order: number }) => a.order - b.order);
+
+  } catch (error) {
+    console.error('Failed to fetch galleries:', error);
+    return []; // Return an empty array in case of an error
+  }
 }
