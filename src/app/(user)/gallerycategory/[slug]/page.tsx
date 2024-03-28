@@ -4,6 +4,7 @@ import { queryBlogListByCategory, queryGalleryListByCategory } from '@/lib/sanit
 import BlogCard from '@/c/cards/BlogCard';
 import BlogCategories from '@/components/nav/BlogCategories';
 import { headerFontStyle } from '@/l/util/headerFontStyles';
+import SubGalleryCard from '@/components/cards/SubGalleryCard';
 
 type Props = {
   params: {
@@ -19,11 +20,13 @@ export default async function GalleryCategoryPage({ params: { slug } }: Props) {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10 py-12'>
-        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>-Gallery Name-</h1>
+        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
+          -Gallery Name-
+        </h1>
         <div>
           <hr className='mb-8 border-accent' />
           <section
-            className={   
+            className={
               (galleries as Blog[]).length > 0
                 ? 'grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3'
                 : 'mx-auto mt-8  px-10 pb-24'
@@ -32,7 +35,7 @@ export default async function GalleryCategoryPage({ params: { slug } }: Props) {
             {/* Conditional rendering based on the presence of blog posts */}
             {galleries && Array.isArray(galleries) && galleries.length > 0 ? (
               // If there are blog posts, map through the BlogCard component for each blog post
-              galleries.map((index) => <BlogCard blogs={galleries} key={index} />)
+              galleries.map((index) => <SubGalleryCard blogs={galleries} key={index} />)
             ) : (
               // If there are no blog posts, render a message
               <div className='flex w-full flex-col items-center justify-center space-y-4'>
