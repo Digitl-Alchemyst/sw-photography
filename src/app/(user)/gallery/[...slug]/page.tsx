@@ -18,7 +18,7 @@ const scriptFont = Alex_Brush({
 });
 
 export default async function Gallery({ params: { slug } }: Props) {
-  const gallery: Gallery[] = await getGalleryListByCategory(slug);
+  const gallery: Gallery[] = await getGalleryBySlug(slug);
   // console.log("🚀 ~ Gallery ~ gallery:", gallery
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
@@ -33,27 +33,8 @@ export default async function Gallery({ params: { slug } }: Props) {
           Photo Session Gallery <br />
           This page can house the gallery for each individual photo session.
           {/* Gallery Photos */}
-          <div className='grid grid-cols-3 gap-4'>
-            {gallery.map((galleryItem, index) => (
-              <div key={index}>
-                <h2>{galleryItem.title}</h2>
-                {galleryItem.galleryPhotos.map((photo, photoIndex) => (
-                  <div
-                    key={photoIndex}
-                    className='relative h-0 w-full'
-                    style={{ paddingBottom: '100%' }}
-                  >
-                    <Image
-                      src={urlForImage(photo.image.asset._ref as any)?.url || ''}
-                      alt={photo.alt}
-                      layout='fill'
-                      objectFit='cover'
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+
+
         </section>
       </div>
     </main>
@@ -61,7 +42,7 @@ export default async function Gallery({ params: { slug } }: Props) {
 }
 
 // Call the Sanity Fetch Function for the Blog List filtered by category
-async function getGalleryListByCategory(slug: string): Promise<Gallery[]> {
+async function getGalleryBySlug(slug: string): Promise<Gallery[]> {
   try {
     // Fetch blog data from Sanity
     const gallery: Gallery[] = await sanityFetch({
