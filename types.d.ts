@@ -9,7 +9,7 @@ type Base = {
 interface Blog extends Base {
   author: Author;
   body: Block[];
-  blogCategories: Category[];
+  blogCategories: blogCategory[];
   mainImage: Image;
   slug: Slug;
   title: string;
@@ -17,10 +17,30 @@ interface Blog extends Base {
   readTime: string;
   snippet: string;
   videoLink: string;
-  hasEmbeddedVideo: string;
+  hasEmbeddedVideo: boolean;
   hasEmbeddedTweet: boolean;
   comments: Comment[];
 }
+
+interface Gallery extends Base {
+  title: string;
+  slug: Slug;
+  keywords: string;
+  snippet: string;
+  photographer: Author; // Assuming Author is defined elsewhere
+  mainImage: Image;
+  galleryCategories: GalleryCategory[]; // Assuming GalleryCategory is defined elsewhere
+  publishedAt: string;
+  tripDate: string;
+  galleryPhotos: GalleryPhoto[];
+  body: Block[]; // Assuming Block is defined elsewhere
+}
+
+type GalleryPhoto = {
+  image: Image;
+  alt: string;
+  _key: string;
+};
 
 interface Author extends Base {
   bio: Block[];
@@ -37,6 +57,7 @@ interface Image {
 interface Reference {
   _ref: string;
   _type: 'reference';
+  alt: string;
 }
 
 interface Slug {
@@ -96,16 +117,4 @@ interface Comment {
   _rev: string;
   _type: string;
   _updatedAt: string;
-}
-
-
-// Query Payloads
-interface blogListPayload {
-  title?: string;
-  author: Author;
-  blogCategories: Category[];
-  snippet?: string;
-  publistedAt?: Date;
-  tripDate?: Date;
-  slug?: string;
 }

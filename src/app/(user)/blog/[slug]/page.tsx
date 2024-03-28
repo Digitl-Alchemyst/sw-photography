@@ -25,6 +25,7 @@ export const fetchCache = 'no-store';
 
 export default async function Article({ params: { slug } }: Props) {
   const post = (await getBlogPostBySlug(slug)) as Blog;
+  console.log("🚀 ~ Article ~ post:", post)
 
   return (
     <>
