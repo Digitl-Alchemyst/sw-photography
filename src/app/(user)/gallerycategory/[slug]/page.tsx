@@ -27,7 +27,7 @@ export default async function GalleryCategoryPage({ params: { slug } }: Props) {
           <hr className='mb-8 border-accent' />
           <section
             className={
-              (galleries as Blog[]).length > 0
+              (galleries as Gallery[]).length > 0
                 ? 'grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3'
                 : 'mx-auto mt-8  px-10 pb-24'
             }
@@ -35,7 +35,7 @@ export default async function GalleryCategoryPage({ params: { slug } }: Props) {
             {/* Conditional rendering based on the presence of blog posts */}
             {galleries && Array.isArray(galleries) && galleries.length > 0 ? (
               // If there are blog posts, map through the BlogCard component for each blog post
-              galleries.map((index) => <SubGalleryCard blogs={galleries} key={index} />)
+              <SubGalleryCard galleries={galleries} />
             ) : (
               // If there are no blog posts, render a message
               <div className='flex w-full flex-col items-center justify-center space-y-4'>

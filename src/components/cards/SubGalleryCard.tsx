@@ -7,18 +7,18 @@ import formatDate from '@/l/util/formatDate';
 
 // Props passed down from blog/page.tsx
 type Props = {
-  blogs: Blog[] | undefined;
+  galleries: Gallery[] | undefined;
 };
 
 // Utility function to format date
 
-function SubGalleryCard({ blogs,  }: Props) {
+function SubGalleryCard({ galleries }: Props) {
 
-  // If blogs is falsy (undefined or null), return null to avoid rendering
-  return blogs ? (
+  // If galleries is falsy (undefined or null), return null to avoid rendering
+  return galleries ? (
     <>
       {/* Map through BlogPost */}
-      {blogs.map((post, index) => (
+      {galleries.map((post, index) => (
         // Wrap the blog card with a ClientSideRoute component for client-side routing
         <ClientSideRoute route={resolveHref('gallery', post.slug.current) || ''} key={index}>
           {/* Blog Card  */}
@@ -30,7 +30,7 @@ function SubGalleryCard({ blogs,  }: Props) {
                 className='rounded-t-md object-cover object-center drop-shadow-xl lg:object-center'
                 src={urlForImage(post.mainImage as any)?.url() || ''}
                 fill
-                alt={post.author.name}
+                alt={post.photographer}
               />
 
               {/* Title Category Bar  */}
@@ -50,7 +50,7 @@ function SubGalleryCard({ blogs,  }: Props) {
                 <div className='flex flex-col space-y-1 '>
                   {/* Blog post author */}
                   <h3 className='text-sm font-semibold text-steeldark-700 md:text-lg'>
-                    By: {post.author.name}
+                    By: {post.photographer}
                   </h3>
                   {/* Blog post date */}
                   <h4 className='text-sm font-light text-steeldark-400 md:text-base'>
@@ -59,13 +59,13 @@ function SubGalleryCard({ blogs,  }: Props) {
                 </div>
                 {/* Blog Cateogies  */}
                 <div className='flex flex-col items-center gap-y-2 md:flex-row md:gap-x-2'>
-                  {post.blogCategories &&
-                    post.blogCategories.map((blogCategory) => (
+                  {post.galleryCategories &&
+                    post.galleryCategories.map((galleryCategory) => (
                       <div
-                        key={blogCategory._id}
+                        key={galleryCategory._id}
                         className='hidden rounded-lg border border-steeldark-900 bg-accent/70 px-3 py-2 text-center text-xs font-light text-steeldark-900 md:flex lg:text-sm'
                       >
-                        <p className='text-xs font-semibold'>{blogCategory.title}</p>
+                        <p className='text-xs font-semibold'>{galleryCategory.title}</p>
                       </div>
                     ))}
                 </div>

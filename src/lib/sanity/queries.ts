@@ -16,6 +16,7 @@ export const queryBlogList = groq`
   | order(_createdAt desc)
 `;
 
+// Get list of all blog post by a specific category only returning the info needed to build the blog cards.
 export const queryBlogListByCategory = groq`
   *[_type == 'blog' && references(categories, *[_type == 'blogCategory' && slug.current == $slug]._id)] {
     mainImage,
@@ -29,6 +30,7 @@ export const queryBlogListByCategory = groq`
   } | order(_createdAt desc)
 `;
 
+// Get a specific blog post by its slug
 export const queryBlogPostBySlug = groq`
     *[_type == "blog" && slug.current == $slug][0] {
       ...,
@@ -36,6 +38,7 @@ export const queryBlogPostBySlug = groq`
       blogCategories[]->,
     }`;
 
+// Get a list of all blog categories
 export const queryBlogCategories = groq`
   *[_type=='blogCategory'] {
     ...,
@@ -44,6 +47,7 @@ export const queryBlogCategories = groq`
   } 
 `;
 
+// Get a list of all the Gallery Categories
 export const queryGalleryCategories = groq`
   *[_type=='galleryCategory'] {
     ...,
@@ -54,6 +58,7 @@ export const queryGalleryCategories = groq`
   } 
 `;
 
+// Get a list of all Galleries in a specific Category
 export const queryGalleryListByCategory = groq`
   *[_type == 'gallery' && references(categories, *[_type == 'galleryCategory' && slug.current == $slug]._id)] {
     mainImage,
@@ -67,13 +72,9 @@ export const queryGalleryListByCategory = groq`
   } | order(_createdAt desc)
 `;
 
+// Get a specific Gallery by its slug
 export const queryGalleryBySlug = groq`
-  *[_type == 'gallery' && references(categories, *[_type == 'galleryCategory' && slug.current == $slug]._id)] {
-    galleryPhotos[]{
-      image{
-        asset->{url, _id},
-        alt
-      }
-    }
-  }
-`;
+    *[_type == "gallery" && slug.current == $slug][0] {
+      ...,
+    }`;
+
