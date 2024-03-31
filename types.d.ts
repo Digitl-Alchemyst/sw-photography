@@ -23,18 +23,20 @@ interface Blog extends Base {
 }
 
 interface Gallery extends Base {
-  author: Author; 
-  body: Block[]; 
-  galleryCategories: galleryCategory[]; 
-  mainImage: Image; 
-  slug: Slug; 
-  title: string; 
-  keywords: string; 
-  snippet: string; 
   author: Author;
-  publishedAt: string; 
-  tripDate: string; 
+  body: Block[];
+  galleryCategories: galleryCategory[];
+  mainImage: Image;
+  slug: Slug;
+  title: string;
+  keywords: string;
+  snippet: string;
+  author: Author;
+  publishedAt: string;
+  tripDate: string;
+  galleryPhotos: Image[];
 }
+
 
 
 interface Author extends Base {
