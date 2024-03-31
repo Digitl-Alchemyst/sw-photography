@@ -18,7 +18,7 @@ const scriptFont = Alex_Brush({
 });
 
 export default async function Gallery({ params: { slug } }: Props) {
-  const gallery: Gallery = await getGalleryBySlug(slug);
+  const gallery = await getGalleryBySlug(slug) as Gallery;
   // console.log('🚀 ~ Gallery ~ slug:', slug);
   console.log('🚀 ~ Gallery ~ gallery:', gallery);
   
@@ -71,7 +71,7 @@ export default async function Gallery({ params: { slug } }: Props) {
 async function getGalleryBySlug(slug: string) {
   try {
     // Fetch blog data from Sanity
-    const gallery: Gallery = await sanityFetch({
+    const gallery = await sanityFetch({
       query: queryGalleryBySlug,
       tags: ['gallery-categories'],
       params: {
