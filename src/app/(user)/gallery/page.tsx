@@ -34,7 +34,7 @@ export default async function Portfolio() {
           {galleries.map((gallery, index) => (
 
               <ClientSideRoute
-                route={resolveHref('gallery', formatCategoryTitle(gallery.title)) || ''}
+                route={resolveHref('gallerycategory', formatCategoryTitle(gallery.title)) || ''}
                 key={index}
               >
                 <div className=' flex w-full flex-col items-center space-y-8 rounded-md border border-steeldark-400 bg-steelpolished-600/20 px-6 py-4 shadow-2xl shadow-steeldark-800 drop-shadow-lg'>

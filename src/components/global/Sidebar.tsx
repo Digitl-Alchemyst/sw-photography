@@ -37,6 +37,11 @@ const NavLinks = [
     title: 'Contact',
     url: '/contact',
   },
+  {
+    id: 7,
+    title: 'studio',
+    url: '/studio',
+  },
 ];
 
 import { Alex_Brush, Satisfy } from 'next/font/google';

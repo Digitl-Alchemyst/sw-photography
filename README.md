@@ -92,6 +92,8 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 
 ### Bugs
 
+- [ ] Handle case for no photographer name in database for sub gallery card
+
 ### Refactoring
 
 - [x] Refactor Date formatting into reuseable component.
