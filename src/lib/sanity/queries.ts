@@ -76,7 +76,7 @@ export const queryGalleryListByCategory = groq`
 export const queryGalleryBySlug = groq`
     *[_type == "gallery" && slug.current == $slug][0] {
       ...,
-
+      author->,
     }`;
 
 export const queryPhotographers = groq`
