@@ -23,24 +23,19 @@ interface Blog extends Base {
 }
 
 interface Gallery extends Base {
-  title: string;
-  slug: Slug;
-  keywords: string;
-  snippet: string;
-  photographer: Author; // Assuming Author is defined elsewhere
-  mainImage: Image;
-  galleryCategories: GalleryCategory[]; // Assuming GalleryCategory is defined elsewhere
-  publishedAt: string;
-  tripDate: string;
-  galleryPhotos: GalleryPhoto[];
-  body: Block[]; // Assuming Block is defined elsewhere
+  author: Author; 
+  body: Block[]; 
+  galleryCategories: galleryCategory[]; 
+  mainImage: Image; 
+  slug: Slug; 
+  title: string; 
+  keywords: string; 
+  snippet: string; 
+  author: Author;
+  publishedAt: string; 
+  tripDate: string; 
 }
 
-type GalleryPhoto = {
-  image: Image;
-  alt: string;
-  _key: string;
-};
 
 interface Author extends Base {
   bio: Block[];

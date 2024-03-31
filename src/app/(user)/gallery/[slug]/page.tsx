@@ -18,8 +18,9 @@ const scriptFont = Alex_Brush({
 });
 
 export default async function Gallery({ params: { slug } }: Props) {
-  const gallery: Gallery[] = await getGalleryBySlug(slug);
-  // console.log("🚀 ~ Gallery ~ gallery:", gallery
+  const gallery = await getGalleryBySlug(slug);
+  console.log("🚀 ~ Gallery ~ slug:", slug)
+  console.log("🚀 ~ Gallery ~ gallery:", gallery)
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
@@ -42,21 +43,24 @@ export default async function Gallery({ params: { slug } }: Props) {
 }
 
 // Call the Sanity Fetch Function for the Blog List filtered by category
-async function getGalleryBySlug(slug: string): Promise<Gallery[]> {
+async function getGalleryBySlug(slug: string) {
   try {
     // Fetch blog data from Sanity
-    const gallery: Gallery[] = await sanityFetch({
+    const gallery = await sanityFetch({
       query: queryGalleryBySlug,
       tags: ['gallery-categories'],
       params: {
         slug: slug, // Pass the slug parameter to the query
       },
     });
+      console.log("🚀 ~ getGalleryBySlug ~ queryGalleryBySlug:", queryGalleryBySlug)
+    console.log("🚀 ~ getGalleryBySlug ~ slug:", slug)
+    
     console.log('🚀 ~ getGalleryListByCategory ~ gallery:', gallery);
-
     return gallery;
   } catch (error) {
     console.error('Failed to fetch galleries:', error);
     return []; // Return an empty array in case of an error
   }
 }
+

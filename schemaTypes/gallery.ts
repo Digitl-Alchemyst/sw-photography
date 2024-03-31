@@ -30,7 +30,7 @@ export default defineType({
       type: 'text',
     }),
     defineField({
-      name: 'photographer',
+      name: 'author',
       title: 'Photographer',
       type: 'reference',
       to: { type: 'author' },
