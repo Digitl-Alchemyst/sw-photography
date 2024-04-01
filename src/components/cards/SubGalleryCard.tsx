@@ -32,8 +32,8 @@ function SubGalleryCard({ galleries }: Props) {
                 height={720}
                 alt=''
               />
-              <div className='absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-l from-steelpolished-100/5 to-steeldark-900 px-5 py-2'>
-                <h2 className={`text-center text-7xl font-bold ${Aerotis.className}`}>
+              <div className='absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-l from-steelpolished-100/5 to-steeldark-900/95 px-5 py-2'>
+                <h2 className={`text-center text-7xl font-bold text-steelflat-300 ${Aerotis.className}`}>
                   {post.title}
                 </h2>
               </div>
