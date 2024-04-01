@@ -19,17 +19,17 @@ export default async function GalleryCategoryPage({ params: { slug } }: Props) {
 
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
-      <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10 py-12'>
-        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
-          -Gallery Name-
+      <div className='flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 py-12'>
+        <h1 className={`text-center text-8xl font-bold capitalize ${headerFontStyle.className}`}>
+          -{slug} Galleries-
         </h1>
-        <div>
+        <div className='w-full'>
           <hr className='mb-8 border-accent' />
           <section
             className={
               (galleries as Gallery[]).length > 0
-                ? 'grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3'
-                : 'mx-auto mt-8  px-10 pb-24'
+                ? 'flex w-full flex-col items-center justify-center'
+                : 'mx-auto mt-8 pb-24'
             }
           >
             {/* Conditional rendering based on the presence of blog posts */}

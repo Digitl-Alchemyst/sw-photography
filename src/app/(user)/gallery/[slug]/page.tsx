@@ -52,19 +52,10 @@ export default async function Gallery({ params: { slug } }: Props) {
           {/* Gallery Photos */}
           <div className='grid h-full w-full auto-rows-[15px] grid-cols-4 justify-center py-4'>
             {galleryPhotos?.map((photo) => {
-
-  const refString = photo.asset._ref;
-  const resolutionParts = refString.split('-')[2].split('x');
-  const width = parseInt(resolutionParts[0]);
-  const height = parseInt(resolutionParts[1]);
-
-
-
-              console.log('Width:', width);
-              console.log('Height:', height);
-
-              console.log('🚀 ~ Gallery ~ photo:', photo.asset._ref);
-
+              const refString = photo.asset._ref;
+              const resolutionParts = refString.split('-')[2].split('x');
+              const width = parseInt(resolutionParts[0]);
+              const height = parseInt(resolutionParts[1]);
 
               const aspectRatio = height / width;
 
