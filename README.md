@@ -47,6 +47,7 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 💎 OxyLabs E-Commerce Scrapper <br>
         📁 ShadCN UI Library<br>
 <h3><ul><b>Concepts</b></ul></h3>
+        => Image Optimization with Blurred Placeholder
 <h3><ul><b>Commits</b></ul></h3>
         => Husky <br>
         => Lint-Staged <br>

@@ -4,6 +4,8 @@ import { queryGalleryBySlug } from '@/lib/sanity/queries';
 import sanityFetch from '@/lib/sanity/fetch';
 import Image from 'next/image';
 import urlForImage from '@/lib/util/urlForImage';
+import Link from 'next/link';
+// import blurredImgUrl from '@/lib/util/getBase64';
 
 type Props = {
   params: {
@@ -20,14 +22,16 @@ const scriptFont = Alex_Brush({
 export default async function Gallery({ params: { slug } }: Props) {
   const gallery = (await getGalleryBySlug(slug)) as Gallery;
   // console.log('🚀 ~ Gallery ~ slug:', slug);
-  console.log('🚀 ~ Gallery ~ gallery:', gallery);
+  // console.log('🚀 ~ Gallery ~ gallery:', gallery);
 
   const galleryPhotos = gallery.galleryPhotos;
-  console.log('🚀 ~ Gallery ~ galleryPhotos:', galleryPhotos);
+  // console.log('🚀 ~ Gallery ~ galleryPhotos:', galleryPhotos);
 
   // map through the gallery photos and return the asset._ref
   const galleryPhotosRefs = galleryPhotos?.map((photo) => photo.asset._ref);
-  console.log('🚀 ~ Gallery ~ galleryPhotosRefs:', galleryPhotosRefs);
+  // console.log('🚀 ~ Gallery ~ galleryPhotosRefs:', galleryPhotosRefs);
+
+  // const blurredPhotos = await blurredImgUrl(galleryPhotos);
 
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
@@ -39,31 +43,63 @@ export default async function Gallery({ params: { slug } }: Props) {
         </h1>
 
         {/* Sub Container  */}
-        <section className='flex flex-col items-center justify-center'>
+        <section className='flex w-full flex-col items-center justify-center px-8 '>
           <p>{gallery.snippet}</p>
 
           <p>Photographed By: {gallery.author.name}</p>
           <p>{gallery.tripDate}</p>
 
           {/* Gallery Photos */}
-          <div className='flex flex-col items-center justify-center space-y-12'>
+          <div className='grid h-full w-full auto-rows-[15px] grid-cols-4 justify-center py-4'>
+            {galleryPhotos?.map((photo) => {
 
-                {galleryPhotos?.map((photo, index) => {
-                  console.log('🚀 ~ Gallery Photo ~ _ref:', photo.asset._ref); // Log the _ref of each photo
-                  return (
-                    <div key={photo.asset._ref} className='photo-container'>
+  const refString = photo.asset._ref;
+  const resolutionParts = refString.split('-')[2].split('x');
+  const width = parseInt(resolutionParts[0]);
+  const height = parseInt(resolutionParts[1]);
+
+
+
+              console.log('Width:', width);
+              console.log('Height:', height);
+
+              console.log('🚀 ~ Gallery ~ photo:', photo.asset._ref);
+
+
+              const aspectRatio = height / width;
+
+              const galleryHeight = Math.ceil(250 * aspectRatio);
+
+              const photoSpans = Math.round(galleryHeight / 10) + 1;
+
+              return (
+                <div
+                  key={photo.asset._ref}
+                  className='w-[375px] justify-self-center'
+                  style={{ gridRowEnd: `span ${photoSpans}` }}
+                >
+                  <Link
+                    href={urlForImage(photo as any)?.url() || ''}
+                    target='_blank'
+                    className='grid-place-content-center'
+                  >
+                    <div className='group overflow-hidden'>
                       <Image
                         src={urlForImage(photo as any)?.url() || ''}
+                        width={375}
+                        height={galleryHeight}
+                        sizes='375px'
                         alt='gallery photo'
-                        width={500}
-                        height={500}
+                        // placeholder='blur'
+                        // blurDataURL={photo.blurDataURL}
+                        className='group:hover-opacity-50 w-full rounded-md transition-all duration-75 ease-in-out'
                       />
                     </div>
-                  );
-                })}
-
+                  </Link>
+                </div>
+              );
+            })}
           </div>
-          
         </section>
       </div>
     </main>

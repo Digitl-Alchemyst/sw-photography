@@ -49,7 +49,23 @@ interface Author extends Base {
 interface Image {
   _type: 'image';
   asset: Reference;
+  height: number;
+  width: number;
 }
+
+// interface Photo {
+//   id: string;
+//   width: number;
+//   height: number;
+//   url: string;
+//   src: [
+//     {
+//       large: string;
+//     },
+//   ];
+//   alt: string;
+//   blurDataURL: string;
+// }
 
 interface Reference {
   _ref: string;
