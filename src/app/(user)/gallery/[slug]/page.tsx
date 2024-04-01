@@ -47,22 +47,23 @@ export default async function Gallery({ params: { slug } }: Props) {
 
           {/* Gallery Photos */}
           <div className='flex flex-col items-center justify-center space-y-12'>
-            <div className='flex flex-col items-center justify-center space-y-12'>
-              {galleryPhotos?.map((photo, index) => {
-                console.log('🚀 ~ Gallery Photo ~ _ref:', photo.asset._ref); // Log the _ref of each photo
-                return (
-                  <div key={photo.asset._ref} className='photo-container'>
-                    <Image
-                      src={urlForImage(photo as any)?.url() || ''}
-                      alt='gallery photo'
-                      width={500}
-                      height={500}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+
+                {galleryPhotos?.map((photo, index) => {
+                  console.log('🚀 ~ Gallery Photo ~ _ref:', photo.asset._ref); // Log the _ref of each photo
+                  return (
+                    <div key={photo.asset._ref} className='photo-container'>
+                      <Image
+                        src={urlForImage(photo as any)?.url() || ''}
+                        alt='gallery photo'
+                        width={500}
+                        height={500}
+                      />
+                    </div>
+                  );
+                })}
+
           </div>
+          
         </section>
       </div>
     </main>
