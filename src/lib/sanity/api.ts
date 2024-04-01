@@ -22,9 +22,15 @@ export const studioUrl = '/studio'
 export const apiVersion =
   process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2023-06-21'
   
+// CMS Studio Title
+export const title =
+    process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Steven Watkins Photography';
+
 // See the app/api/revalidate/route.ts for how this is used
 export const revalidateSecret = process.env.SANITY_REVALIDATE_SECRET
 
+
+// Assert Value Function Not sure what it does
 function assertValue<T>(v: T | undefined, errorMessage: string): T {
   if (v === undefined) {
     throw new Error(errorMessage)
@@ -33,6 +39,3 @@ function assertValue<T>(v: T | undefined, errorMessage: string): T {
   return v
 }
 
-// CMS Studio Title
-export const title =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Steven Watkins Photography';

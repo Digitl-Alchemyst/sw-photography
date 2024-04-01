@@ -10,11 +10,11 @@ const Aerotis = localFont({
   weight: '400',
 });
 function GalleryCard({
-  img,
+  galleryImg,
   title,
   url,
 }: {
-  img: string;
+  galleryImg: string;
   title: string;
   url: string;
 }) {
@@ -27,10 +27,10 @@ function GalleryCard({
       </h2>
       <Link href={url} className='relative h-98 w-full'>
         <Image
-          src={img}
+          src={galleryImg}
           fill
           alt='Gallery 1'
-          className='object-cover object-center transition-transform duration-200 ease-out hover:scale-105 rounded-md'
+          className='rounded-md object-cover object-center transition-transform duration-200 ease-out hover:scale-105'
         />
       </Link>
     </div>

@@ -11,7 +11,7 @@ import StudioNavbar from '@/c/studio/StudioNavbar';
 import {theme as _theme} from '@/l/sanity/theme'
 
 // 2. Assign typings to the theme
-const theme = _theme as import('sanity').StudioTheme
+const myTheme = _theme as import('sanity').StudioTheme
 export default defineConfig({
   basePath: studioUrl,
 
@@ -45,5 +45,5 @@ export default defineConfig({
       navbar: StudioNavbar,
     },
   },
-  // theme: myTheme,
+  theme: myTheme,
 });

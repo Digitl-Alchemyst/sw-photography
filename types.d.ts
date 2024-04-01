@@ -9,7 +9,7 @@ type Base = {
 interface Blog extends Base {
   author: Author;
   body: Block[];
-  blogCategories: Category[];
+  blogCategories: blogCategory[];
   mainImage: Image;
   slug: Slug;
   title: string;
@@ -17,10 +17,27 @@ interface Blog extends Base {
   readTime: string;
   snippet: string;
   videoLink: string;
-  hasEmbeddedVideo: string;
+  hasEmbeddedVideo: boolean;
   hasEmbeddedTweet: boolean;
   comments: Comment[];
 }
+
+interface Gallery extends Base {
+  author: Author;
+  body: Block[];
+  galleryCategories: galleryCategory[];
+  mainImage: Image;
+  slug: Slug;
+  title: string;
+  keywords: string;
+  snippet: string;
+  author: Author;
+  publishedAt: string;
+  tripDate: string;
+  galleryPhotos: Image[];
+}
+
+
 
 interface Author extends Base {
   bio: Block[];
@@ -32,11 +49,28 @@ interface Author extends Base {
 interface Image {
   _type: 'image';
   asset: Reference;
+  height: number;
+  width: number;
 }
+
+// interface Photo {
+//   id: string;
+//   width: number;
+//   height: number;
+//   url: string;
+//   src: [
+//     {
+//       large: string;
+//     },
+//   ];
+//   alt: string;
+//   blurDataURL: string;
+// }
 
 interface Reference {
   _ref: string;
   _type: 'reference';
+  alt: string;
 }
 
 interface Slug {
@@ -66,8 +100,10 @@ interface blogCategory extends Base {
 }
 
 interface galleryCategory extends Base {
+  order: number;
   description: string;
   title: string;
+  featuredImage: Image;
 }
 
 interface MainImage {
@@ -94,16 +130,4 @@ interface Comment {
   _rev: string;
   _type: string;
   _updatedAt: string;
-}
-
-
-// Query Payloads
-interface blogListPayload {
-  title?: string;
-  author: Author;
-  blogCategories: Category[];
-  snippet?: string;
-  publistedAt?: Date;
-  tripDate?: Date;
-  slug?: string;
 }
