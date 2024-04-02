@@ -40,13 +40,12 @@ export default function RootLayout({
       <body
         className={`scrollbar-hide ${inter.className} ${mono.variable} ${sans.variable} ${serif.variable}`}
       >
-        <div className='flex h-screen w-full flex-col '>
-          <div className='flex flex-1'>
+        <div className='flex h-screen w-full flex-1 flex-col'>
+          <div className='flex flex-1 '>
             <Sidebar />
 
             {children}
           </div>
-
           <Footer />
         </div>
       </body>
