@@ -107,13 +107,7 @@ export default async function Article({ params: { slug } }: Props) {
               <p className='mt-6 px-2 italic text-xs xs:text-sm md:text-base'>{post.snippet}</p>
             </section>
           </section>
-          <p className='hidden sm:flex'>sm</p>
-          <p className='hidden md:flex'>md</p>
-          <p className='hidden lg:flex'>lg</p>
-          <p className='hidden xl:flex'>xl</p>
-          <p className='hidden dxl:flex'>dxl</p>
-          <p className='hidden xxl:flex'>xxl</p>
-          <p className='hidden mxl:flex'>mxl</p>
+
           {/* Article Main Image  */}
           {/* TODO: Add Light Box  */}
           <div className='mt-4 flex justify-center'>
