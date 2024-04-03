@@ -21,7 +21,7 @@ function About() {
         </h1>
 
         {/* Bio Section  */}
-        <section className='xl:spacy-y-0 flex h-full w-full flex-col items-center justify-center space-y-8 xl:mx-auto xl:flex-row xl:space-x-36'>
+        <section className='dxl:spacy-y-0 flex h-full w-full flex-col items-center justify-center space-y-8 dxl:mx-auto dxl:flex-row dxl:space-x-36'>
           {/* Text & Counters */}
           <div className='flex flex-col items-center justify-center lg:w-5/6'>
             {/* Bio  */}
