@@ -3,6 +3,7 @@ import { Inter, IBM_Plex_Mono, PT_Serif } from 'next/font/google';
 import '@/app/globals.css'
 import Footer from '@/c/global/Footer';
 import Sidebar from '@/c/global/Sidebar';
+import MobileNav from '@/components/global/MobileNav';
 
 
 const serif = PT_Serif({
@@ -43,7 +44,7 @@ export default function RootLayout({
         <div className='flex h-screen w-screen flex-1 flex-col'>
           <div className='flex flex-1 '>
             <Sidebar />
-
+<MobileNav />
             {children}
           </div>
           <Footer />

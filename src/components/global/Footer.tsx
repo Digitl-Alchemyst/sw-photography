@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
   return (
-    <footer className='w-screen bg-steeldark-700 px-10 py-10 text-steelpolished-200'>
+    <footer className='w-screen bg-steeldark-700 px-10 py-10 text-steelpolished-200 pb-22 md:pb-0'>
       <div className='mx-auto justify-between gap-16 sm:flex'>
         {/* COLUMN 1 */}
         <div className='mt-16 flex basis-1/2 flex-col sm:mt-0'>
