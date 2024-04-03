@@ -12,11 +12,11 @@ const NavLinks = [
     title: 'Gallery',
     url: '/gallery',
   },
-  {
-    id: 3,
-    title: 'Booking',
-    url: '/booking',
-  },
+  // {
+  //   id: 3,
+  //   title: 'Booking',
+  //   url: '/booking',
+  // },
   // {
   //   id: 4,
   //   title: 'Shop',
@@ -36,11 +36,6 @@ const NavLinks = [
     id: 7,
     title: 'Contact',
     url: '/contact',
-  },
-  {
-    id: 7,
-    title: 'studio',
-    url: '/studio',
   },
 ];
 

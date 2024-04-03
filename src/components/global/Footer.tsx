@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react'
 
 function Footer() {
@@ -132,7 +133,10 @@ function Footer() {
           </p>
         </div>
       </div>
+      <div className='flex justify-between pb-1'>
       <p>© 2023 Steven Watkins. All rights reserved.</p>
+<Link href='/studio' className='text-xs font-light text-accent underline'>Studio</Link>
+      </div>
     </footer>
   );
 }
