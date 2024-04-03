@@ -64,7 +64,7 @@ const Contact = () => {
         </h1>
 
         {/* Sub Container  */}
-        <div className='flex flex-col items-center justify-center space-y-8 lg:space-y-0 rounded-xl border border-steelflat-600/60 bg-steeldark-400/40 px-16 lg:py-16 py-6 shadow-xl shadow-steeldark-700/40 drop-shadow-lg lg:flex-row lg:space-x-16'>
+        <div className='flex flex-col items-center justify-center space-y-8 xl:space-y-0 rounded-xl border border-steelflat-600/60 bg-steeldark-400/40 px-16 lg:py-16 py-6 shadow-xl shadow-steeldark-700/40 drop-shadow-lg xl:flex-row xl:space-x-16'>
           {/* Contact Info */}
           <section className='mx-auto flex w-full flex-1 flex-col items-start space-y-4'>
             <h3 className='text-2xl font-bold'>

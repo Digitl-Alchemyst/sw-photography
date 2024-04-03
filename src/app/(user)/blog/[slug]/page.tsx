@@ -34,10 +34,15 @@ export default async function Article({ params: { slug } }: Props) {
           {/* Title  */}
           <div className='w-full px-16'>
             <div className='px-4'>
-              <h1 className='text-3xl font-bold text-accent/80'>{post.title}</h1>
+              <h1 className='text-lg font-bold text-accent/80 lg:text-xl xl:text-2xl dxl:text-3xl'>
+                {post.title}
+              </h1>
 
               {/* Social Media Share Icons  */}
-              <SocialShare url={`https://sw-photography.vercel.app/blog/${slug}`} title={post.title} />
+              <SocialShare
+                url={`https://sw-photography.vercel.app/blog/${slug}`}
+                title={post.title}
+              />
             </div>
             <hr className='mb-8 mt-5 w-full border-accent ' />
           </div>
@@ -57,7 +62,7 @@ export default async function Article({ params: { slug } }: Props) {
             {/* Headline Content  */}
             <section className='relative w-full space-y-2 bg-accent/20 p-5'>
               {/* Author & Category  */}
-              <div className='flex items-center justify-between'>
+              <div className='flex flex-col xs:flex-row items-center justify-between'>
                 {/* Author Profile Link  */}
                 <ClientSideRoute route={resolveHref('author', post.author.slug?.current) || ''}>
                   <div className='flex items-center justify-start space-x-3 py-2'>
@@ -68,17 +73,21 @@ export default async function Article({ params: { slug } }: Props) {
                       height={65}
                       alt=''
                     />
-                    <h3 className='text-xl font-semibold'>{post.author.name}</h3>
+                    <div className='flex flex-col'>
+
+                    <p className='text-sm lg:text-base'>Written By:</p>
+                    <h3 className='lg:text-xl font-semibold'>{post.author.name}</h3>
+                    </div>
                   </div>
                 </ClientSideRoute>
 
                 {/* Article Category  */}
-                <div className='mt-auto flex items-center justify-end space-x-2'>
+                <div className=' flex space-x-2'>
                   {post.blogCategories &&
                     post.blogCategories.map((category) => (
                       <div
                         key={category._id}
-                        className='max-w-[160px] rounded-xl border border-accent2 bg-slate-900/80 px-3 py-2 text-center text-xs font-semibold text-accent lg:text-sm'
+                        className='max-w-[260px] rounded-xl border border-accent2 bg-slate-900/80 px-3 py-2  text-xs font-semibold text-accent lg:text-sm'
                       >
                         <p>{category.title}</p>
                       </div>
@@ -88,17 +97,23 @@ export default async function Article({ params: { slug } }: Props) {
 
               {/* Article Date  */}
               <div className='space-y-1'>
-                <p className='text-md text-steelpolished-600'>{formatDate(post._createdAt)}</p>
+                <p className=' text-steelpolished-600'>{formatDate(post._createdAt)}</p>
                 {/* Post Read Time  */}
                 {post.readTime && (
                   <p className='text-sm font-light text-steelflat-500'>{post.readTime} Read</p>
                 )}
               </div>
 
-              <p className='mt-6 px-2 italic'>{post.snippet}</p>
+              <p className='mt-6 px-2 italic text-xs xs:text-sm md:text-base'>{post.snippet}</p>
             </section>
           </section>
-
+          <p className='hidden sm:flex'>sm</p>
+          <p className='hidden md:flex'>md</p>
+          <p className='hidden lg:flex'>lg</p>
+          <p className='hidden xl:flex'>xl</p>
+          <p className='hidden dxl:flex'>dxl</p>
+          <p className='hidden xxl:flex'>xxl</p>
+          <p className='hidden mxl:flex'>mxl</p>
           {/* Article Main Image  */}
           {/* TODO: Add Light Box  */}
           <div className='mt-4 flex justify-center'>
