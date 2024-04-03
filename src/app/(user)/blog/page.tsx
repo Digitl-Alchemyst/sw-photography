@@ -1,8 +1,8 @@
 import sanityFetch from '@/l/sanity/fetch';
 import { queryBlogList } from '@/l/sanity/queries';
-import BlogCategories from '@/c/nav/BlogCategories';
+import { headerFontStyle } from '@/lib/util/headerFontStyles';
+import BlogCategories from '@/components/global/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
-import { headerFontStyle } from '@/l/util/headerFontStyles';
 
 export const revalidate = 60;
 export const fetchCache = 'no-store';
@@ -15,7 +15,9 @@ export default async function Blog() {
       {/* Main Container  */}
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10  py-12'>
         {/* Header */}
-        <h1 className={`text-center text-5xl lg:text-7xl font-bold ${headerFontStyle.className}`}>-Blog-</h1>
+        <h1 className={`text-center text-5xl font-bold lg:text-7xl ${headerFontStyle.className}`}>
+          -Blog-
+        </h1>
 
         {/* Sub Container  */}
         <div>
@@ -24,7 +26,7 @@ export default async function Blog() {
           <section
             className={
               blogs.length > 0
-                ? 'grid grid-cols-1 lg:gap-8 dxl:gap-y-10 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-4 mxl:grid-cols-5'
+                ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3 dxl:gap-y-10 xxl:grid-cols-4 mxl:grid-cols-5'
                 : 'mx-auto mt-8  px-2 pb-24 xl:px-10'
             }
           >

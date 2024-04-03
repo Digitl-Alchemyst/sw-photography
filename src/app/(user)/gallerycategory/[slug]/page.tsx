@@ -1,10 +1,8 @@
 /* eslint-disable react/function-component-definition */
-import sanityFetch from '@/lib/sanity/fetch';      
-import { queryBlogListByCategory, queryGalleryListByCategory } from '@/lib/sanity/queries';
-import BlogCard from '@/c/cards/BlogCard';
-import BlogCategories from '@/components/nav/BlogCategories';
-import { headerFontStyle } from '@/l/util/headerFontStyles';
-import SubGalleryCard from '@/components/cards/SubGalleryCard';
+import sanityFetch from '@/lib/sanity/fetch';
+import { queryGalleryListByCategory } from '@/lib/sanity/queries';
+import { headerFontStyle } from '@/lib/util/headerFontStyles';
+import SubGalleryCard from '@/c/cards/SubGalleryCard';
 
 type Props = {
   params: {

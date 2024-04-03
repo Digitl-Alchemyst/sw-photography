@@ -1,14 +1,7 @@
-import Image from 'next/image'
-import React from 'react'
-import localFont from 'next/font/local';
+import { Aerotis } from '@/lib/util/headerFontStyles';
+import Image from 'next/image';
 import Link from 'next/link';
 
-
-const Aerotis = localFont({
-//   subsets: ['latin'],
-  src: '../../../public/fonts/AEROTIS.ttf',
-  weight: '400',
-});
 function GalleryCard({
   galleryImg,
   title,
@@ -37,4 +30,4 @@ function GalleryCard({
   );
 }
 
-export default GalleryCard
+export default GalleryCard;

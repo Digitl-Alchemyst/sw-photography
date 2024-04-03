@@ -1,14 +1,7 @@
 'use client';
 import Image from 'next/image';
-import React from 'react';
+import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import CountUp from 'react-countup';
-import { Alex_Brush, Satisfy, Allison } from 'next/font/google';
-
-const scriptFont = Alex_Brush({
-  subsets: ['latin'],
-  variable: '--my-font-family',
-  weight: '400',
-});
 
 function About() {
   return (
@@ -16,13 +9,13 @@ function About() {
       {/* Main Container  */}
       <div className='flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-6 py-12 xl:mx-auto xl:px-30 xl:py-20'>
         {/* Heading  */}
-        <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>
+        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
           - About <span className='text-accent'>Me</span> -
         </h1>
         <div className='w-full'>
           <hr className='mb-8 border-accent' />
           {/* Bio Section  */}
-          <section className='dxl:spacy-y-0 flex h-full w-full flex-col items-center justify-center space-y-8 dxl:mx-auto dxl:flex-row dxl:space-x-36'>
+          <section className='flex h-full w-full flex-col items-center justify-center space-y-8 dxl:mx-auto dxl:flex-row dxl:space-x-36 dxl:space-y-0'>
             {/* Text & Counters */}
             <div className='flex flex-col items-center justify-center lg:w-5/6'>
               {/* Bio  */}

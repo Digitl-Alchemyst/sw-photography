@@ -1,16 +1,15 @@
 /* eslint-disable react/function-component-definition */
-import sanityFetch from '@/lib/sanity/fetch';      
+import sanityFetch from '@/lib/sanity/fetch';
 import { queryBlogListByCategory } from '@/lib/sanity/queries';
+import { headerFontStyle } from '@/lib/util/headerFontStyles';
+import BlogCategories from '@/components/global/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
-import BlogCategories from '@/components/nav/BlogCategories';
-import { headerFontStyle } from '@/l/util/headerFontStyles';
 
 type Props = {
   params: {
     slug: string;
   };
 };
-
 
 export const revalidate = 18;
 export const fetchCache = 'no-store';
@@ -31,7 +30,7 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
             className={
               (blogs as Blog[]).length > 0
                 ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3 dxl:gap-y-10 xxl:grid-cols-4 mxl:grid-cols-5'
-                : 'mx-auto mt-8 px-2 pb-24 xl:px-10 w-full'
+                : 'mx-auto mt-8 w-full px-2 pb-24 xl:px-10'
             }
           >
             {/* Conditional rendering based on the presence of blog posts */}

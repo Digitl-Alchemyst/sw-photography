@@ -1,18 +1,11 @@
-import React from 'react';
-import { Alex_Brush, Satisfy, Allison } from 'next/font/google';
-
-const scriptFont = Alex_Brush({
-  subsets: ['latin'],
-  variable: '--my-font-family',
-  weight: '400',
-});
+import { headerFontStyle } from '@/lib/util/headerFontStyles';
 function Booking() {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-8 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900'>
         {/* Header */}
-        <h1 className={`text-center text-7xl font-bold capitalize ${scriptFont.className}`}>
+        <h1 className={`text-center text-7xl font-bold capitalize ${headerFontStyle.className}`}>
           - Heading -
         </h1>
         <div className='w-full'>

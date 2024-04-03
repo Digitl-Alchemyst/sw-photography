@@ -1,13 +1,13 @@
-import Image from 'next/image';
-import { groq } from 'next-sanity';
-import { PortableText } from '@portabletext/react';
-import { RichTextComponents } from '@/components/providers/RichTextComponents';
-import SocialShare from '@/components/global/SocialShare';
 import { client } from '@/l/sanity/client';
-import urlForImage from '@/l/util/urlForImage';
-import ClientSideRoute from '@/c/providers/ClientSideRoute';
+import { groq } from 'next-sanity';
 import sanityFetch from '@/l/sanity/fetch';
 import { queryBlogPostBySlug } from '@/l/sanity/queries';
+import Image from 'next/image';
+import ClientSideRoute from '@/c/providers/ClientSideRoute';
+import { RichTextComponents } from '@/c/providers/RichTextComponents';
+import { PortableText } from '@portabletext/react';
+import SocialShare from '@/c/global/SocialShare';
+import urlForImage from '@/l/util/urlForImage';
 import resolveHref from '@/l/util/resolveHref';
 import formatDate from '@/l/util/formatDate';
 

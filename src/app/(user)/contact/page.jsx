@@ -1,6 +1,10 @@
 /* eslint-disable import/no-named-as-default-member */
 'use client';
-
+import { useRef } from 'react';
+import Link from 'next/link';
+import SocialLinks from '@/c/global/SocialLinks';
+import { headerFontStyle } from '@/lib/util/headerFontStyles';
+import emailjs from '@emailjs/browser';
 import {
   BsArrowRight,
   BsFillChatLeftTextFill,
@@ -10,22 +14,8 @@ import {
 } from 'react-icons/bs';
 import { MdSettingsCell } from 'react-icons/md';
 import { ImEnvelop } from 'react-icons/im';
-
-import SocialLinks from '@/c/global/SocialLinks';
 import { TbBrandLinktree } from 'react-icons/tb';
-import Link from 'next/link';
-
-import React, { useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import { HiBuildingOffice2 } from 'react-icons/hi2';
-
-import { Alex_Brush, Satisfy, Allison } from 'next/font/google';
-
-const scriptFont = Alex_Brush({
-  subsets: ['latin'],
-  variable: '--my-font-family',
-  weight: '400',
-});
 
 const Contact = () => {
   // Email Form Logic
@@ -58,7 +48,7 @@ const Contact = () => {
       {/* Main Container  */}
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-18 py-22'>
         {/* Header */}
-        <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>
+        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
           -Let&apos;s <span className='text-accent'>Connect-</span>
         </h1>
         <div className='w-full'>
