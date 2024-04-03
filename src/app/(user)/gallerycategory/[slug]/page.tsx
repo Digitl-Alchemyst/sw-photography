@@ -23,6 +23,7 @@ export default async function GalleryCategoryPage({ params: { slug } }: Props) {
         <h1 className={`text-center text-8xl font-bold capitalize ${headerFontStyle.className}`}>
           -{slug} Galleries-
         </h1>
+
         <div className='w-full'>
           <hr className='mb-8 border-accent' />
           <section

@@ -11,7 +11,9 @@ type Props = {
   };
 };
 
+
 export const revalidate = 18;
+export const fetchCache = 'no-store';
 
 export default async function BlogCategoryPage({ params: { slug } }: Props) {
   const blogs = await getBlogListByCategory(slug);
@@ -19,21 +21,23 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10 py-12'>
-        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>-Blog-</h1>
+        <h1 className={`text-center text-5xl font-bold lg:text-7xl ${headerFontStyle.className}`}>
+          -Blog-
+        </h1>
         <div>
           <BlogCategories />
           <hr className='mb-8 border-accent' />
           <section
-            className={   
+            className={
               (blogs as Blog[]).length > 0
-                ? 'grid grid-cols-1 gap-x-10 gap-y-12 md:grid-cols-2 lg:grid-cols-3'
-                : 'mx-auto mt-8  px-10 pb-24'
+                ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3 dxl:gap-y-10 xxl:grid-cols-4 mxl:grid-cols-5'
+                : 'mx-auto mt-8 px-2 pb-24 xl:px-10'
             }
           >
             {/* Conditional rendering based on the presence of blog posts */}
             {blogs && Array.isArray(blogs) && blogs.length > 0 ? (
               // If there are blog posts, map through the BlogCard component for each blog post
-              blogs.map((index) => <BlogCard blogs={blogs} key={index} />)
+              <BlogCard blogs={blogs} />
             ) : (
               // If there are no blog posts, render a message
               <div className='flex w-full flex-col items-center justify-center space-y-4'>

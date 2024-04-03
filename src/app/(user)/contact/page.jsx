@@ -59,14 +59,12 @@ const Contact = () => {
       {/* Main Container  */}
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-18 py-22'>
         {/* Header */}
-        <h1
-          className={`text-center text-7xl font-bold ${scriptFont.className}`}
-        >
+        <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>
           -Let&apos;s <span className='text-accent'>Connect-</span>
         </h1>
 
         {/* Sub Container  */}
-        <div className='flex flex-row items-center justify-center space-x-16 rounded-xl border border-steelflat-600/60 bg-steeldark-400/40 px-16 py-16 drop-shadow-lg shadow-xl shadow-steeldark-700/40'>
+        <div className='flex flex-col items-center justify-center space-y-8 xl:space-y-0 rounded-xl border border-steelflat-600/60 bg-steeldark-400/40 px-16 lg:py-16 py-6 shadow-xl shadow-steeldark-700/40 drop-shadow-lg xl:flex-row xl:space-x-16'>
           {/* Contact Info */}
           <section className='mx-auto flex w-full flex-1 flex-col items-start space-y-4'>
             <h3 className='text-2xl font-bold'>
@@ -74,11 +72,10 @@ const Contact = () => {
             </h3>
 
             <p className='text-left'>
-              Feel free to get in touch with me however you prefer. Let&apos;s
-              chat about your project and any photography or video needs you
-              have. I&apos;m open to discussing new projects, creative ideas,
-              collaborations, or any other opportunities you have in mind. Just
-              reach out to me in whatever way works best for you.
+              Feel free to get in touch with me however you prefer. Let&apos;s chat about your
+              project and any photography or video needs you have. I&apos;m open to discussing new
+              projects, creative ideas, collaborations, or any other opportunities you have in
+              mind. Just reach out to me in whatever way works best for you.
             </p>
 
             {/* Link Tree  */}
@@ -88,8 +85,8 @@ const Contact = () => {
                 href='https://www.flowcode.com/page/digitalalchemyst'
                 className='font-semibold underline decoration-steelflat-600 hover:text-accent'
               >
-                <span className='text-accent2'>Visit my Link Tree</span> for a
-                full scope of my projects
+                <span className='text-accent2'>Visit my Link Tree</span> for a full scope of my
+                projects
               </Link>
             </div>
 
@@ -171,7 +168,7 @@ const Contact = () => {
             <form
               onSubmit={sendEmail}
               ref={form}
-              className='mx-auto flex w-full flex-1 flex-col gap-y-4 pb-50 xl:pb-0 text-steeldark-700'
+              className='mx-auto flex w-full flex-1 flex-col gap-y-4 lg:pb-50 text-steeldark-700 xl:pb-0'
             >
               {/* Input Group */}
               <div className='flex w-full gap-x-6'>
@@ -180,14 +177,14 @@ const Contact = () => {
                   type='text'
                   name='name'
                   placeholder='name'
-                  className='w-full border border-white/20 rounded-sm bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
+                  className='w-full rounded-sm border border-white/20 bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
                 />
                 <input
                   required
                   type='text'
                   name='email'
                   placeholder='email'
-                  className='w-full border border-white/20 rounded-sm bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
+                  className='w-full rounded-sm border border-white/20 bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
                 />
               </div>
               <input
@@ -195,7 +192,7 @@ const Contact = () => {
                 type='text'
                 name='subject'
                 placeholder='subject'
-                className='border border-white/20 rounded-sm bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
+                className='rounded-sm border border-white/20 bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
               />
               <textarea
                 required
@@ -206,12 +203,12 @@ const Contact = () => {
               <button
                 type='submit'
                 value='Send'
-                className='text-light text-steelpolished-300 group flex max-w-[170px] items-center justify-center overflow-hidden rounded-lg border border-solid border-accent bg-steeldark-800/60 p-3 px-8 text-lg font-semibold transition-all duration-75 hover:border-accent2 hover:bg-accent2 hover:text-steeldark-500 hover:neon-sky'
+                className='text-light group flex max-w-[170px] items-center justify-center overflow-hidden rounded-lg border border-solid border-accent bg-steeldark-800/60 p-3 px-8 text-lg font-semibold text-steelpolished-300 transition-all duration-75 hover:border-accent2 hover:bg-accent2 hover:text-steeldark-500 hover:neon-sky'
               >
                 <span className='transition-all duration-500 group-hover:-translate-x-[120%] group-hover:opacity-0'>
                   Let&apos;s Talk
                 </span>
-                <BsArrowRight className='absolute translate-x-[120%] text-[22px] opacity-0 transition-all delay-25 duration-300 group-hover:flex group-hover:-translate-x-0 group-hover:opacity-100' />
+                <BsArrowRight className='delay-25 absolute translate-x-[120%] text-[22px] opacity-0 transition-all duration-300 group-hover:flex group-hover:-translate-x-0 group-hover:opacity-100' />
               </button>
             </form>
           </div>

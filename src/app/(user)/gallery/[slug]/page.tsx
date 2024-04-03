@@ -21,17 +21,7 @@ const scriptFont = Alex_Brush({
 
 export default async function Gallery({ params: { slug } }: Props) {
   const gallery = (await getGalleryBySlug(slug)) as Gallery;
-  // console.log('🚀 ~ Gallery ~ slug:', slug);
-  // console.log('🚀 ~ Gallery ~ gallery:', gallery);
-
   const galleryPhotos = gallery.galleryPhotos;
-  // console.log('🚀 ~ Gallery ~ galleryPhotos:', galleryPhotos);
-
-  // map through the gallery photos and return the asset._ref
-  const galleryPhotosRefs = galleryPhotos?.map((photo) => photo.asset._ref);
-  // console.log('🚀 ~ Gallery ~ galleryPhotosRefs:', galleryPhotosRefs);
-
-  // const blurredPhotos = await blurredImgUrl(galleryPhotos);
 
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
@@ -43,14 +33,17 @@ export default async function Gallery({ params: { slug } }: Props) {
         </h1>
 
         {/* Sub Container  */}
-        <section className='flex w-full flex-col items-center justify-center px-8 '>
-          <p>{gallery.snippet}</p>
-
-          <p>Photographed By: {gallery.author.name}</p>
-          <p>{gallery.tripDate}</p>
+        <section className='mx-auto flex w-full flex-col items-center justify-center px-8 '>
+          <div className='flex items-center justify-between px-6 py-4 w-full'>
+            <div>
+            <p>Photographed By: {gallery.author.name}</p>
+            <p>{gallery.tripDate}</p>
+            </div>
+              <p>{gallery.snippet}</p>
+          </div>
 
           {/* Gallery Photos */}
-          <div className='grid h-full w-full auto-rows-[15px] grid-cols-4 justify-center py-4'>
+          <div className='grid h-full w-full auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-3 xxl:grid-cols-4'>
             {galleryPhotos?.map((photo) => {
               const refString = photo.asset._ref;
               const resolutionParts = refString.split('-')[2].split('x');
@@ -59,14 +52,14 @@ export default async function Gallery({ params: { slug } }: Props) {
 
               const aspectRatio = height / width;
 
-              const galleryHeight = Math.ceil(250 * aspectRatio);
+              const galleryHeight = Math.ceil(170 * aspectRatio);
 
               const photoSpans = Math.round(galleryHeight / 10) + 1;
 
               return (
                 <div
                   key={photo.asset._ref}
-                  className='w-[375px] justify-self-center'
+                  className='flex justify-center'
                   style={{ gridRowEnd: `span ${photoSpans}` }}
                 >
                   <Link
@@ -74,15 +67,13 @@ export default async function Gallery({ params: { slug } }: Props) {
                     target='_blank'
                     className='grid-place-content-center'
                   >
-                    <div className='group overflow-hidden'>
+                    <div className='group overflow-hidden '>
                       <Image
                         src={urlForImage(photo as any)?.url() || ''}
-                        width={375}
+                        width={535}
                         height={galleryHeight}
-                        sizes='375px'
+                        sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
                         alt='gallery photo'
-                        // placeholder='blur'
-                        // blurDataURL={photo.blurDataURL}
                         className='group:hover-opacity-50 w-full rounded-md transition-all duration-75 ease-in-out'
                       />
                     </div>

@@ -5,7 +5,7 @@ import BlogCard from '@/c/cards/BlogCard';
 import { headerFontStyle } from '@/l/util/headerFontStyles';
 
 export const revalidate = 60;
-export const fetchCache = 'force-cache';
+export const fetchCache = 'no-store';
 // export const dynamic = 'force-dynamic';
 
 export default async function Blog() {
@@ -15,12 +15,19 @@ export default async function Blog() {
       {/* Main Container  */}
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10  py-12'>
         {/* Header */}
-        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>-Blog-</h1>
+        <h1 className={`text-center text-5xl lg:text-7xl font-bold ${headerFontStyle.className}`}>-Blog-</h1>
+
         {/* Sub Container  */}
         <div>
           <BlogCategories />
           <hr className='mb-8 border-accent' />
-          <section className={blogs.length > 0 ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12' : 'mx-auto mt-8  px-10 pb-24'}>
+          <section
+            className={
+              blogs.length > 0
+                ? 'grid grid-cols-1 lg:gap-8 dxl:gap-y-10 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 xxl:grid-cols-4 mxl:grid-cols-5'
+                : 'mx-auto mt-8  px-2 pb-24 xl:px-10'
+            }
+          >
             {/* Conditional rendering based on the presence of blog posts */}
             {blogs && blogs.length > 0 ? (
               // If there are blog posts, render the BlogCard component for each blog post

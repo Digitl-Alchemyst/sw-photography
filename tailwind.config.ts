@@ -20,7 +20,14 @@ const config: Config = {
         full: '0 0 100%',
       },
       screens: {
-        xxl: '1950px',
+        xs: '420px',
+        sm: '640px',
+        md: '768px',
+        lg: '1000px',
+        xl: '1165px',
+        dxl: '1300px',
+        xxl: '1750px',
+        mxl: '2055px'
       },
       lineClamp: {
         '8': '8',
