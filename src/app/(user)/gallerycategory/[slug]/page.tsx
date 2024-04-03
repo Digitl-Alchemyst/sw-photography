@@ -20,7 +20,7 @@ export default async function GalleryCategoryPage({ params: { slug } }: Props) {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       <div className='flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 py-12'>
-        <h1 className={`text-center text-8xl font-bold capitalize ${headerFontStyle.className}`}>
+        <h1 className={`text-center text-7xl font-bold capitalize ${headerFontStyle.className}`}>
           -{slug} Galleries-
         </h1>
 

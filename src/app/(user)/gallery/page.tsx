@@ -29,8 +29,9 @@ export default async function Portfolio() {
       {/* Main Container  */}
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l  from-steelpolished-300/10 to-steeldark-900  px-10 py-12'>
         {/* Header */}
-        <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>-Gallery-</h1>
-   
+        <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>-Galleries-</h1>
+           <div className='w-full'>
+          <hr className='mb-8 border-accent' />
         <section className='grid w-full grid-cols-1 lg:grid-cols-2 dxl:grid-cols-3 grid-rows-2 items-center justify-center gap-x-8 gap-y-8'>
           {galleries.map((gallery, index) => (
             <ClientSideRoute
@@ -55,6 +56,7 @@ export default async function Portfolio() {
             </ClientSideRoute>
           ))}
         </section>
+        </div>
       </div>
     </main>
   );

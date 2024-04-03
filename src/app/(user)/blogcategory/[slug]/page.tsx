@@ -31,7 +31,7 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
             className={
               (blogs as Blog[]).length > 0
                 ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 lg:gap-8 xl:grid-cols-3 dxl:gap-y-10 xxl:grid-cols-4 mxl:grid-cols-5'
-                : 'mx-auto mt-8 px-2 pb-24 xl:px-10'
+                : 'mx-auto mt-8 px-2 pb-24 xl:px-10 w-full'
             }
           >
             {/* Conditional rendering based on the presence of blog posts */}

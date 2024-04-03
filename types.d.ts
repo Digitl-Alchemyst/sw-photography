@@ -51,6 +51,7 @@ interface Image {
   asset: Reference;
   height: number;
   width: number;
+  alt: string;
 }
 
 // interface Photo {

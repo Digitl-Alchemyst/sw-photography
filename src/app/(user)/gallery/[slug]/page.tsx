@@ -26,12 +26,13 @@ export default async function Gallery({ params: { slug } }: Props) {
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
-      <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900'>
+      <div className='mx-auto py-6 px-4 flex h-full w-full flex-col items-center justify-center space-y-8 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900'>
         {/* Header */}
         <h1 className={`text-center text-7xl font-bold ${scriptFont.className}`}>
           -{gallery.title}-
         </h1>
-
+        <div className='w-full'>
+          <hr className='mb-8 border-accent' />
         {/* Sub Container  */}
         <section className='mx-auto flex w-full flex-col items-center justify-center px-8 '>
           <div className='flex items-center justify-between px-6 py-4 w-full'>
@@ -83,6 +84,7 @@ export default async function Gallery({ params: { slug } }: Props) {
             })}
           </div>
         </section>
+        </div>
       </div>
     </main>
   );

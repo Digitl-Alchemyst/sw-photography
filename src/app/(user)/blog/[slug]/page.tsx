@@ -62,7 +62,7 @@ export default async function Article({ params: { slug } }: Props) {
             {/* Headline Content  */}
             <section className='relative w-full space-y-2 bg-accent/20 p-5'>
               {/* Author & Category  */}
-              <div className='flex flex-col xs:flex-row items-center justify-between'>
+              <div className='xs:flex-row flex flex-col items-center justify-between'>
                 {/* Author Profile Link  */}
                 <ClientSideRoute route={resolveHref('author', post.author.slug?.current) || ''}>
                   <div className='flex items-center justify-start space-x-3 py-2'>
@@ -74,9 +74,8 @@ export default async function Article({ params: { slug } }: Props) {
                       alt=''
                     />
                     <div className='flex flex-col'>
-
-                    <p className='text-sm lg:text-base'>Written By:</p>
-                    <h3 className='lg:text-xl font-semibold'>{post.author.name}</h3>
+                      <p className='text-sm lg:text-base'>Written By:</p>
+                      <h3 className='font-semibold lg:text-xl'>{post.author.name}</h3>
                     </div>
                   </div>
                 </ClientSideRoute>
@@ -104,7 +103,7 @@ export default async function Article({ params: { slug } }: Props) {
                 )}
               </div>
 
-              <p className='mt-6 px-2 italic text-xs xs:text-sm md:text-base'>{post.snippet}</p>
+              <p className='xs:text-sm mt-6 px-2 text-xs italic md:text-base'>{post.snippet}</p>
             </section>
           </section>
 
@@ -124,6 +123,9 @@ export default async function Article({ params: { slug } }: Props) {
               className='rounded-lg'
             />
           </div>
+            <p className='rounded-lg border mt-2 border-accent bg-steeldark-900/20 px-4 py-1 text-sm font-light text-steelpolished-400'>
+              {post.mainImage.alt}
+            </p>
 
           {/* Article Video  */}
           {post.hasEmbeddedVideo && (
