@@ -177,5 +177,6 @@ export async function generateStaticParams() {
 
   return slugRoutes.map((slug) => ({
     slug,
+    path: resolveHref('blog', slug),
   }));
 }
