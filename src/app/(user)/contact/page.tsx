@@ -1,12 +1,9 @@
 /* eslint-disable import/no-named-as-default-member */
-'use client';
-import { useRef } from 'react';
 import Link from 'next/link';
 import SocialLinks from '@/c/global/SocialLinks';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
-import emailjs from '@emailjs/browser';
 import {
-  BsArrowRight,
+
   BsFillChatLeftTextFill,
   BsSignal,
   BsTelephoneFill,
@@ -16,33 +13,13 @@ import { MdSettingsCell } from 'react-icons/md';
 import { ImEnvelop } from 'react-icons/im';
 import { TbBrandLinktree } from 'react-icons/tb';
 import { HiBuildingOffice2 } from 'react-icons/hi2';
+import ContactForm from '@/components/home/ContactForm';
+import sanityFetch from '@/lib/sanity/fetch';
+import { queryPhotographers } from '@/lib/sanity/queries';
 
-const Contact = () => {
-  // Email Form Logic
-  const form = useRef();
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-        form.current,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        },
-      );
-
-    e.target.reset();
-  };
-
+export default async function Contact() {
+    const photographers = await getPhotographer();
+    const photographer = photographers[0];
   return (
     <main className=' bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
@@ -72,7 +49,7 @@ const Contact = () => {
               <div className='flex items-center space-x-4'>
                 <TbBrandLinktree className='h-8 w-8 text-accent' />
                 <Link
-                  href='https://www.flowcode.com/page/digitalalchemyst'
+                  href={photographer.linkTree}
                   className='font-semibold underline decoration-steelflat-600 hover:text-accent'
                 >
                   <span className='text-accent2'>Visit my Link Tree</span> for a full scope of my
@@ -85,14 +62,14 @@ const Contact = () => {
                 <ImEnvelop className='h-8 w-8 text-accent' />
                 <div className='flex flex-col items-start'>
                   <Link
-                    href='mailto:digitalalchemiststudios@gmail.com'
+                    href={`mailto:${photographer.email}`}
                     target='_blank'
                     className='cursor-pointer hover:text-accent2'
                   >
                     StevenRWatkins86@gmail.com
                   </Link>
                   <Link
-                    href='mailto:digitalalchemiststudios@gmail.com'
+                    href={`mailto:${photographer.email2}`}
                     target='_blank'
                     className='cursor-pointer hover:text-accent2'
                   >
@@ -108,7 +85,7 @@ const Contact = () => {
                   <div className='flex items-center gap-x-2'>
                     <MdSettingsCell className='text-accent2' />
                     <Link
-                      href='tel:7204513767'
+                      href={`tel:${photographer.phone}`}
                       target='_blank'
                       className='cursor-pointer hover:text-accent2'
                     >
@@ -118,7 +95,7 @@ const Contact = () => {
                   <div className='flex items-center gap-x-2'>
                     <HiBuildingOffice2 className='text-accent2' />
                     <Link
-                      href='tel:7209303876'
+                      href={`tel:${photographer.phone2}`}
                       target='_blank'
                       className='cursor-pointer hover:text-accent2'
                     >
@@ -130,16 +107,16 @@ const Contact = () => {
 
               {/* Text Links  */}
               <div className='mb-4 flex items-center gap-x-6 text-lg'>
-                <Link href='sms:7204513767'>
+                <Link href={`sms:${photographer.phone}`}>
                   <BsFillChatLeftTextFill className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
                 </Link>
                 <Link
-                  href='https://signal.group/#CjQKIFmG5VRvMOLW8RsrO9Fo5C9nrJCfxV9TMKkW9qaexiVxEhBgwsiG6RorUJenFSjbISHI'
+                  href={photographer.signal}
                   target='_blank'
                 >
                   <BsSignal className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
                 </Link>
-                <Link href='https://wa.me/7204513767?text=Hello' target='_blank'>
+                <Link href={photographer.whatsApp} target='_blank'>
                   <BsWhatsapp className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
                 </Link>
               </div>
@@ -151,57 +128,7 @@ const Contact = () => {
             </section>
 
             {/* Contact Form  */}
-            <section className='flex w-full flex-1 flex-col items-start justify-center space-y-4'>
-              <h3 className='mb-6 text-2xl font-bold'>
-                Contact <span className='text-accent'>Me</span>
-              </h3>
-              <form
-                onSubmit={sendEmail}
-                ref={form}
-                className='mx-auto flex w-full flex-1 flex-col gap-y-4 text-steeldark-700 lg:pb-50 xl:pb-0'
-              >
-                {/* Input Group */}
-                <div className='flex w-full gap-x-6'>
-                  <input
-                    required
-                    type='text'
-                    name='name'
-                    placeholder='name'
-                    className='w-full rounded-sm border border-white/20 bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
-                  />
-                  <input
-                    required
-                    type='text'
-                    name='email'
-                    placeholder='email'
-                    className='w-full rounded-sm border border-white/20 bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
-                  />
-                </div>
-                <input
-                  required
-                  type='text'
-                  name='subject'
-                  placeholder='subject'
-                  className='rounded-sm border border-white/20 bg-steelpolished-400 px-3 py-1 capitalize outline-none placeholder:font-light placeholder:text-steeldark-700 focus:ring-1 focus:ring-accent'
-                />
-                <textarea
-                  required
-                  name='message'
-                  placeholder='message'
-                  className='h-[180px] w-full resize-none rounded-lg p-3 capitalize'
-                />
-                <button
-                  type='submit'
-                  value='Send'
-                  className='text-light group flex max-w-[170px] items-center justify-center overflow-hidden rounded-lg border border-solid border-accent bg-steeldark-800/60 p-3 px-8 text-lg font-semibold text-steelpolished-300 transition-all duration-75 hover:border-accent2 hover:bg-accent2 hover:text-steeldark-500 hover:neon-sky'
-                >
-                  <span className='transition-all duration-500 group-hover:-translate-x-[120%] group-hover:opacity-0'>
-                    Let&apos;s Talk
-                  </span>
-                  <BsArrowRight className='delay-25 absolute translate-x-[120%] text-[22px] opacity-0 transition-all duration-300 group-hover:flex group-hover:-translate-x-0 group-hover:opacity-100' />
-                </button>
-              </form>
-            </section>
+            <ContactForm />
           </section>
         </div>
       </div>
@@ -209,4 +136,13 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+// Call the Sanity Fetch Function for the Photographer Information
+async function getPhotographer(): Promise<Author[]> {
+  // Fetch blog data from Sanity
+  const photographer: Author[] = await sanityFetch({
+    query: queryPhotographers,
+    tags: ['author'],
+  });
+  // console.log("🚀 ~ getPhotographer ~ photographer:", photographer)
+  return photographer;
+}
