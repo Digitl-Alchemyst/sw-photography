@@ -6,7 +6,7 @@ function Booking() {
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-8 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900'>
         {/* Header */}
         <h1 className={`text-center text-7xl font-bold capitalize ${headerFontStyle.className}`}>
-          - Heading -
+          - Booking -
         </h1>
         <div className='w-full'>
           <hr className='mb-8 border-accent' />

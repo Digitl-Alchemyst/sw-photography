@@ -16,7 +16,7 @@ export default async function Blog() {
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10  py-12'>
         {/* Header */}
         <h1 className={`text-center text-5xl font-bold lg:text-7xl ${headerFontStyle.className}`}>
-          -Blog-
+          - Blog -
         </h1>
 
         {/* Sub Container  */}

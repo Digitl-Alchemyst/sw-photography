@@ -35,6 +35,56 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'authorImage2',
+      title: 'Secondary Author Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+    }),
+    defineField({
+      name: 'hero',
+      title: 'Hero Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+    }),
+    defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative Text',
+        },
+      ],
+    }),
+    defineField({
+      name: 'snippet',
+      title: 'Snippet',
+      type: 'text',
+    }),
+    defineField({
       name: 'bio',
       title: 'Bio',
       type: 'array',
@@ -83,8 +133,38 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'linkTree',
+      title: 'Link Tree',
+      type: 'string',
+    }),
+    defineField({
       name: 'email',
       title: 'Email',
+      type: 'string',
+    }),
+    defineField({
+      name: 'email2',
+      title: 'Email 2',
+      type: 'string',
+    }),
+    defineField({
+      name: 'phone',
+      title: 'Phone',
+      type: 'string',
+    }),
+    defineField({
+      name: 'phone2',
+      title: 'Phone 2',
+      type: 'string',
+    }),
+    defineField({
+      name: 'signal',
+      title: 'Signal',
+      type: 'string',
+    }),
+    defineField({
+      name: 'whatsApp',
+      title: 'WhatsApp',
       type: 'string',
     }),
     defineField({

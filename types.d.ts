@@ -40,9 +40,26 @@ interface Gallery extends Base {
 
 
 interface Author extends Base {
-  bio: Block[];
   authorImage: Image;
+  authorImage2: Image;
+  hero: Image;
+  logo: Image;
   name: string;
+  snippet: string;
+  bio: Block[];
+  twitter: string;
+  instagram: string;
+  facebook: string;
+  tiktok: string;
+  youtube: string;
+  website: string;
+  linkTree: string;
+  email: string;
+  email2: string;
+  phone: string;
+  phone2: string;
+  signal: string;
+  whatsApp: string;
   slug: Slug;
 }
 

@@ -82,5 +82,5 @@ export const queryGalleryBySlug = groq`
 export const queryPhotographers = groq`
   *[_type=='author'] {
     ...,
-  } 
+  }
 `;

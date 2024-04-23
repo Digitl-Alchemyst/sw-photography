@@ -15,7 +15,7 @@ export default async function Portfolio() {
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-12 bg-gradient-to-l  from-steelpolished-300/10 to-steeldark-900  px-10 py-12'>
         {/* Header */}
         <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
-          -Galleries-
+          - Galleries -
         </h1>
         <div className='w-full'>
           <hr className='mb-8 border-accent' />

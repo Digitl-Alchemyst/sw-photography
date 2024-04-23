@@ -23,7 +23,7 @@ export default async function Gallery({ params: { slug } }: Props) {
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-8 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-4 py-6'>
         {/* Header */}
         <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
-          -{gallery.title}-
+          - {gallery.title} -
         </h1>
         <div className='w-full'>
           <hr className='mb-8 border-accent' />

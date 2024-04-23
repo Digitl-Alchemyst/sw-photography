@@ -21,7 +21,7 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-2 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-10 py-12'>
         <h1 className={`text-center text-5xl font-bold lg:text-7xl ${headerFontStyle.className}`}>
-          -Blog-
+          - Blog -
         </h1>
         <div>
           <BlogCategories />
