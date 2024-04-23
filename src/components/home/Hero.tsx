@@ -47,7 +47,6 @@ export default async function Hero() {
   );
 }
 
-
 // Call the Sanity Fetch Function for the Photographer Information
 async function getPhotographer(): Promise<Author[]> {
   // Fetch blog data from Sanity
