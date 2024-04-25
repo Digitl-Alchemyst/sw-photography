@@ -11,7 +11,7 @@ import urlForImage from '@/l/util/urlForImage';
 import resolveHref from '@/l/util/resolveHref';
 import formatDate from '@/l/util/formatDate';
 
-export { generateMetadata } from '@/l/util/generateMetadata';
+export { generateMetadata } from '@/lib/util/generateMetadata';
 
 type Props = {
   params: {

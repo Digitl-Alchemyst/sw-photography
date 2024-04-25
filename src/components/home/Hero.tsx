@@ -9,7 +9,7 @@ import urlForImage from '@/lib/util/urlForImage';
 export default async function Hero() {
   const photographers = await getPhotographer();
   const photographer = photographers[0];
-  console.log("🚀 ~ Hero ~ photographer:", photographer)
+  // console.log("🚀 ~ Hero ~ photographer:", photographer)
   return (
     <div className='relative z-10'>
       <div className='absolute left-0 top-0 z-20 h-full w-full flex-1 bg-gradient-to-l from-steelpolished-100/20 to-steeldark-900' />

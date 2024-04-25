@@ -86,14 +86,14 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 
 ### Features
 
-- [ ]
+- [ ] Blurred Images
 - [ ] Add search functionality
-- [ ] Design a responsive layout
+- [x] Design a responsive layout
 - [ ] Comments Section on Articles
 
 ### Bugs
 
-- [ ] Handle case for no photographer name in database for sub gallery card
+- [x] Handle case for no photographer name in database for sub gallery card
 
 ### Refactoring
 

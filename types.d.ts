@@ -71,19 +71,21 @@ interface Image {
   alt: string;
 }
 
-// interface Photo {
-//   id: string;
-//   width: number;
-//   height: number;
-//   url: string;
-//   src: [
-//     {
-//       large: string;
-//     },
-//   ];
-//   alt: string;
-//   blurDataURL: string;
-// }
+
+interface BlurredImages {
+  id: string;
+  width: number;
+  height: number;
+  url: string;
+  src: [
+    {
+      large: string;
+    },
+  ];
+  photos: Image[];
+  alt: string;
+  blurDataURL: string;
+}
 
 interface Reference {
   _ref: string;

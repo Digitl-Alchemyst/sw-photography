@@ -79,6 +79,25 @@ export const queryGalleryBySlug = groq`
       author->,
     }`;
 
+export const queryGalleryMetadata = groq`
+    *[_type == "gallery" && slug.current == $slug][0] {
+      mainImage,
+      author->,
+      snippet,
+      title,
+      slug,
+      keywords,
+    }`;
+export const queryBlogMetadata = groq`
+    *[_type == "blog" && slug.current == $slug][0] {
+      title,
+      mainImage,
+      keywords,
+      snippet,
+      author->,
+      readTime,
+    }`;
+
 export const queryPhotographers = groq`
   *[_type=='author'] {
     ...,

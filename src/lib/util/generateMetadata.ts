@@ -1,7 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import { groq } from 'next-sanity';
 import { client } from '@/lib/sanity/client';
-import urlForImage from '@/u/urlForImage';
+import urlForImage, { urlForOpenGraphImage } from '@/u/urlForImage';
+import { queryBlogMetadata, queryGalleryMetadata } from '../sanity/queries';
 // import type { Metadata } from 'next';
 
 type Props = {
@@ -11,64 +12,110 @@ type Props = {
 };
 
 // Define the generateMetadata function
-export async function generateMetadata({ params: { slug } }: Props) {
+export async function generateBlogMetadata({ params: { slug } }: Props) {
   // Fetch the post data based on the slug
-  const query = groq`
-    *[_type == "blog" && slug.current == $slug][0] {
-      title,
-      mainImage,
-      keywords,
-      snippet,
-      author->,
-      // Add more fields as needed for metadata
-    }`;
+  const query = queryBlogMetadata
 
   const post: Blog = await client.fetch(query, { slug });
 
   // Create metadata object with dynamic values
   const metadata = {
-    // type: 'article',
-    title: `${post.title} | UnTelevised Media`,
+    type: 'BlogPosting',
+    title: `${post.title} | Steven Watkins Photography`,
     description: post.snippet,
     keywords: post.keywords,
     authors: post.author,
-    publisher: 'UnTelevised Media',
+    publisher: 'Steven Watkins Photography',
 
     openGraph: {
-      title: `${post.title} | UnTelevised Media`,
+      title: `${post.title} | Steven Watkins Photography`,
       description: post.snippet,
-      url: `https://untelevised.media/post/${slug}`,
-      //   siteName: 'UnTelevised Media',
+      url: `https://sw-photography.vercel.app/blog/${slug}`,
+      siteName: 'Steven Watkins Photography',
       images: {
-        url: urlForImage(post.mainImage as any)?.url() || '',
-        //   width: 800,
-        //   height: 600,
-        // alt: post.mainImage.alt,
+        url: urlForOpenGraphImage(post.mainImage as any)?.url() || '',
+        width: 1200,
+        height: 6300,
+        alt: post.mainImage.alt,
       },
-      //   locale: 'en_US',
-      //   type: 'article',
+      locale: 'en_US',
+      type: 'article',
     },
 
     twitter: {
-      //   card: 'app',
-      title: `${post.title} | UnTelevised Media`,
+      card: 'summary_large_image',
+      title: `${post.title} | Steven Watkins Photography`,
       description: post.snippet,
-      //   siteId: '1467726470533754880',
-      creator: '@UnTelevisedLive',
-      //   creatorId: '1467726470533754880',
+      siteId: '@DigitlAlchemyst',
+      creator: '@DigitlAlchemyst',
+      creatorId: '@DigitlAlchemyst',
       images: {
-        url: urlForImage(post.mainImage as any)?.url() || '',
-        // alt: post.mainImage.alt,
+        url: urlForOpenGraphImage(post.mainImage as any)?.url() || '',
+        alt: post.mainImage.alt,
       },
     },
 
-    // colorScheme: 'dark',
-    // referrer: 'origin-when-cross-origin',
-    // formatDetection: {
-    //   email: false,
-    //   address: false,
-    //   telephone: false,
-    // },
+    colorScheme: 'dark',
+    referrer: 'origin-when-cross-origin',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+  };
+
+  return metadata;
+}
+
+export async function generateGalleryMetadata({ params: { slug } }: Props) {
+  // Fetch the post data based on the slug
+  const query = queryGalleryMetadata
+
+  const gallery: Gallery = await client.fetch(query, { slug });
+
+  // Create metadata object with dynamic values
+  const metadata = {
+    type: 'Collection',
+    title: `${gallery.title} | Steven Watkins Photography`,
+    description: gallery.snippet,
+    keywords: gallery.keywords,
+    publisher: 'UnTelevised Media',
+
+    openGraph: {
+      title: `${gallery.title} | Steven Watkins Photography`,
+      description: gallery.snippet,
+      url: `https://sw-photography.vercel.app/gallery/${slug}`,
+      siteName: 'Steven Watkins Photography',
+      images: {
+        url: urlForImage(gallery.mainImage as any)?.url() || '',
+        width: 1200,
+        height: 6300,
+        alt: gallery.mainImage.alt,
+      },
+      locale: 'en_US',
+      type: 'article',
+    },
+
+    twitter: {
+      card: 'summary_large_image',
+      title: `${gallery.title} | Steven Watkins Photography`,
+      description: gallery.snippet,
+      siteId: '@DigitlAlchemyst',
+      creator: '@DigitlAlchemyst',
+      creatorId: '@DigitlAlchemyst',
+      images: {
+        url: urlForImage(gallery.mainImage as any)?.url() || '',
+        alt: gallery.mainImage.alt,
+      },
+    },
+
+    colorScheme: 'dark',
+    referrer: 'origin-when-cross-origin',
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
   };
 
   return metadata;
