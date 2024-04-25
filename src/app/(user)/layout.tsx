@@ -8,8 +8,44 @@ import MobileNav from '@/components/global/MobileNav';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Steven Watkins Photography',
-  description: 'My Photography Portfolio',
+  title: `Steven Watkins Photography`,
+  description: '',
+  keywords: '',
+  publisher: 'Digitl Alchemyst',
+
+  openGraph: {
+    title: `Steven Watkins Photography`,
+    description: '',
+    url: `https://sw-photography.vercel.app/`,
+    siteName: 'Steven Watkins Photography',
+    images: {
+      url:'',
+      width: 1200,
+      height: 6300,
+      alt: '',
+    },
+    locale: 'en_US',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: `Steven Watkins Photography`,
+    description: '',
+    siteId: '@DigitlAlchemyst',
+    creator: '@DigitlAlchemyst',
+    creatorId: '@DigitlAlchemyst',
+    images: {
+      url:  '',
+      alt: '',
+    },
+  },
+
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
 };
 
 export default function RootLayout({

@@ -11,7 +11,7 @@ import urlForImage from '@/l/util/urlForImage';
 import resolveHref from '@/l/util/resolveHref';
 import formatDate from '@/l/util/formatDate';
 
-export { generateMetadata } from '@/lib/util/generateMetadata';
+export { generateMetadata } from '@/lib/util/generateBlogMetadata';
 
 type Props = {
   params: {
@@ -19,13 +19,12 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
+// export const revalidate = 60;
 export const fetchCache = 'no-store';
 // export const dynamic = 'force-dynamic';
 
 export default async function Article({ params: { slug } }: Props) {
   const post = (await getBlogPostBySlug(slug)) as Blog;
-  // console.log("🚀 ~ Article ~ post:", post)
 
   return (
     <>
@@ -62,7 +61,7 @@ export default async function Article({ params: { slug } }: Props) {
             {/* Headline Content  */}
             <section className='relative w-full space-y-2 bg-accent/20 p-5'>
               {/* Author & Category  */}
-              <div className='xs:flex-row flex flex-col items-center justify-between'>
+              <div className='flex flex-col items-center justify-between xs:flex-row'>
                 {/* Author Profile Link  */}
                 <ClientSideRoute route={resolveHref('author', post.author.slug?.current) || ''}>
                   <div className='flex items-center justify-start space-x-3 py-2'>
@@ -103,7 +102,7 @@ export default async function Article({ params: { slug } }: Props) {
                 )}
               </div>
 
-              <p className='xs:text-sm mt-6 px-2 text-xs italic md:text-base'>{post.snippet}</p>
+              <p className='mt-6 px-2 text-xs italic xs:text-sm md:text-base'>{post.snippet}</p>
             </section>
           </section>
 
@@ -123,9 +122,9 @@ export default async function Article({ params: { slug } }: Props) {
               className='rounded-lg'
             />
           </div>
-            <p className='rounded-lg border mt-2 border-accent bg-steeldark-900/20 px-4 py-1 text-sm font-light text-steelpolished-400'>
-              {post.mainImage.alt}
-            </p>
+          <p className='mt-2 rounded-lg border border-accent bg-steeldark-900/20 px-4 py-1 text-sm font-light text-steelpolished-400'>
+            {post.mainImage.alt}
+          </p>
 
           {/* Article Video  */}
           {post.hasEmbeddedVideo && (

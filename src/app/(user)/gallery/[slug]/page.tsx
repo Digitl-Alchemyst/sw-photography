@@ -7,6 +7,9 @@ import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import formatDate from '@/lib/util/formatDate';
 // import blurredImgUrl from '@/lib/util/getBase64';
 
+
+export { generateMetadata } from '@/lib/util/generateGalleryMetadata';
+
 type Props = {
   params: {
     slug: string;
