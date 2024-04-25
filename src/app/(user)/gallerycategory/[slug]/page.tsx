@@ -4,6 +4,8 @@ import { queryGalleryListByCategory } from '@/lib/sanity/queries';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import SubGalleryCard from '@/c/cards/SubGalleryCard';
 
+export { generateMetadata } from '@/lib/util/generateGalleryCatMetadata';
+
 type Props = {
   params: {
     slug: string;

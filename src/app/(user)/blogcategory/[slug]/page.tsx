@@ -5,6 +5,8 @@ import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import BlogCategories from '@/components/global/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
 
+export { generateMetadata } from '@/lib/util/generateBlogCatMetadata';
+
 type Props = {
   params: {
     slug: string;

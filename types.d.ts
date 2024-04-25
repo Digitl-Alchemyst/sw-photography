@@ -114,13 +114,16 @@ interface Span {
 }
 
 interface blogCategory extends Base {
+  keywords: string;
   description: string;
   title: string;
   order: number;
+  featuredImage: Image;
 }
 
 interface galleryCategory extends Base {
   order: number;
+  keywords: string;
   description: string;
   title: string;
   featuredImage: Image;

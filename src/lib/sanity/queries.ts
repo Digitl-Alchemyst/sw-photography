@@ -79,6 +79,12 @@ export const queryGalleryBySlug = groq`
       author->,
     }`;
 
+export const queryPhotographers = groq`
+  *[_type=='author'] {
+    ...,
+  }
+`;
+
 export const queryGalleryMetadata = groq`
     *[_type == "gallery" && slug.current == $slug][0] {
       mainImage,
@@ -88,6 +94,7 @@ export const queryGalleryMetadata = groq`
       slug,
       keywords,
     }`;
+
 export const queryBlogMetadata = groq`
     *[_type == "blog" && slug.current == $slug][0] {
       title,
@@ -98,8 +105,24 @@ export const queryBlogMetadata = groq`
       readTime,
     }`;
 
-export const queryPhotographers = groq`
-  *[_type=='author'] {
-    ...,
-  }
-`;
+export const queryGalleryCatMetadata = groq`
+    *[_type == "galleryCategory" && slug.current == $slug][0] {
+      featuredImage,
+      author->,
+      snippet,
+      title,
+      slug,
+      keywords,
+    }`;
+
+export const queryBlogCatMetadata = groq`
+    *[_type == "blogCategory" && slug.current == $slug][0] {
+      title,
+      featuredImage,
+      keywords,
+      snippet,
+      author->,
+      readTime,
+    }`;
+
+
