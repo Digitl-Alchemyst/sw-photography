@@ -4,6 +4,10 @@ import { queryBlogListByCategory } from '@/lib/sanity/queries';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import BlogCategories from '@/components/global/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
+import { client } from '@/l/sanity/client';
+import { groq } from 'next-sanity';
+import resolveHref from '@/lib/util/resolveHref';
+
 
 export { generateMetadata } from '@/lib/util/generateBlogCatMetadata';
 
@@ -71,4 +75,20 @@ async function getBlogListByCategory(slug: string) {
     console.error('Failed to fetch blogs:', error);
     return []; // Return an empty array in case of an error
   }
+}
+
+// Generate the static params for the blog category list
+export async function generateStaticParams() {
+  const query = groq`*[_type=='blogCategory']
+    {
+      slug
+    }`;
+
+  const slugs: Gallery[] = await client.fetch(query);
+  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
+
+  return slugRoutes.map((slug) => ({
+    slug,
+    path: resolveHref('blogCategory', slug),
+  }));
 }
