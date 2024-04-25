@@ -12,7 +12,9 @@ type Props = {
   };
 };
 
-export const revalidate = 18;
+export const revalidate = 60;
+export const fetchCache = 'no-store';
+// export const dynamic = 'force-dynamic';
 
 export default async function GalleryCategoryPage({ params: { slug } }: Props) {
   const galleries = await getGalleryListByCategory(slug);

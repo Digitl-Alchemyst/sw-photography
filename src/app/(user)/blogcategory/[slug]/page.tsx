@@ -15,6 +15,7 @@ type Props = {
 
 export const revalidate = 18;
 export const fetchCache = 'no-store';
+// export const dynamic = 'force-dynamic';
 
 export default async function BlogCategoryPage({ params: { slug } }: Props) {
   const blogs = await getBlogListByCategory(slug);

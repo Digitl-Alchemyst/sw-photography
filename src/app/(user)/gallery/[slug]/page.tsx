@@ -7,6 +7,9 @@ import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import formatDate from '@/lib/util/formatDate';
 // import blurredImgUrl from '@/lib/util/getBase64';
 
+export const revalidate = 60;
+export const fetchCache = 'no-store';
+// export const dynamic = 'force-dynamic';
 
 export { generateMetadata } from '@/lib/util/generateGalleryMetadata';
 
