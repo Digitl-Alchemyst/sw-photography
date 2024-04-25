@@ -88,6 +88,6 @@ export async function generateStaticParams() {
 
   return slugRoutes.map((slug) => ({
     slug,
-    path: resolveHref('galleryCategory', slug),
+    path: resolveHref('gallery', slug),
   }));
 }

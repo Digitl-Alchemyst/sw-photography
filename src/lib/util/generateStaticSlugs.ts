@@ -5,7 +5,7 @@ import { groq } from 'next-sanity';
 
 import { client } from '@/lib/sanity/client';
 
-import { readToken as token } from '@/lib/sanity/api';
+import { readToken as token } from '@/lib/sanity/tokens';
 
 // Used in `generateStaticParams`
 // This may end up unused
