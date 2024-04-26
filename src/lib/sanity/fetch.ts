@@ -17,8 +17,6 @@ export default async function sanityFetch<QueryResponse>({
   params?: QueryParams;
   tags: string[];
 }): Promise<QueryResponse> {
-  // console.log("🚀 fetch ~ params:", params)
-  // console.log("🚀 fetch ~ query:", query)
   const isDraftMode = draftMode().isEnabled;
   if (isDraftMode && !readToken) {
     throw new Error('The `SANITY_API_READ_TOKEN` environment variable is required.');
