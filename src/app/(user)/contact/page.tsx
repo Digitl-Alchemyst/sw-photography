@@ -12,7 +12,7 @@ import {
 import { MdSettingsCell } from 'react-icons/md';
 import { ImEnvelop } from 'react-icons/im';
 import { TbBrandLinktree } from 'react-icons/tb';
-import { HiBuildingOffice2 } from 'react-icons/hi2';
+import { FaBuilding } from 'react-icons/fa';
 import ContactForm from '@/components/home/ContactForm';
 import sanityFetch from '@/lib/sanity/fetch';
 import { queryPhotographers } from '@/lib/sanity/queries';
@@ -103,7 +103,7 @@ export default async function Contact() {
                     </Link>
                   </div>
                   <div className='flex items-center gap-x-2'>
-                    <HiBuildingOffice2 className='text-accent2' />
+                    <FaBuilding className='text-accent2' />
                     <Link
                       href={`tel:${photographer.phone2}`}
                       target='_blank'
@@ -120,10 +120,7 @@ export default async function Contact() {
                 <Link href={`sms:${photographer.phone}`}>
                   <BsFillChatLeftTextFill className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
                 </Link>
-                <Link
-                  href={photographer.signal}
-                  target='_blank'
-                >
+                <Link href={photographer.signal} target='_blank'>
                   <BsSignal className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
                 </Link>
                 <Link href={photographer.whatsApp} target='_blank'>

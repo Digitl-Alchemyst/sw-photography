@@ -11,6 +11,8 @@ type Props = {
   };
 };
 
+const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
+
 // Define the generateMetadata function
 export async function generateMetadata({ params: { slug } }: Props) {
 
@@ -30,7 +32,7 @@ export async function generateMetadata({ params: { slug } }: Props) {
     openGraph: {
       title: `${post.title} | SW Photography`,
       description: post.snippet,
-      url: `https://sw-photography.vercel.app/blog/${slug}`,
+      url: `${baseURL}blog/${slug}`,
       locale: 'en_US',
       siteName: 'Steven Watkins Photography',
       images: {

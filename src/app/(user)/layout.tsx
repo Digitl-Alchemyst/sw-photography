@@ -8,7 +8,7 @@ import MobileNav from '@/components/global/MobileNav';
 const inter = Inter({ subsets: ['latin'] });
 
 
-
+const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 export const metadata: Metadata = {
   title: `Steven Watkins Photography`,
   description:
@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     title: `Steven Watkins Photography`,
     description:
       'As a landscape photographer, my journey is a testament to my unwavering passion for capturing the breathtaking beauty of our natural world. From my early years exploring the scenic landscapes near my hometown to my formal education in photography, I have continuously honed my technical skills and artistic vision. With a deep reverence for nature, I strive to convey its raw, untamed beauty through bold compositions and vibrant colors. My work has been recognized in various publications and exhibitions, but beyond accolades, my ultimate goal is to inspire others to connect with and protect our planet. Through my lens, I aim to freeze fleeting moments in time, inviting viewers to embark on their own journey of discovery and appreciation for the wonders that surround us.',
-    url: `https://sw-photography.vercel.app/`,
+    url: baseURL,
     siteName: 'Steven Watkins Photography',
     images: {
-      url: '/Profile.jpg',
+      url: `${baseURL}Profile.jpg`,
       width: 1200,
       height: 6300,
       alt: 'SW-Photography Profile Photo',
