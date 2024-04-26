@@ -3,6 +3,11 @@ import sanityFetch from '@/lib/sanity/fetch';
 import { queryGalleryListByCategory } from '@/lib/sanity/queries';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import SubGalleryCard from '@/c/cards/SubGalleryCard';
+import { client } from '@/l/sanity/client';
+import { groq } from 'next-sanity';
+import resolveHref from '@/lib/util/resolveHref';
+
+export { generateMetadata } from '@/lib/util/generateGalleryCatMetadata';
 
 type Props = {
   params: {
@@ -10,7 +15,9 @@ type Props = {
   };
 };
 
-export const revalidate = 18;
+//Warning: Each child in a list should have a unique "key" prop.
+
+// Check the top-level render call using <Fragment>. See https://reactjs.org/link/warning-keys for more information.
 
 export default async function GalleryCategoryPage({ params: { slug } }: Props) {
   const galleries = await getGalleryListByCategory(slug);
@@ -55,15 +62,26 @@ async function getGalleryListByCategory(slug: string) {
     // Fetch blog data from Sanity
     const galleries = await sanityFetch({
       query: queryGalleryListByCategory,
-      params: {
-        slug: slug, // Pass the slug parameter to the query
-      },
-      tags: ['blog-list'],
+      params: { slug },
+         // Pass the slug parameter to the query
+      tags: ['gallery-list'],
     });
 
-    return galleries;
+    return galleries || [];
   } catch (error) {
-    console.error('Failed to fetch galleries:', error);
+    console.error('Failed to fetch gallery categories:', error);
     return []; // Return an empty array in case of an error
   }
+}
+
+// Generate the static params for the gallery category list
+export async function generateStaticParams() {
+  const query = groq`*[_type=='galleryCategory'] { slug }`;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);;
+
+  return slugRoutes.map((slug: string | undefined) => ({
+    slug,
+    path: resolveHref('gallery', slug),
+  }));
 }

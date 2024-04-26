@@ -4,6 +4,15 @@ import { queryBlogListByCategory } from '@/lib/sanity/queries';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import BlogCategories from '@/components/global/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
+import { client } from '@/l/sanity/client';
+import { groq } from 'next-sanity';
+import resolveHref from '@/lib/util/resolveHref';
+
+
+export { generateMetadata } from '@/lib/util/generateBlogCatMetadata';
+
+// Invalid page type: blogCategory
+
 
 type Props = {
   params: {
@@ -11,8 +20,7 @@ type Props = {
   };
 };
 
-export const revalidate = 18;
-export const fetchCache = 'no-store';
+
 
 export default async function BlogCategoryPage({ params: { slug } }: Props) {
   const blogs = await getBlogListByCategory(slug);
@@ -34,16 +42,20 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
             }
           >
             {/* Conditional rendering based on the presence of blog posts */}
-            {blogs && Array.isArray(blogs) && blogs.length > 0 ? (
-              // If there are blog posts, map through the BlogCard component for each blog post
-              <BlogCard blogs={blogs} />
-            ) : (
-              // If there are no blog posts, render a message
-              <div className='flex w-full flex-col items-center justify-center space-y-4'>
-                <h1 className='text-center text-3xl'>There are no blog posts at this time.</h1>
-                <p className='text-lg'>Please check back again later.</p>
-              </div>
-            )}
+            {/* Null check for blogs array  */}
+            {blogs && Array.isArray(blogs) ? (
+              // optional chaining for length of the array
+              blogs?.length > 0 ? (
+                // If there are blog posts, map through the BlogCard component for each blog post
+                <BlogCard blogs={blogs} />
+              ) : (
+                // If there are no blog posts, render a message
+                <div className='flex w-full flex-col items-center justify-center space-y-4'>
+                  <h1 className='text-center text-3xl'>There are no blog posts at this time.</h1>
+                  <p className='text-lg'>Please check back again later.</p>
+                </div>
+              )
+            ) : null}
           </section>
         </div>
       </div>
@@ -57,15 +69,24 @@ async function getBlogListByCategory(slug: string) {
     // Fetch blog data from Sanity
     const blogs = await sanityFetch({
       query: queryBlogListByCategory,
-      params: {
-        slug: slug, // Pass the slug parameter to the query
-      },
+      params: { slug },
       tags: ['blog-list'],
     });
-
-    return blogs;
+    return blogs || [];
   } catch (error) {
-    console.error('Failed to fetch blogs:', error);
+    console.error('Failed to fetch blog categories:', error);
     return []; // Return an empty array in case of an error
   }
+}
+
+// Generate the static params for the blog category list
+export async function generateStaticParams() {
+  const query = groq`*[_type=='blogCategory'] { slug }`;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);
+
+  return slugRoutes.map((slug: string | undefined) => ({
+    slug,
+    path: resolveHref('blog', slug),
+  }));
 }

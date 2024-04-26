@@ -11,7 +11,7 @@ import urlForImage from '@/l/util/urlForImage';
 import resolveHref from '@/l/util/resolveHref';
 import formatDate from '@/l/util/formatDate';
 
-export { generateMetadata } from '@/l/util/generateMetadata';
+export { generateMetadata } from '@/lib/util/generateBlogMetadata';
 
 type Props = {
   params: {
@@ -19,13 +19,10 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
+
 
 export default async function Article({ params: { slug } }: Props) {
   const post = (await getBlogPostBySlug(slug)) as Blog;
-  // console.log("🚀 ~ Article ~ post:", post)
 
   return (
     <>
@@ -55,6 +52,8 @@ export default async function Article({ params: { slug } }: Props) {
                 className='-z-1 mx-auto object-cover object-center'
                 src={urlForImage(post.mainImage as any)?.url() || ''}
                 fill
+                sizes='33vw'
+                priority={true}
                 alt=''
               />
             </div>
@@ -62,7 +61,7 @@ export default async function Article({ params: { slug } }: Props) {
             {/* Headline Content  */}
             <section className='relative w-full space-y-2 bg-accent/20 p-5'>
               {/* Author & Category  */}
-              <div className='xs:flex-row flex flex-col items-center justify-between'>
+              <div className='flex flex-col items-center justify-between xs:flex-row'>
                 {/* Author Profile Link  */}
                 <ClientSideRoute route={resolveHref('author', post.author.slug?.current) || ''}>
                   <div className='flex items-center justify-start space-x-3 py-2'>
@@ -70,8 +69,9 @@ export default async function Article({ params: { slug } }: Props) {
                       className='rounded-full object-cover object-center'
                       src={urlForImage(post.author.authorImage as any)?.url() || ''}
                       width={65}
-                      height={65}
-                      alt=''
+                      height={45}
+                      style={{ width: 'auto', height: 'auto' }}
+                      alt='Author Image'
                     />
                     <div className='flex flex-col'>
                       <p className='text-sm lg:text-base'>Written By:</p>
@@ -103,7 +103,7 @@ export default async function Article({ params: { slug } }: Props) {
                 )}
               </div>
 
-              <p className='xs:text-sm mt-6 px-2 text-xs italic md:text-base'>{post.snippet}</p>
+              <p className='mt-6 px-2 text-xs italic xs:text-sm md:text-base'>{post.snippet}</p>
             </section>
           </section>
 
@@ -113,19 +113,21 @@ export default async function Article({ params: { slug } }: Props) {
             <Image
               src={urlForImage(post.mainImage as any)?.url() || ''}
               alt='description'
-              sizes='80vw'
+              // sizes='80vw'
               style={{
                 width: '75%',
                 height: 'auto',
               }}
+              sizes='(max-width: 768px) 80vw, (max-width: 1200px) 90vw, 90vw'
+              priority={true}
               width={300}
               height={300}
               className='rounded-lg'
             />
           </div>
-            <p className='rounded-lg border mt-2 border-accent bg-steeldark-900/20 px-4 py-1 text-sm font-light text-steelpolished-400'>
-              {post.mainImage.alt}
-            </p>
+          <p className='mt-2 rounded-lg border border-accent bg-steeldark-900/20 px-4 py-1 text-sm font-light text-steelpolished-400'>
+            {post.mainImage.alt}
+          </p>
 
           {/* Article Video  */}
           {post.hasEmbeddedVideo && (
@@ -153,29 +155,29 @@ export default async function Article({ params: { slug } }: Props) {
 
 // Call the Sanity Fetch Function for the Blog List
 async function getBlogPostBySlug(slug: string) {
-  // Fetch blog data from Sanity
-  const post = await sanityFetch({
-    query: queryBlogPostBySlug,
-    params: {
-      slug: slug, // Pass the slug parameter to the query
-    },
-    tags: ['blog-list'],
-  });
+  try{
 
-  return post;
+    // Fetch blog data from Sanity
+    const post = await sanityFetch({
+      query: queryBlogPostBySlug,
+      params: { slug },
+      tags: ['blog-list'],
+    });
+    
+    return post || [];
+  } catch (error) {
+    console.log('Failed to fetch blog post:', error);
+    return [];
+  }
 }
 
 // Generate the static params for the blog list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='blog']
-    {
-      slug
-    }`;
+  const query = groq`*[_type=='blog'] { slug }`;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);
 
-  const slugs: Blog[] = await client.fetch(query);
-  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
-
-  return slugRoutes.map((slug) => ({
+  return slugRoutes.map((slug: string | undefined) => ({
     slug,
     path: resolveHref('blog', slug),
   }));

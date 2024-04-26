@@ -1,3 +1,4 @@
+import { client } from '@/l/sanity/client';
 import { queryGalleryBySlug } from '@/lib/sanity/queries';
 import sanityFetch from '@/lib/sanity/fetch';
 import Image from 'next/image';
@@ -5,7 +6,11 @@ import Link from 'next/link';
 import urlForImage from '@/lib/util/urlForImage';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import formatDate from '@/lib/util/formatDate';
+import { groq } from 'next-sanity';
+import resolveHref from '@/lib/util/resolveHref';
 // import blurredImgUrl from '@/lib/util/getBase64';
+
+export { generateMetadata } from '@/lib/util/generateGalleryMetadata';
 
 type Props = {
   params: {
@@ -70,6 +75,7 @@ export default async function Gallery({ params: { slug } }: Props) {
                           src={urlForImage(photo as any)?.url() || ''}
                           width={535}
                           height={galleryHeight}
+                          priority={true}
                           sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
                           alt='gallery photo'
                           className='group:hover-opacity-50 w-full rounded-md transition-all duration-75 ease-in-out'
@@ -98,13 +104,21 @@ async function getGalleryBySlug(slug: string) {
         slug: slug, // Pass the slug parameter to the query
       },
     });
-    // console.log('🚀 ~ getGalleryBySlug ~ queryGalleryBySlug:', queryGalleryBySlug);
-    // console.log('🚀 ~ getGalleryBySlug ~ slug:', slug);
-
-    // console.log('🚀 ~ getGalleryListByCategory ~ gallery:', gallery);
     return gallery;
   } catch (error) {
     console.error('Failed to fetch galleries:', error);
     return []; // Return an empty array in case of an error
   }
+}
+
+// Generate the static params for the gallery list
+export async function generateStaticParams() {
+  const query = groq`*[_type=='gallery'] { slug }`;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);
+
+  return slugRoutes.map((slug: string | undefined) => ({
+    slug,
+    path: resolveHref('gallerycategory', slug),
+  }));
 }

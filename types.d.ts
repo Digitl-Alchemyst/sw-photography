@@ -37,8 +37,6 @@ interface Gallery extends Base {
   galleryPhotos: Image[];
 }
 
-
-
 interface Author extends Base {
   authorImage: Image;
   authorImage2: Image;
@@ -71,19 +69,21 @@ interface Image {
   alt: string;
 }
 
-// interface Photo {
-//   id: string;
-//   width: number;
-//   height: number;
-//   url: string;
-//   src: [
-//     {
-//       large: string;
-//     },
-//   ];
-//   alt: string;
-//   blurDataURL: string;
-// }
+
+interface BlurredImages {
+  id: string;
+  width: number;
+  height: number;
+  url: string;
+  src: [
+    {
+      large: string;
+    },
+  ];
+  photos: Image[];
+  alt: string;
+  blurDataURL: string;
+}
 
 interface Reference {
   _ref: string;
@@ -112,13 +112,16 @@ interface Span {
 }
 
 interface blogCategory extends Base {
+  keywords: string;
   description: string;
   title: string;
   order: number;
+  featuredImage: Image;
 }
 
 interface galleryCategory extends Base {
   order: number;
+  keywords: string;
   description: string;
   title: string;
   featuredImage: Image;

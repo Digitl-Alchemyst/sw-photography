@@ -12,10 +12,20 @@ import {
 import { MdSettingsCell } from 'react-icons/md';
 import { ImEnvelop } from 'react-icons/im';
 import { TbBrandLinktree } from 'react-icons/tb';
-import { HiBuildingOffice2 } from 'react-icons/hi2';
+import { FaBuilding } from 'react-icons/fa';
 import ContactForm from '@/components/home/ContactForm';
 import sanityFetch from '@/lib/sanity/fetch';
 import { queryPhotographers } from '@/lib/sanity/queries';
+import type { Metadata } from 'next';
+
+
+export const metadata: Metadata = {
+  title: `Contact | SW Photography`,
+  description:
+    'As a landscape photographer, my journey is a testament to my unwavering passion for capturing the breathtaking beauty of our natural world. From my early years exploring the scenic landscapes near my hometown to my formal education in photography, I have continuously honed my technical skills and artistic vision. With a deep reverence for nature, I strive to convey its raw, untamed beauty through bold compositions and vibrant colors. My work has been recognized in various publications and exhibitions, but beyond accolades, my ultimate goal is to inspire others to connect with and protect our planet. Through my lens, I aim to freeze fleeting moments in time, inviting viewers to embark on their own journey of discovery and appreciation for the wonders that surround us.',
+  keywords:
+    'Photographer, Portfolio, Contact, Steven Watkins, Steven Watkins Photography, Landscape Photographer, Photojournalist, Photography, Journalist Landscape Photography, Journalist Photography, Photographer Landscape Photography, Colorado Photographer, Colorado Landscape Photography, Colorado Journalist, Colorado Photography',
+};
 
 export default async function Contact() {
     const photographers = await getPhotographer();
@@ -93,7 +103,7 @@ export default async function Contact() {
                     </Link>
                   </div>
                   <div className='flex items-center gap-x-2'>
-                    <HiBuildingOffice2 className='text-accent2' />
+                    <FaBuilding className='text-accent2' />
                     <Link
                       href={`tel:${photographer.phone2}`}
                       target='_blank'
@@ -110,10 +120,7 @@ export default async function Contact() {
                 <Link href={`sms:${photographer.phone}`}>
                   <BsFillChatLeftTextFill className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
                 </Link>
-                <Link
-                  href={photographer.signal}
-                  target='_blank'
-                >
+                <Link href={photographer.signal} target='_blank'>
                   <BsSignal className='h-7 w-7 cursor-pointer text-accent hover:text-accent2' />
                 </Link>
                 <Link href={photographer.whatsApp} target='_blank'>

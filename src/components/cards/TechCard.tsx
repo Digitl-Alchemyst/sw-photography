@@ -7,12 +7,12 @@ const TechCard = ({ imageUrl, title }: { imageUrl: string; title: string }) => {
         <Image
           src={imageUrl}
           alt={title}
-          layout='fill'
-          objectFit='cover'
+          fill
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
         />
       </div>
       <div className='p-4'>
-        <h3 className='font-semibold text-nowrap'>{title}</h3>
+        <h3 className='text-nowrap font-semibold'>{title}</h3>
       </div>
     </div>
   );

@@ -84,3 +84,45 @@ export const queryPhotographers = groq`
     ...,
   }
 `;
+
+export const queryGalleryMetadata = groq`
+    *[_type == "gallery" && slug.current == $slug][0] {
+      mainImage,
+      author->,
+      snippet,
+      title,
+      slug,
+      keywords,
+    }`;
+
+export const queryBlogMetadata = groq`
+    *[_type == "blog" && slug.current == $slug][0] {
+      title,
+      mainImage,
+      keywords,
+      snippet,
+      author->,
+      readTime,
+    }`;
+
+export const queryGalleryCatMetadata = groq`
+    *[_type == "galleryCategory" && slug.current == $slug][0] {
+      featuredImage,
+      author->,
+      snippet,
+      title,
+      slug,
+      keywords,
+    }`;
+
+export const queryBlogCatMetadata = groq`
+    *[_type == "blogCategory" && slug.current == $slug][0] {
+      title,
+      featuredImage,
+      keywords,
+      snippet,
+      author->,
+      readTime,
+    }`;
+
+

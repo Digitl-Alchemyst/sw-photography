@@ -4,8 +4,6 @@ import resolveHref from '@/lib/util/resolveHref';
 import { queryBlogCategories } from '@/lib/sanity/queries';
 import formatCategoryTitle from '@/l/util/formatTitleForURL';
 
-export const revalidate = 60;
-export const fetchCache = 'force-cache';
 
 export default async function BlogCategories() {
   const categories = await getBlogCategories();

@@ -54,7 +54,7 @@ export function urlForOpenGraphImage(image: Image | undefined) {
     return openGraphImageUrlCache.get(cacheKey);
   }
 
-  const url = buildImageUrl(image).width(1200).height(627).fit('crop').url();
+  const url = buildImageUrl(image).width(1200).height(630).fit('crop').url();
   openGraphImageUrlCache.set(cacheKey, url);
   return url;
 }

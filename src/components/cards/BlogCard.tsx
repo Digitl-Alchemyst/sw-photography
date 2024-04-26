@@ -23,12 +23,13 @@ function BlogCard({ blogs }: Props) {
           {/* Blog Card  */}
           <div className='group flex w-full cursor-pointer flex-col rounded-md border border-steelflat-400 bg-steelpolished-600/40 px-6 py-4 text-steelpolished-300 shadow-2xl shadow-steeldark-700/40  drop-shadow-lg'>
             {/* Image Title & Category */}
-            <div className='relative h-52 md:h-72 lg:h-64 xl:h-82 dxl:h-98 w-auto drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105'>
+            <div className='relative h-52 w-auto drop-shadow-xl transition-transform duration-200 ease-out group-hover:scale-105 md:h-72 lg:h-64 xl:h-82 dxl:h-98'>
               {/* Main Image */}
               <Image
                 className='w-full rounded-t-md object-cover object-center drop-shadow-xl lg:object-center'
                 src={urlForImage(post.mainImage as any)?.url() || ''}
                 fill
+                sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                 alt={post.author.name}
               />
 

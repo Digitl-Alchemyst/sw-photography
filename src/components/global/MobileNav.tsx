@@ -1,24 +1,20 @@
-import {
-  HiHome,
-  HiUser,
-  HiEnvelope,
-} from 'react-icons/hi2';
 import { GrGallery } from 'react-icons/gr';
 import { ImBlog } from 'react-icons/im';
+import { FaHome, FaUser, FaEnvelope } from 'react-icons/fa';
 import Link from 'next/link';
 
 
 //  Navigation Menu Links
 const navLinks = [
-  { name: 'home', path: '/', icon: <HiHome /> },
+  { name: 'home', path: '/', icon: <FaHome /> },
   { name: 'gallery', path: '/gallery', icon: <GrGallery /> },
   { name: 'blog', path: '/blog', icon: <ImBlog /> },
   //   { name: 'booking', path: '/booking', icon: <LiaProjectDiagramSolid /> },
-  { name: 'about', path: '/about', icon: <HiUser /> },
+  { name: 'about', path: '/about', icon: <FaUser /> },
   {
     name: 'contact',
     path: '/contact',
-    icon: <HiEnvelope />,
+    icon: <FaEnvelope />,
   },
 ];
 

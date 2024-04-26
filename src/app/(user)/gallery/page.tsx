@@ -6,7 +6,17 @@ import resolveHref from '@/lib/util/resolveHref';
 import formatCategoryTitle from '@/l/util/formatTitleForURL';
 import urlForImage from '@/lib/util/urlForImage';
 import { Aerotis, headerFontStyle } from '@/lib/util/headerFontStyles';
+import type { Metadata } from 'next';
 
+
+
+export const metadata: Metadata = {
+  title: `Photography Galleries | SW Photography`,
+  description:
+    'As a landscape photographer, my journey is a testament to my unwavering passion for capturing the breathtaking beauty of our natural world. From my early years exploring the scenic landscapes near my hometown to my formal education in photography, I have continuously honed my technical skills and artistic vision. With a deep reverence for nature, I strive to convey its raw, untamed beauty through bold compositions and vibrant colors. My work has been recognized in various publications and exhibitions, but beyond accolades, my ultimate goal is to inspire others to connect with and protect our planet. Through my lens, I aim to freeze fleeting moments in time, inviting viewers to embark on their own journey of discovery and appreciation for the wonders that surround us.',
+  keywords:
+    'Photographer, Portfolio, Contact, Steven Watkins, Steven Watkins Photography, Landscape Photographer, Photojournalist, Photography, Journalist Landscape Photography, Journalist Photography, Photographer Landscape Photography, Colorado Photographer, Colorado Landscape Photography, Colorado Journalist, Colorado Photography',
+};
 export default async function Portfolio() {
   const galleries = await getGalleryListByCategory();
   return (
@@ -35,6 +45,7 @@ export default async function Portfolio() {
                     <Image
                       src={urlForImage(gallery.featuredImage as any)?.url() || ''}
                       fill
+                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                       alt='Gallery 1'
                       className='rounded-md object-cover object-center transition-transform duration-200 ease-out hover:scale-105'
                     />
