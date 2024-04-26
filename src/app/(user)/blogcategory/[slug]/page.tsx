@@ -39,16 +39,20 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
             }
           >
             {/* Conditional rendering based on the presence of blog posts */}
-            {blogs && Array.isArray(blogs) && blogs.length > 0 ? (
-              // If there are blog posts, map through the BlogCard component for each blog post
-              <BlogCard blogs={blogs} />
-            ) : (
-              // If there are no blog posts, render a message
-              <div className='flex w-full flex-col items-center justify-center space-y-4'>
-                <h1 className='text-center text-3xl'>There are no blog posts at this time.</h1>
-                <p className='text-lg'>Please check back again later.</p>
-              </div>
-            )}
+            {/* Null check for blogs array  */}
+            {blogs && Array.isArray(blogs) ? (
+              // Optional chaining for length of the array
+              blogs?.length > 0 ? (
+                // If there are blog posts, map through the BlogCard component for each blog post
+                <BlogCard blogs={blogs} />
+              ) : (
+                // If there are no blog posts, render a message
+                <div className='flex w-full flex-col items-center justify-center space-y-4'>
+                  <h1 className='text-center text-3xl'>There are no blog posts at this time.</h1>
+                  <p className='text-lg'>Please check back again later.</p>
+                </div>
+              )
+            ) : null}
           </section>
         </div>
       </div>
@@ -76,7 +80,7 @@ async function getBlogListByCategory(slug: string) {
 export async function generateStaticParams() {
   const query = groq`*[_type=='blogCategory'] { slug }`;
   const slugs = await client.fetch(query);
-  const slugRoutes = slugs.map((slug: { slug: { current: any; }; }) => slug.slug.current);
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);
 
   return slugRoutes.map((slug: string | undefined) => ({
     slug,

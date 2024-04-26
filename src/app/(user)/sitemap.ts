@@ -1,48 +1,69 @@
-// sitemap.ts
-import getAllNews from '@/util/getAllNews';
+import getAllUrls from '@/l/util/getAllUrls';
+import { Metadata, MetadataRoute } from 'next';
 
-export default async function sitemap(): Promise<
-  {
-    url: string;
-    lastModified?: string | Date;
-    changeFrequency?:
-      | 'hourly'
-      | 'always'
-      | 'daily'
-      | 'weekly'
-      | 'monthly'
-      | 'yearly'
-      | 'never';
-    priority?: number;
-  }[]
-> {
-  const allNews = await getAllNews();
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
-  const postURLs = allNews
-    .filter((item) => item._type === 'post')
-    .map((post) => ({
-      url: `https://www.untelevised.media/post/${post.slug.current}`,
-      lastModified: post._updatedAt,
-      changeFrequency: 'daily' as const,
+  const baseURL = process.env.BASEURL;
+
+  const allUrls = await getAllUrls();
+
+  const galleryURLs = allUrls
+    .filter((item) => item._type === 'gallery')
+    .map((gallery) => ({
+      url: `${baseURL}gallery/${gallery.slug.current}`,
+      lastModified: gallery._updatedAt,
+      changeFrequency: 'weekly' as const,
       priority: 0.5,
     }));
 
-  const liveEventURLs = allNews
-    .filter((item) => item._type === 'liveEvent')
-    .map((liveEvent) => ({
-      url: `https://www.untelevised.media/live-event/${liveEvent.slug.current}`,
-      lastModified: liveEvent._updatedAt,
-      changeFrequency: 'hourly' as const,
+  const blogURLs = allUrls
+    .filter((item) => item._type === 'blog')
+    .map((blog) => ({
+      url: `${baseURL}blog/${blog.slug.current}`,
+      lastModified: blog._updatedAt,
+      changeFrequency: 'monthly' as const,
       priority: 0.5,
+    }));
+
+  const galleryCategoryURLs = allUrls
+    .filter((item) => item._type === 'galleryCategory')
+    .map((gallery) => ({
+      url: `${baseURL}gallerycategory/${gallery.slug.current}`,
+      lastModified: gallery._updatedAt,
+      changeFrequency: 'monthly' as const,
+      priority: 0.4,
+    }));
+
+  const blogCategoryURLs = allUrls
+    .filter((item) => item._type === 'blogCategory')
+    .map((blog) => ({
+      url: `${baseURL}blogcategory/${blog.slug.current}`,
+      lastModified: blog._updatedAt,
+      changeFrequency: 'monthly' as const,
+      priority: 0.4,
     }));
 
   return [
-    ...postURLs,
-    ...liveEventURLs,
+    ...galleryURLs,
+    ...blogURLs,
+    ...galleryCategoryURLs,
+    ...blogCategoryURLs,
     {
-      url: 'https://www.untelevised.media/',
+      url: `${baseURL}`,
       lastModified: new Date(),
-      changeFrequency: 'hourly' as const,
+      changeFrequency: 'monthly' as const,
+      priority: 0.3,
+    },
+    {
+      url: `${baseURL}about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.3,
+    },
+    {
+      url: `${baseURL}contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
       priority: 0.3,
     },
   ];
