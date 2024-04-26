@@ -8,9 +8,7 @@ import urlForImage from '@/lib/util/urlForImage';
 import { Aerotis, headerFontStyle } from '@/lib/util/headerFontStyles';
 import type { Metadata } from 'next';
 
-export const revalidate = 60;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
+
 
 export const metadata: Metadata = {
   title: `Photography Galleries | SW Photography`,

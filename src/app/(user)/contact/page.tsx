@@ -18,9 +18,7 @@ import sanityFetch from '@/lib/sanity/fetch';
 import { queryPhotographers } from '@/lib/sanity/queries';
 import type { Metadata } from 'next';
 
-export const revalidate = 60;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: `Contact | SW Photography`,
   description:

@@ -25,10 +25,10 @@ export default async function sanityFetch<QueryResponse>({
   }
 
   return client.fetch<QueryResponse>(query, params, {
-    cache: 'no-store',
+    // cache: 'no-store',
     
     ...(isDraftMode && {
-      cache: 'no-store',
+      // cache: 'no-store',
       token: readToken,
       perspective: 'previewDrafts',
     }),

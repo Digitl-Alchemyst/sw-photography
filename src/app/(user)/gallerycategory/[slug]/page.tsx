@@ -7,7 +7,6 @@ import { client } from '@/l/sanity/client';
 import { groq } from 'next-sanity';
 import resolveHref from '@/lib/util/resolveHref';
 
-
 export { generateMetadata } from '@/lib/util/generateGalleryCatMetadata';
 
 type Props = {
@@ -16,9 +15,6 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
 
 export default async function GalleryCategoryPage({ params: { slug } }: Props) {
   const galleries = await getGalleryListByCategory(slug);
@@ -63,30 +59,25 @@ async function getGalleryListByCategory(slug: string) {
     // Fetch blog data from Sanity
     const galleries = await sanityFetch({
       query: queryGalleryListByCategory,
-      params: {
-        slug: slug, // Pass the slug parameter to the query
-      },
-      tags: ['blog-list'],
+      params: { slug },
+         // Pass the slug parameter to the query
+      tags: ['gallery-list'],
     });
 
-    return galleries;
+    return galleries || [];
   } catch (error) {
-    console.error('Failed to fetch galleries:', error);
+    console.error('Failed to fetch gallery categories:', error);
     return []; // Return an empty array in case of an error
   }
 }
 
 // Generate the static params for the gallery category list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='galleryCategory']
-    {
-      slug
-    }`;
+  const query = groq`*[_type=='galleryCategory'] { slug }`;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);;
 
-  const slugs: Gallery[] = await client.fetch(query);
-  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
-
-  return slugRoutes.map((slug) => ({
+  return slugRoutes.map((slug: string | undefined) => ({
     slug,
     path: resolveHref('gallery', slug),
   }));

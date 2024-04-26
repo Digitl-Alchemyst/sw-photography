@@ -37,8 +37,6 @@ interface Gallery extends Base {
   galleryPhotos: Image[];
 }
 
-
-
 interface Author extends Base {
   authorImage: Image;
   authorImage2: Image;

@@ -17,9 +17,7 @@ type Props = {
   };
 };
 
-export const revalidate = 18;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
+
 
 export default async function BlogCategoryPage({ params: { slug } }: Props) {
   const blogs = await getBlogListByCategory(slug);
@@ -64,30 +62,23 @@ async function getBlogListByCategory(slug: string) {
     // Fetch blog data from Sanity
     const blogs = await sanityFetch({
       query: queryBlogListByCategory,
-      params: {
-        slug: slug, // Pass the slug parameter to the query
-      },
+      params: { slug },
       tags: ['blog-list'],
     });
-
-    return blogs;
+    return blogs || [];
   } catch (error) {
-    console.error('Failed to fetch blogs:', error);
+    console.error('Failed to fetch blog categories:', error);
     return []; // Return an empty array in case of an error
   }
 }
 
 // Generate the static params for the blog category list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='blogCategory']
-    {
-      slug
-    }`;
+  const query = groq`*[_type=='blogCategory'] { slug }`;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug: { slug: { current: any; }; }) => slug.slug.current);
 
-  const slugs: Gallery[] = await client.fetch(query);
-  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
-
-  return slugRoutes.map((slug) => ({
+  return slugRoutes.map((slug: string | undefined) => ({
     slug,
     path: resolveHref('blogCategory', slug),
   }));

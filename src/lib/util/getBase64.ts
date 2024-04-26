@@ -25,13 +25,13 @@ async function getBase64(imageUrl: string) {
 
 export default async function blurredImgUrl(images: BlurredImages): Promise<Image[]> {
   // Make all request in parrallel and collect the unresolved promises
-  const base64Promises = images.photos.map((photo) => getBase64(photo.src.large));
+  // const base64Promises = images.photos.map((photo) => getBase64(photo.src.large));
 
   // Resolve all Promises
-  const base64Results = await Promise.all(base64Promises);
+  // const base64Results = await Promise.all(base64Promises);
 
   const blurredPhotos: Image[] = images.photos.map((photo, index: number) => {
-    photo.blurDataURL = base64Results[index];
+    // photo.blurDataURL = base64Results[index];
     return photo;
   });
   return blurredPhotos;

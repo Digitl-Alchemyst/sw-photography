@@ -5,9 +5,7 @@ import BlogCategories from '@/components/global/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
 import type { Metadata } from 'next';
 
-export const revalidate = 60;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: `Photography Blog | SW Photography`,
   description:

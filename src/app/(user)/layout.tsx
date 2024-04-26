@@ -8,9 +8,7 @@ import MobileNav from '@/components/global/MobileNav';
 const inter = Inter({ subsets: ['latin'] });
 
 
-export const revalidate = 60;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: `Steven Watkins Photography`,
   description:

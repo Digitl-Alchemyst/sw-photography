@@ -10,10 +10,6 @@ import { groq } from 'next-sanity';
 import resolveHref from '@/lib/util/resolveHref';
 // import blurredImgUrl from '@/lib/util/getBase64';
 
-export const revalidate = 60;
-export const fetchCache = 'no-store';
-// export const dynamic = 'force-dynamic';
-
 export { generateMetadata } from '@/lib/util/generateGalleryMetadata';
 
 type Props = {
@@ -116,15 +112,11 @@ async function getGalleryBySlug(slug: string) {
 
 // Generate the static params for the gallery list
 export async function generateStaticParams() {
-  const query = groq`*[_type=='gallery']
-    {
-      slug
-    }`;
+  const query = groq`*[_type=='gallery'] { slug }`;
+  const slugs = await client.fetch(query);
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);
 
-  const slugs: Gallery[] = await client.fetch(query);
-  const slugRoutes = slugs ? slugs.map((slug) => slug.slug.current) : [];
-
-  return slugRoutes.map((slug) => ({
+  return slugRoutes.map((slug: string | undefined) => ({
     slug,
     path: resolveHref('gallerycategory', slug),
   }));
