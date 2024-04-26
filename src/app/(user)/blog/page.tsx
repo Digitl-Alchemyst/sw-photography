@@ -58,8 +58,10 @@ async function getBlogList(): Promise<Blog[]> {
   // Fetch blog data from Sanity
   const blogs: Blog[] = await sanityFetch({
     query: queryBlogList,
-    tags: ['blog-list'],
+    tags: ['blog'],
   });
 
   return blogs;
 }
+
+//getStaticParams here

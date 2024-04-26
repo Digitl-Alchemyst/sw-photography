@@ -30,7 +30,7 @@ async function getBlogCategories() {
     // Fetch Gallery Category List from Sanity
   const categories: blogCategory[] = await sanityFetch({
     query: queryBlogCategories,
-    tags: ['blog-categories'],
+    tags: ['blogCategory'],
   });
 
   return categories.sort((a: { order: number }, b: { order: number }) => a.order - b.order);

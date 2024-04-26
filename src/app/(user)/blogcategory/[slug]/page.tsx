@@ -70,7 +70,7 @@ async function getBlogListByCategory(slug: string) {
     const blogs = await sanityFetch({
       query: queryBlogListByCategory,
       params: { slug },
-      tags: ['blog-list'],
+      tags: ['blogCategory', 'blog'],
     });
     return blogs || [];
   } catch (error) {
@@ -90,3 +90,5 @@ export async function generateStaticParams() {
     path: resolveHref('blog', slug),
   }));
 }
+
+

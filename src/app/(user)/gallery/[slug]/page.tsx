@@ -99,7 +99,7 @@ async function getGalleryBySlug(slug: string) {
     // Fetch blog data from Sanity
     const gallery = await sanityFetch({
       query: queryGalleryBySlug,
-      tags: ['gallery-categories'],
+      tags: ['gallery'],
       params: {
         slug: slug, // Pass the slug parameter to the query
       },

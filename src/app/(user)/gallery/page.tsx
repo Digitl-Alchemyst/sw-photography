@@ -66,7 +66,7 @@ async function getGalleryListByCategory() {
     // Fetch blog data from Sanity
     const galleries: galleryCategory[] = await sanityFetch({
       query: queryGalleryCategories,
-      tags: ['gallery-categories'],
+      tags: ['galleryCategory'],
     });
 
     return galleries.sort((a: { order: number }, b: { order: number }) => a.order - b.order);
@@ -75,3 +75,5 @@ async function getGalleryListByCategory() {
     return []; // Return an empty array in case of an error
   }
 }
+
+// getStaticParams is required for every page that is pre-rendered at build time
