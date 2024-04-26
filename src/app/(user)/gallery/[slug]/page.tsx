@@ -75,6 +75,7 @@ export default async function Gallery({ params: { slug } }: Props) {
                           src={urlForImage(photo as any)?.url() || ''}
                           width={535}
                           height={galleryHeight}
+                          priority={true}
                           sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
                           alt='gallery photo'
                           className='group:hover-opacity-50 w-full rounded-md transition-all duration-75 ease-in-out'

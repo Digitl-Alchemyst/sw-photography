@@ -11,6 +11,9 @@ import resolveHref from '@/lib/util/resolveHref';
 
 export { generateMetadata } from '@/lib/util/generateBlogCatMetadata';
 
+// Invalid page type: blogCategory
+
+
 type Props = {
   params: {
     slug: string;
@@ -41,7 +44,7 @@ export default async function BlogCategoryPage({ params: { slug } }: Props) {
             {/* Conditional rendering based on the presence of blog posts */}
             {/* Null check for blogs array  */}
             {blogs && Array.isArray(blogs) ? (
-              // Optional chaining for length of the array
+              // optional chaining for length of the array
               blogs?.length > 0 ? (
                 // If there are blog posts, map through the BlogCard component for each blog post
                 <BlogCard blogs={blogs} />
@@ -84,6 +87,6 @@ export async function generateStaticParams() {
 
   return slugRoutes.map((slug: string | undefined) => ({
     slug,
-    path: resolveHref('blogCategory', slug),
+    path: resolveHref('blog', slug),
   }));
 }

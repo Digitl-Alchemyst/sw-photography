@@ -52,6 +52,8 @@ export default async function Article({ params: { slug } }: Props) {
                 className='-z-1 mx-auto object-cover object-center'
                 src={urlForImage(post.mainImage as any)?.url() || ''}
                 fill
+                sizes='33vw'
+                priority={true}
                 alt=''
               />
             </div>
@@ -67,8 +69,9 @@ export default async function Article({ params: { slug } }: Props) {
                       className='rounded-full object-cover object-center'
                       src={urlForImage(post.author.authorImage as any)?.url() || ''}
                       width={65}
-                      height={65}
-                      alt=''
+                      height={45}
+                      style={{ width: 'auto', height: 'auto' }}
+                      alt='Author Image'
                     />
                     <div className='flex flex-col'>
                       <p className='text-sm lg:text-base'>Written By:</p>
@@ -110,11 +113,13 @@ export default async function Article({ params: { slug } }: Props) {
             <Image
               src={urlForImage(post.mainImage as any)?.url() || ''}
               alt='description'
-              sizes='80vw'
+              // sizes='80vw'
               style={{
                 width: '75%',
                 height: 'auto',
               }}
+              sizes='(max-width: 768px) 80vw, (max-width: 1200px) 90vw, 90vw'
+              priority={true}
               width={300}
               height={300}
               className='rounded-lg'

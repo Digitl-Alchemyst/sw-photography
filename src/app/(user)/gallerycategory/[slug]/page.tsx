@@ -15,6 +15,9 @@ type Props = {
   };
 };
 
+//Warning: Each child in a list should have a unique "key" prop.
+
+// Check the top-level render call using <Fragment>. See https://reactjs.org/link/warning-keys for more information.
 
 export default async function GalleryCategoryPage({ params: { slug } }: Props) {
   const galleries = await getGalleryListByCategory(slug);

@@ -17,7 +17,7 @@ function SubGalleryCard({ galleries }: Props) {
     <>
       {galleries.map((post) => (
         // console.log(post),
-        <ClientSideRoute route={resolveHref('gallery', post.slug.current) || ''} key={post._id}>
+        <ClientSideRoute route={resolveHref('gallery', post.slug.current) || ''} key={post.slug.current}>
           <div className='flex w-full cursor-pointer text-steelpolished-300 shadow-2xl shadow-steeldark-700/40 drop-shadow-lg'>
             <div className='relative h-70 w-full overflow-hidden md:h-90 xl:h-144'>
               <Image
@@ -25,6 +25,7 @@ function SubGalleryCard({ galleries }: Props) {
                 src={urlForImage(post.mainImage as any)?.url() || ''}
                 width={1800}
                 height={720}
+                priority={true}
                 alt=''
               />
               <div className='absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-l from-steelpolished-100/5 to-steeldark-900/95 px-5 py-2'>

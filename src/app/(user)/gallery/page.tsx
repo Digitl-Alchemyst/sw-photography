@@ -45,6 +45,7 @@ export default async function Portfolio() {
                     <Image
                       src={urlForImage(gallery.featuredImage as any)?.url() || ''}
                       fill
+                      sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                       alt='Gallery 1'
                       className='rounded-md object-cover object-center transition-transform duration-200 ease-out hover:scale-105'
                     />
