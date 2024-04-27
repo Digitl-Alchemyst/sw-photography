@@ -1,20 +1,13 @@
-import Image from 'next/image'
-import React from 'react'
-import localFont from 'next/font/local';
+import { Aerotis } from '@/lib/util/headerFontStyles';
+import Image from 'next/image';
 import Link from 'next/link';
 
-
-const Aerotis = localFont({
-//   subsets: ['latin'],
-  src: '../../../public/fonts/AEROTIS.ttf',
-  weight: '400',
-});
 function GalleryCard({
-  img,
+  galleryImg,
   title,
   url,
 }: {
-  img: string;
+  galleryImg: string;
   title: string;
   url: string;
 }) {
@@ -27,14 +20,14 @@ function GalleryCard({
       </h2>
       <Link href={url} className='relative h-98 w-full'>
         <Image
-          src={img}
+          src={galleryImg}
           fill
           alt='Gallery 1'
-          className='object-cover object-center transition-transform duration-200 ease-out hover:scale-105 rounded-md'
+          className='rounded-md object-cover object-center transition-transform duration-200 ease-out hover:scale-105'
         />
       </Link>
     </div>
   );
 }
 
-export default GalleryCard
+export default GalleryCard;

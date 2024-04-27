@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import React from 'react';
+import SocialLinks from './SocialLinks';
+import { headerFontStyle } from '@/lib/util/headerFontStyles';
 
 const NavLinks = [
   {
@@ -12,11 +13,11 @@ const NavLinks = [
     title: 'Gallery',
     url: '/gallery',
   },
-  {
-    id: 3,
-    title: 'Booking',
-    url: '/booking',
-  },
+  // {
+  //   id: 3,
+  //   title: 'Booking',
+  //   url: '/booking',
+  // },
   // {
   //   id: 4,
   //   title: 'Shop',
@@ -39,22 +40,17 @@ const NavLinks = [
   },
 ];
 
-import { Alex_Brush, Satisfy } from 'next/font/google';
-
-import SocialLinks from './SocialLinks';
 
 
 
-const Alex = Satisfy({
-  subsets: ['latin'],
-  variable: '--my-font-family',
-  weight: '400',
-});
+
+
+
 
 const Sidebar = () => {
   return (
     <div
-      className={`flex h-full min-w-fit flex-col bg-steeldark-900 py-5 ${Alex.className}`}
+      className={`hidden h-full min-w-fit flex-col bg-steeldark-900 py-5 md:flex ${headerFontStyle.className}`}
     >
       <SocialLinks />
       <div className='mt-10 flex flex-col space-y-16 px-16'>

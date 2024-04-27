@@ -1,20 +1,17 @@
+import Link from 'next/link';
 import React from 'react'
 
 function Footer() {
   return (
-    <footer className='w-full bg-steeldark-700 px-10 py-10 text-steelpolished-200'>
+    <footer className='w-screen bg-steeldark-700 px-10 py-10 text-steelpolished-200 pb-22 md:pb-0'>
       <div className='mx-auto justify-between gap-16 sm:flex'>
         {/* COLUMN 1 */}
         <div className='mt-16 flex basis-1/2 flex-col sm:mt-0'>
-          <h4 className='text-2xl font-bold text-steelpolished-500'>
-            Steven Watkins Photography
-          </h4>
+          <h4 className='text-2xl font-bold text-steelpolished-500'>Steven Watkins Photography</h4>
           <p className='my-5  flex-1 text-sm text-steelpolished-300'>
-            Welcome to my photography portfolio! Im a photographer based in the
-            United States. I love to capture the beauty of nature and the world
-            around us.
+            Welcome to my photography portfolio! Im a photographer based in the United States. I
+            love to capture the beauty of nature and the world around us.
           </p>
-          <p>© 2023 Steven Watkins. All rights reserved.</p>
         </div>
 
         {/* COLUMN 2 */}
@@ -80,11 +77,7 @@ function Footer() {
         <div className='mt-16 basis-1/4 sm:mt-0'>
           <h4 className='text-2xl font-bold text-steelflat-400'>Contact</h4>
           <p className='my-5  text-sm text-steelflat-600'>
-            <a
-              href='https://discord.gg/SvcgPzTn8d'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <a href='https://discord.gg/SvcgPzTn8d' target='_blank' rel='noopener noreferrer'>
               Discord
             </a>
           </p>
@@ -139,6 +132,10 @@ function Footer() {
             </a>
           </p>
         </div>
+      </div>
+      <div className='flex justify-between pb-1'>
+      <p>© 2023 Steven Watkins. All rights reserved.</p>
+<Link href='/studio' className='text-xs font-light text-accent underline'>Studio</Link>
       </div>
     </footer>
   );
