@@ -6,6 +6,8 @@ import Sidebar from '@/c/global/Sidebar';
 import MobileNav from '@/components/global/MobileNav';
 import { VisualEditing } from 'next-sanity';
 import { draftMode } from 'next/headers';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
