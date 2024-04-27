@@ -13,8 +13,8 @@ import { MdSettingsCell } from 'react-icons/md';
 import { ImEnvelop } from 'react-icons/im';
 import { TbBrandLinktree } from 'react-icons/tb';
 import { FaBuilding } from 'react-icons/fa';
-import ContactForm from '@/components/home/ContactForm';
-import sanityFetch from '@/lib/sanity/fetch';
+import ContactForm from '@/c/home/ContactForm';
+import sanityFetch from '@/l/sanity/fetch';
 import { queryPhotographers } from '@/lib/sanity/queries';
 import type { Metadata } from 'next';
 

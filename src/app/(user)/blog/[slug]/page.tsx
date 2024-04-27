@@ -37,7 +37,7 @@ export default async function Article({ params: { slug } }: Props) {
 
               {/* Social Media Share Icons  */}
               <SocialShare
-                url={`https://sw-photography.vercel.app/blog/${slug}`}
+                url={`https://www.stevenwatkinsphotography.com/blog/${slug}`}
                 title={post.title}
               />
             </div>
