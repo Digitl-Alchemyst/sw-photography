@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
 
 import { draftMode } from 'next/headers';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiResponse } from 'next';
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: any, res: NextApiResponse) {
   // Disable draft mode
   draftMode().disable();
 
