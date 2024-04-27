@@ -63,8 +63,8 @@ async function getGalleryListByCategory(slug: string) {
     const galleries = await sanityFetch({
       query: queryGalleryListByCategory,
       params: { slug },
-         // Pass the slug parameter to the query
-      tags: ['gallery-list'],
+      // Pass the slug parameter to the query
+      tags: ['gallery', 'galleryCategory'],
     });
 
     return galleries || [];

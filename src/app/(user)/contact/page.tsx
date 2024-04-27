@@ -150,6 +150,7 @@ async function getPhotographer(): Promise<Author[]> {
     query: queryPhotographers,
     tags: ['author'],
   });
-  // console.log("🚀 ~ getPhotographer ~ photographer:", photographer)
   return photographer;
 }
+
+// getstaticparams probably

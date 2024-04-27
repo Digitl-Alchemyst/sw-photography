@@ -161,7 +161,7 @@ async function getBlogPostBySlug(slug: string) {
     const post = await sanityFetch({
       query: queryBlogPostBySlug,
       params: { slug },
-      tags: ['blog-list'],
+      tags: ['blog'],
     });
     
     return post || [];
