@@ -26,7 +26,6 @@ export default defineConfig({
     structureTool({
       // defaultDocumentNode: getDefaultDocumentNode,
     }),
-    visionTool({}),
     presentationTool({
       previewUrl: {
         draftMode: {
@@ -34,6 +33,7 @@ export default defineConfig({
         },
       },
     }),
+    visionTool({}),
   ],
 
   schema: {

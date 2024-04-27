@@ -4,6 +4,8 @@ import '@/app/globals.css'
 import Footer from '@/c/global/Footer';
 import Sidebar from '@/c/global/Sidebar';
 import MobileNav from '@/components/global/MobileNav';
+import { VisualEditing } from 'next-sanity';
+import { draftMode } from 'next/headers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -61,14 +63,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className='scrollbar-hide'>
-      <body
-        className={`scrollbar-hide ${inter.className}`}
-      >
+      <body className={`scrollbar-hide ${inter.className}`}>
         <div className='flex h-screen w-screen flex-1 flex-col'>
           <div className='flex flex-1 '>
             <Sidebar />
             <MobileNav />
+            {draftMode().isEnabled && (
+
+<></>
+            )}
             {children}
+            {draftMode().isEnabled && <VisualEditing />}
           </div>
           <Footer />
         </div>
