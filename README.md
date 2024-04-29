@@ -44,8 +44,7 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
         🎓 Typescript <br>
         🚀 Tailwind CSS <br>        
 <h3><ul><b>Libraries & Plugins</b></ul></h3>
-💎 OxyLabs E-Commerce Scrapper <br>
-        📁 ShadCN UI Library<br>
+         📁 ShadCN UI Library<br>
 <h3><ul><b>Concepts</b></ul></h3>
         => Image Optimization with Blurred Placeholder
 <h3><ul><b>Commits</b></ul></h3>
@@ -76,7 +75,6 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 
 ## To-Do List
 
-- [ ] Preview Mode.
 
 ### Documentation
 
@@ -86,7 +84,9 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 
 ### Features
 
+- [x] Preview Mode.
 - [ ] Blurred Images
+- [ ] Lightbox
 - [ ] Add search functionality
 - [x] Design a responsive layout
 - [ ] Comments Section on Articles
@@ -99,8 +99,8 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 
 - [x] Refactor Date formatting into reuseable component.
 - [ ] Base URL Resolver.
-- [ ] Refactor the database connection logic
-- [ ] Optimize the data retrieval process
+- [x] Refactor the database connection logic
+- [x] Optimize the data retrieval process
 
 ### Libraries & Plugins to Implement
         
