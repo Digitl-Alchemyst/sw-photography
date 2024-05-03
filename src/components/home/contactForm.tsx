@@ -3,7 +3,9 @@
 import { useRef } from 'react';
 import { sendForm } from '@emailjs/browser';
 import { BsArrowRight } from 'react-icons/bs';
+import { sendGTMEvent } from '@next/third-parties/google';
 
+export const revalidate = 10;
 const ContactForm = () => {
   // Email Form Logic
   const form = useRef<HTMLFormElement>(null);
@@ -69,6 +71,7 @@ const ContactForm = () => {
         />
         <button
           type='submit'
+          onClick={() => sendGTMEvent({ event: 'formSubmitted', value: 'Contact Form' })}
           value='Send'
           className='text-light group flex max-w-[170px] items-center justify-center overflow-hidden rounded-lg border border-solid border-accent bg-steeldark-800/60 p-3 px-8 text-lg font-semibold text-steelpolished-300 transition-all duration-75 hover:border-accent2 hover:bg-accent2 hover:text-steeldark-500 hover:neon-sky'
         >
