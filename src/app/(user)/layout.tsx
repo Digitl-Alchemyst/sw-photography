@@ -6,6 +6,13 @@ import Sidebar from '@/c/global/Sidebar';
 import MobileNav from '@/components/global/MobileNav';
 import { VisualEditing } from 'next-sanity';
 import { draftMode } from 'next/headers';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
+import Script from 'next/script';
+import GTM from '@/components/analytics/GTM';
+import GTMIFrame from '@/components/analytics/GTMIFrame';
+import { GoogleTagManager } from '@next/third-parties/google';
+import GASVerify from '@/lib/util/googleAdSense';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -55,7 +62,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -63,15 +69,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' className='scrollbar-hide'>
+      {process.env.NODE_ENV === 'production' && process.env.GTM_ID && process.env.GAS_ID && (
+        <>
+          {/* <GTM GTM_ID={process.env.GTM_ID} /> */}
+          <GASVerify googleAdsenseId={process.env.GAS_ID} />
+          <GoogleTagManager gtmId={process.env.GTM_ID} />
+        </>
+      )}
       <body className={`scrollbar-hide ${inter.className}`}>
+        {process.env.NODE_ENV === 'production' && process.env.GTM_ID && (
+          <>
+            {/* <GTMIFrame GTM_ID={process.env.GTM_ID} /> */}
+          </>
+        )}
         <div className='flex h-screen w-screen flex-1 flex-col'>
           <div className='flex flex-1 '>
+            {process.env.NODE_ENV === 'production' && (
+              <>
+                {/* <GoogleAdSense /> */}
+              </>
+            )}
             <Sidebar />
             <MobileNav />
-            {draftMode().isEnabled && (
-
-<></>
-            )}
             {children}
             {draftMode().isEnabled && <VisualEditing />}
           </div>
