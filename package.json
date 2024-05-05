@@ -25,8 +25,8 @@
     "@sanity/client": "^6.17.2",
     "@sanity/icons": "^2.11.8",
     "@sanity/image-url": "^1.0.2",
-    "@sanity/preview-url-secret": "1.6.11",
-    "@sanity/react-loader": "1.9.16",
+    "@sanity/preview-url-secret": "1.6.12",
+    "@sanity/react-loader": "1.9.17",
     "@sanity/ui": "^2.1.6",
     "@sanity/vision": "^3.40.0",
     "@types/react-syntax-highlighter": "^15.5.13",
@@ -66,7 +66,7 @@
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.4.4",
+    "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.6",
     "@testing-library/user-event": "14.5.2",
     "@types/jest": "^29.5.12",
