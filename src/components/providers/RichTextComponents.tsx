@@ -8,21 +8,20 @@ import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export const RichTextComponents = {
   types: {
-
     image: ({ value }: any) => {
       const alt = value.alt;
       return (
         <div className='my-3 space-y-1'>
           <div className='relative h-144 w-full rounded-lg '>
             <Image
-              className='mx-auto object-contain border border-accent/70'
+              className='mx-auto border border-accent/70 object-contain'
               src={urlForImage(value)?.url() || ''}
               alt={alt}
               fill
             />
           </div>
           <div className='flex justify-center'>
-            <p className='rounded-lg border border-accent bg-steeldark-900/20 px-4 py-1 font-light text-sm text-steelpolished-400'>
+            <p className='rounded-lg border border-accent bg-steeldark-900/20 px-4 py-1 text-sm font-light text-steelpolished-400'>
               {alt}
             </p>
           </div>
@@ -90,41 +89,27 @@ export const RichTextComponents = {
               </Link>
             </div>
           </blockquote>
-          <script async src='//www.instagram.com/embed.js'/>
+          <script async src='//www.instagram.com/embed.js' />
         </div>
       );
     },
   },
 
   list: {
-    bullet: ({ children }: any) => (
-      <ul className='ml-10 list-disc space-y-5 py-5'>{children}</ul>
-    ),
-    number: ({ children }: any) => (
-      <ol className='mt-lg list-decimal'>{children}</ol>
-    ),
+    bullet: ({ children }: any) => <ul className='ml-10 list-disc space-y-5 py-5'>{children}</ul>,
+    number: ({ children }: any) => <ol className='mt-lg list-decimal'>{children}</ol>,
   },
 
   block: {
-    h1: ({ children }: any) => (
-      <h1 className='py-6 text-4xl font-bold md:text-5xl'>{children}</h1>
-    ),
-    h2: ({ children }: any) => (
-      <h2 className='py-6 text-3xl font-bold md:text-4xl'>{children}</h2>
-    ),
-    h3: ({ children }: any) => (
-      <h3 className='py-6 text-2xl font-bold md:text-3xl'>{children}</h3>
-    ),
-    h4: ({ children }: any) => (
-      <h4 className='py-6 text-xl font-bold md:text-2xl'>{children}</h4>
-    ),
+    h1: ({ children }: any) => <h1 className='py-6 text-4xl font-bold md:text-5xl'>{children}</h1>,
+    h2: ({ children }: any) => <h2 className='py-6 text-3xl font-bold md:text-4xl'>{children}</h2>,
+    h3: ({ children }: any) => <h3 className='py-6 text-2xl font-bold md:text-3xl'>{children}</h3>,
+    h4: ({ children }: any) => <h4 className='py-6 text-xl font-bold md:text-2xl'>{children}</h4>,
   },
 
   marks: {
     link: ({ children, value }: any) => {
-      const rel = !value.href.startsWith('/')
-        ? 'noreferrer noopener'
-        : undefined;
+      const rel = !value.href.startsWith('/') ? 'noreferrer noopener' : undefined;
       return (
         <Link
           href={value.href}
@@ -137,9 +122,7 @@ export const RichTextComponents = {
     },
 
     blockquote: ({ children }: any) => (
-      <blockquote className='boreder-l-accent my-5 border-l-4 py-5 pl-5'>
-        {children}
-      </blockquote>
+      <blockquote className='boreder-l-accent my-5 border-l-4 py-5 pl-5'>{children}</blockquote>
     ),
 
     code: ({ children }: any) => (
@@ -156,7 +139,5 @@ export const RichTextComponents = {
     strikethrough: ({ children }: any) => <s>{children}</s>,
     superscript: ({ children }: any) => <sup>{children}</sup>,
     subscript: ({ children }: any) => <sub>{children}</sub>,
-
   },
-
 };

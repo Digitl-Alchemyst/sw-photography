@@ -9,7 +9,6 @@ function ClientSideRoute({ children, route }: { children: React.ReactNode; route
 
 export default ClientSideRoute;
 
-
 /**
  * ClientSideRoute component renders a Link component to client-side route
  *

@@ -24,5 +24,5 @@ export async function GET(req: NextRequest, res: NextResponse) {
   draftMode().enable();
 
   // Redirect to root path if (redirectTo) {
-    redirect(redirectTo);
-  }
+  redirect(redirectTo);
+}

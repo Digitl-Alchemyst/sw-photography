@@ -5,7 +5,6 @@ import BlogCategories from '@/components/global/BlogCategories';
 import BlogCard from '@/c/cards/BlogCard';
 import type { Metadata } from 'next';
 
-
 export const metadata: Metadata = {
   title: `Photography Blog | SW Photography`,
   description:

@@ -32,6 +32,13 @@
     "baseUrl": ".",
     "outDir": "./out"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".dev/pageTemp.tsx", "build-utilities/generateRobots.mjs"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".dev/pageTemp.tsx",
+    "build-utilities/generateRobots.mjs"
+  ],
   "exclude": ["node_modules"]
 }

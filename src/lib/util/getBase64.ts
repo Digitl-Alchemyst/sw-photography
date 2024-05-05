@@ -1,14 +1,11 @@
 import { getPlaiceholder } from 'plaiceholder';
 
-
 async function getBase64(imageUrl: string) {
-
-    
-    try {
-        const res = await fetch(imageUrl);
-     if (!res.ok) {
-       throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`);
-     }
+  try {
+    const res = await fetch(imageUrl);
+    if (!res.ok) {
+      throw new Error(`Failed to fetch image: ${res.status} ${res.statusText}`);
+    }
 
     const buffer = await res.arrayBuffer();
 
@@ -17,8 +14,7 @@ async function getBase64(imageUrl: string) {
 
     return base64;
   } catch (e) {
-    if (e instanceof Error) 
-      console.error(e.stack);
+    if (e instanceof Error) console.error(e.stack);
     return null;
   }
 }

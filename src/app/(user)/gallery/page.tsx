@@ -8,8 +8,6 @@ import urlForImage from '@/lib/util/urlForImage';
 import { Aerotis, headerFontStyle } from '@/lib/util/headerFontStyles';
 import type { Metadata } from 'next';
 
-
-
 export const metadata: Metadata = {
   title: `Photography Galleries | SW Photography`,
   description:

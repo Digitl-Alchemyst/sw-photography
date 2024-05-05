@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 
 function Footer() {
   return (
-    <footer className='w-screen bg-steeldark-700 px-10 py-10 text-steelpolished-200 pb-22 md:pb-0'>
+    <footer className='w-screen bg-steeldark-700 px-10 py-10 pb-22 text-steelpolished-200 md:pb-0'>
       <div className='mx-auto justify-between gap-16 sm:flex'>
         {/* COLUMN 1 */}
         <div className='mt-16 flex basis-1/2 flex-col sm:mt-0'>
@@ -134,11 +134,13 @@ function Footer() {
         </div>
       </div>
       <div className='flex justify-between pb-1'>
-      <p>© 2023 Steven Watkins. All rights reserved.</p>
-<Link href='/studio' className='text-xs font-light text-accent underline'>Studio</Link>
+        <p>© 2023 Steven Watkins. All rights reserved.</p>
+        <Link href='/studio' className='text-xs font-light text-accent underline'>
+          Studio
+        </Link>
       </div>
     </footer>
   );
 }
 
-export default Footer
+export default Footer;

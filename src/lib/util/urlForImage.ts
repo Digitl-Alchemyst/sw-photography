@@ -10,7 +10,6 @@ const imageUrlCache = new Map();
 // Cached images URLs for OpenGraph images
 const openGraphImageUrlCache = new Map();
 
-
 // Helper to build URL
 function buildImageUrl(source: Image) {
   // Ensure imageBuilder is defined
@@ -30,15 +29,15 @@ export default function urlForImage(source: Image | undefined) {
   }
 
   // Use a unique identifier as the cache key
-const cacheKey = source.asset._ref;
+  const cacheKey = source.asset._ref;
 
-if (imageUrlCache.has(cacheKey)) {
-  return imageUrlCache.get(cacheKey);
-}
+  if (imageUrlCache.has(cacheKey)) {
+    return imageUrlCache.get(cacheKey);
+  }
 
-const url = buildImageUrl(source);
-imageUrlCache.set(cacheKey, url);
-return url;
+  const url = buildImageUrl(source);
+  imageUrlCache.set(cacheKey, url);
+  return url;
 }
 
 // OpenGraph image URL
@@ -58,8 +57,6 @@ export function urlForOpenGraphImage(image: Image | undefined) {
   openGraphImageUrlCache.set(cacheKey, url);
   return url;
 }
-
-
 
 // Yes, implementing caching for image URLs in a Next.js application, especially when working with a CMS like Sanity.io, can significantly improve performance and reduce the number of requests to the CMS backend. Here's why:
 

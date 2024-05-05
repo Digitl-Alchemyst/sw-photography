@@ -40,13 +40,6 @@ const NavLinks = [
   },
 ];
 
-
-
-
-
-
-
-
 const Sidebar = () => {
   return (
     <div

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '@/app/globals.css'
+import '@/app/globals.css';
 import Footer from '@/c/global/Footer';
 import Sidebar from '@/c/global/Sidebar';
 import MobileNav from '@/components/global/MobileNav';
@@ -15,7 +15,6 @@ import { GoogleTagManager } from '@next/third-parties/google';
 import GASVerify from '@/lib/util/googleAdSense';
 
 const inter = Inter({ subsets: ['latin'] });
-
 
 const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 export const metadata: Metadata = {
@@ -78,17 +77,11 @@ export default function RootLayout({
       )}
       <body className={`scrollbar-hide ${inter.className}`}>
         {process.env.NODE_ENV === 'production' && process.env.GTM_ID && (
-          <>
-            {/* <GTMIFrame GTM_ID={process.env.GTM_ID} /> */}
-          </>
+          <>{/* <GTMIFrame GTM_ID={process.env.GTM_ID} /> */}</>
         )}
         <div className='flex h-screen w-screen flex-1 flex-col'>
           <div className='flex flex-1 '>
-            {process.env.NODE_ENV === 'production' && (
-              <>
-                {/* <GoogleAdSense /> */}
-              </>
-            )}
+            {process.env.NODE_ENV === 'production' && <>{/* <GoogleAdSense /> */}</>}
             <Sidebar />
             <MobileNav />
             {children}

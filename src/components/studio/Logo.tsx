@@ -4,13 +4,7 @@ const Logo = (props: any) => {
   const { renderDefault, title } = props;
   return (
     <div className='flex items-center space-x-2'>
-      <Image
-        src='/Logo.png'
-        width={80}
-        height={40}
-        alt={title}
-        className='object-cover'
-      />
+      <Image src='/Logo.png' width={80} height={40} alt={title} className='object-cover' />
       {renderDefault && <>{renderDefault(props)}</>}
     </div>
   );

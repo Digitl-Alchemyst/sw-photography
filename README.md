@@ -11,9 +11,6 @@
 <img src="https://readme-typing-svg.demolab.com?font=Noto+Serif&pause=3000&color=2FA4D7&center=true&vCenter=true&width=375&lines=Next.JS+Sanity+Photography+Portfolio+" alt=typing>
  </p>
 
-
-
-
 <p align="center">
 This is a Photography portfolio website built with Next.js & Typescript and Sanity.io. It has a photo gallery and a blog section managed with the Sanity Content Lake.
 <br />
@@ -30,9 +27,9 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 <br />
 </p>
 
-<h3><ul><b>Project Demo</b></ul></h3>
+<h2><ul><b>Live Project</b></ul></h2>
 
-<a href="https://sw-photography.vercel.app/" target="blank"><img align="center" src="./public/global/SW-Photog.png" alt="logo" height="55" width="250" /></a>
+<a href="https://www.stevenwatkinsphotography.com/" target="blank"><img align="center" src="./public/global/SW-Photog.png" alt="logo" height="55" width="250" /></a>
 
 [Demo Video](https://www.youtube.com/@DigitalAlchemyst)
 
@@ -42,17 +39,27 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 <h3><ul><b>Envrioment</b></ul></h3>
         📟 Next.js <br>
         🎓 Typescript <br>
-        🚀 Tailwind CSS <br>        
+        🚀 Tailwind CSS <br>
+        👾  Santiy CMS
 <h3><ul><b>Libraries & Plugins</b></ul></h3>
          📁 ShadCN UI Library<br>
+         📌 Hero Icons<br>
+         💬 Email JS<br>
+         🍻 Next 3rd Parties - GTM<br>
+         📢 Google Ad Sense<br>
 <h3><ul><b>Concepts</b></ul></h3>
+        => Server Side Data Fetching
+        => Data Caching & Revalitation with tags
+        => Server Side Rendering(SSR)
+        => Static Site Generation(SSG) with generateStaticParams
+        => Dynamic Routing
+        => Routing Groups
         => Image Optimization with Blurred Placeholder
-<h3><ul><b>Commits</b></ul></h3>
+<h3><ul><b>Testing & Commits</b></ul></h3>
+        => React Testing Library <br>
+        => Jest <br>
         => Husky <br>
         => Lint-Staged <br>
-<h3><ul><b>Testing</b></ul></h3>
-        => Jest <br>
-        => React Testing Library <br>
 <h3><ul><b>🚀 Tailwind CSS Extensions</b></ul></h3>
         🌈 Neon Shadows <br>
         🌀 Slower Spin Animation <br>
@@ -71,25 +78,22 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
         => Initial Development <br>
 <br />
 
-<h3><ul><b>To-Do List</b></ul></h3>
-
 ## To-Do List
-
 
 ### Documentation
 
 - [ ] Add comments to all public functions
-- [ ] Update the README with installation instructions
 - [ ] Create a CONTRIBUTING guide
+- [x] Update the README with installation instructions
 
 ### Features
 
-- [x] Preview Mode.
-- [ ] Blurred Images
 - [ ] Lightbox
+- [ ] Blurred Images
 - [ ] Add search functionality
-- [x] Design a responsive layout
 - [ ] Comments Section on Articles
+- [x] Design a responsive layout
+- [x] Preview Mode.
 
 ### Bugs
 
@@ -97,13 +101,12 @@ This is a Photography portfolio website built with Next.js & Typescript and Sani
 
 ### Refactoring
 
-- [x] Refactor Date formatting into reuseable component.
 - [ ] Base URL Resolver.
+- [x] Refactor Date formatting into reuseable component.
 - [x] Refactor the database connection logic
 - [x] Optimize the data retrieval process
 
 ### Libraries & Plugins to Implement
-        
 
 <h2><ul><b>How to use</b></ul></h2>
 

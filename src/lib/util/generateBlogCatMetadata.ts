@@ -15,7 +15,6 @@ const baseURL = process.env.NEXT_PUBLIC_METADATA_BASE_URL;
 
 // Define the generateMetadata function
 export async function generateMetadata({ params: { slug } }: Props) {
-
   // Fetch the blog data based on the slug
   const query = queryBlogCatMetadata;
 

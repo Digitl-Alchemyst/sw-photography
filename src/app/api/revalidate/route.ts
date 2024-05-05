@@ -23,11 +23,11 @@
  * 16. Redeploy with `npx vercel --prod` to apply the new environment variable
  */
 
-import { revalidateTag } from 'next/cache'
-import { type NextRequest, NextResponse } from 'next/server'
-import { parseBody } from 'next-sanity/webhook'
+import { revalidateTag } from 'next/cache';
+import { type NextRequest, NextResponse } from 'next/server';
+import { parseBody } from 'next-sanity/webhook';
 
-import { revalidateSecret } from '@/lib/sanity/api'
+import { revalidateSecret } from '@/lib/sanity/api';
 
 type WebhookPayload = {
   _type: string;
@@ -64,10 +64,8 @@ export async function POST(req: NextRequest) {
       now: Date.now(),
       body,
     });
-
   } catch (err: any) {
-    console.error(err)
-    return new Response(err.message, { status: 500 })
+    console.error(err);
+    return new Response(err.message, { status: 500 });
   }
-  
 }

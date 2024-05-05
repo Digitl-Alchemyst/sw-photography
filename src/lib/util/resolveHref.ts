@@ -16,14 +16,11 @@ const pageRoutes: PageRoutes = {
   author: { path: '/about' },
 };
 
-
-
 // Define the resolveHref function with type annotations
 export default function resolveHref(pageType: string, slug?: string): string | undefined {
-
-    if (pageType === undefined) {
-      throw new Error('pageType is required');
-    }
+  if (pageType === undefined) {
+    throw new Error('pageType is required');
+  }
 
   const page = pageRoutes[pageType! as string];
   if (!page) {

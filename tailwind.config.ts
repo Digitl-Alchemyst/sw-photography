@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const plugin = require('tailwindcss/plugin');
 
@@ -27,7 +27,7 @@ const config: Config = {
         xl: '1165px',
         dxl: '1300px',
         xxl: '1750px',
-        mxl: '2055px'
+        mxl: '2055px',
       },
       lineClamp: {
         '8': '8',
@@ -407,36 +407,27 @@ const config: Config = {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
   },
   plugins: [
     require('tailwind-scrollbar-hide'),
     require('tailwindcss-animate'),
-    plugin(
-      ({
-        theme,
-        addUtilities,
-      }: {
-        theme: any;
-        addUtilities: (arg0: any) => void;
-      }) => {
-        let neonUtilities: Record<string, any> = {};
-        const colors = theme('colors');
-        for (const color in colors) {
-          if (typeof colors[color] === 'object') {
-            const color1 = colors[color][300];
-            const color2 = colors[color][600];
-            neonUtilities[`.neon-${color}`] = {
-              boxShadow: `0 0 5px ${color1}, 0 0 20px ${color2}`,
-            };
-          }
+    plugin(({ theme, addUtilities }: { theme: any; addUtilities: (arg0: any) => void }) => {
+      let neonUtilities: Record<string, any> = {};
+      const colors = theme('colors');
+      for (const color in colors) {
+        if (typeof colors[color] === 'object') {
+          const color1 = colors[color][300];
+          const color2 = colors[color][600];
+          neonUtilities[`.neon-${color}`] = {
+            boxShadow: `0 0 5px ${color1}, 0 0 20px ${color2}`,
+          };
         }
-        addUtilities(neonUtilities);
-      },
-    ),
+      }
+      addUtilities(neonUtilities);
+    }),
   ],
 };
-export default config
+export default config;

@@ -69,7 +69,6 @@ interface Image {
   alt: string;
 }
 
-
 interface BlurredImages {
   id: string;
   width: number;

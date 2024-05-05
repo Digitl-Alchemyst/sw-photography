@@ -34,14 +34,13 @@ export default async function sanityFetch<QueryResponse>({
     );
   }
 
-
   if (perspective === 'previewDrafts') {
     return client.fetch<QueryResponse>(query, params, {
       stega,
       perspective: 'previewDrafts',
       // The token is required to fetch draft content
       token: readToken,
-      
+
       // The `previewDrafts` perspective isn't available on the API CDN
       useCdn: false,
       // And we can't cache the responses as it would slow down the live preview experience
@@ -58,6 +57,5 @@ export default async function sanityFetch<QueryResponse>({
     // Only enable Stega in production if it's a Vercel Preview Deployment, as the Vercel Toolbar supports Visual Editing
     // When using the `published` perspective we use time-based revalidation to match the time-to-live on Sanity's API CDN (60 seconds)
     next: { tags },
-    });
+  });
 }
-

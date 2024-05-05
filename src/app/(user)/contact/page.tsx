@@ -2,13 +2,7 @@
 import Link from 'next/link';
 import SocialLinks from '@/c/global/SocialLinks';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
-import {
-
-  BsFillChatLeftTextFill,
-  BsSignal,
-  BsTelephoneFill,
-  BsWhatsapp,
-} from 'react-icons/bs';
+import { BsFillChatLeftTextFill, BsSignal, BsTelephoneFill, BsWhatsapp } from 'react-icons/bs';
 import { MdSettingsCell } from 'react-icons/md';
 import { ImEnvelop } from 'react-icons/im';
 import { TbBrandLinktree } from 'react-icons/tb';
@@ -19,7 +13,6 @@ import { queryPhotographers } from '@/lib/sanity/queries';
 import type { Metadata } from 'next';
 import ContactForm from '@/c/home/contactForm';
 
-
 export const metadata: Metadata = {
   title: `Contact | SW Photography`,
   description:
@@ -29,8 +22,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Contact() {
-    const photographers = await getPhotographer();
-    const photographer = photographers[0];
+  const photographers = await getPhotographer();
+  const photographer = photographers[0];
   return (
     <main className=' bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
@@ -142,7 +135,7 @@ export default async function Contact() {
       </div>
     </main>
   );
-};
+}
 
 // Call the Sanity Fetch Function for the Photographer Information
 async function getPhotographer(): Promise<Author[]> {

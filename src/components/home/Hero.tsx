@@ -2,7 +2,7 @@ import sanityFetch from '@/lib/sanity/fetch';
 import { queryPhotographers } from '@/lib/sanity/queries';
 import { PortableText } from 'next-sanity';
 import Image from 'next/image';
-import React from 'react'
+import React from 'react';
 import { RichTextComponents } from '../providers/RichTextComponents';
 import urlForImage from '@/lib/util/urlForImage';
 

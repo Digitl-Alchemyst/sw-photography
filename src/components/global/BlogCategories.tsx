@@ -4,7 +4,6 @@ import resolveHref from '@/lib/util/resolveHref';
 import { queryBlogCategories } from '@/lib/sanity/queries';
 import formatCategoryTitle from '@/l/util/formatTitleForURL';
 
-
 export default async function BlogCategories() {
   const categories = await getBlogCategories();
 
@@ -28,13 +27,12 @@ export default async function BlogCategories() {
 async function getBlogCategories() {
   try {
     // Fetch Gallery Category List from Sanity
-  const categories: blogCategory[] = await sanityFetch({
-    query: queryBlogCategories,
-    tags: ['blogCategory'],
-  });
+    const categories: blogCategory[] = await sanityFetch({
+      query: queryBlogCategories,
+      tags: ['blogCategory'],
+    });
 
-  return categories.sort((a: { order: number }, b: { order: number }) => a.order - b.order);
-
+    return categories.sort((a: { order: number }, b: { order: number }) => a.order - b.order);
   } catch (error) {
     console.error('Failed to fetch galleries:', error);
     return []; // Return an empty array in case of an error

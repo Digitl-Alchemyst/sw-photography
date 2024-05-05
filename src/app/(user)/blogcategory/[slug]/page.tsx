@@ -8,19 +8,15 @@ import { client } from '@/l/sanity/client';
 import { groq } from 'next-sanity';
 import resolveHref from '@/lib/util/resolveHref';
 
-
 export { generateMetadata } from '@/lib/util/generateBlogCatMetadata';
 
 // Invalid page type: blogCategory
-
 
 type Props = {
   params: {
     slug: string;
   };
 };
-
-
 
 export default async function BlogCategoryPage({ params: { slug } }: Props) {
   const blogs = await getBlogListByCategory(slug);
@@ -90,5 +86,3 @@ export async function generateStaticParams() {
     path: resolveHref('blog', slug),
   }));
 }
-
-

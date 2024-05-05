@@ -78,7 +78,7 @@ async function getGalleryListByCategory(slug: string) {
 export async function generateStaticParams() {
   const query = groq`*[_type=='galleryCategory'] { slug }`;
   const slugs = await client.fetch(query);
-  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);;
+  const slugRoutes = slugs.map((slug: { slug: { current: any } }) => slug.slug.current);
 
   return slugRoutes.map((slug: string | undefined) => ({
     slug,

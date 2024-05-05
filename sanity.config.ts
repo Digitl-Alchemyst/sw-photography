@@ -8,10 +8,10 @@ import Logo from '@/c/studio/Logo';
 import StudioNavbar from '@/c/studio/StudioNavbar';
 
 // 1. Add the import to the theme.js you downloaded
-import {theme as _theme} from '@/l/sanity/theme'
+import { theme as _theme } from '@/l/sanity/theme';
 
 // 2. Assign typings to the theme
-const myTheme = _theme as import('sanity').StudioTheme
+const myTheme = _theme as import('sanity').StudioTheme;
 export default defineConfig({
   basePath: studioUrl,
 

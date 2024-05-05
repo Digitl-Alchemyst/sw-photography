@@ -2,7 +2,6 @@ import getAllUrls from '@/l/util/getAllUrls';
 import { Metadata, MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-
   const baseURL = process.env.BASEURL;
 
   const allUrls = await getAllUrls();

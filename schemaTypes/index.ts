@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import blockContent from './blockContent'
+import blockContent from './blockContent';
 import blogCategory from './blogCategory';
 import galleryCategory from './galleryCategory';
 import gallery from './gallery';

@@ -9,8 +9,6 @@ import TechCard from '@/components/cards/TechCard';
 import GearCard from '@/components/cards/GearCard';
 import type { Metadata } from 'next';
 
-
-
 export const metadata: Metadata = {
   title: `About Me | SW Photography`,
   description:

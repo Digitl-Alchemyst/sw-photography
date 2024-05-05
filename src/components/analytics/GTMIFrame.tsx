@@ -1,5 +1,3 @@
-
-
 interface Props {
   GTM_ID: string;
 }

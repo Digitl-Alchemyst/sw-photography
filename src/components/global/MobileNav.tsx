@@ -3,7 +3,6 @@ import { ImBlog } from 'react-icons/im';
 import { FaHome, FaUser, FaEnvelope } from 'react-icons/fa';
 import Link from 'next/link';
 
-
 //  Navigation Menu Links
 const navLinks = [
   { name: 'home', path: '/', icon: <FaHome /> },
@@ -19,15 +18,14 @@ const navLinks = [
 ];
 
 const MobileNav = () => {
-
   return (
-    <nav className='fixed bottom-0 top-0 z-30 mt-auto flex md:hidden h-max w-full flex-col items-center'>
+    <nav className='fixed bottom-0 top-0 z-30 mt-auto flex h-max w-full flex-col items-center md:hidden'>
       {/* inner  */}
       <div className='flex h-[80px] w-full items-center justify-between bg-steelpolished-300/20 px-12 py-8 text-3xl backdrop-blur-md'>
         {navLinks.map((link, index) => {
           return (
             <Link
-              className="group relative flex items-center transition-all duration-300 hover:text-accent2"
+              className='group relative flex items-center transition-all duration-300 hover:text-accent2'
               href={link.path}
               key={index}
             >

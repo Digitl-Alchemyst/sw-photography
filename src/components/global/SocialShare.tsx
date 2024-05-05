@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import {
   FaFacebookSquare,
@@ -15,15 +15,15 @@ import {
   FaTumblrSquare,
   FaFlipboard,
 } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md'
+import { MdEmail } from 'react-icons/md';
 
-const SocialShare = ({ url, title }: {url: string, title: string}) => {
+const SocialShare = ({ url, title }: { url: string; title: string }) => {
   return (
-    <div className='mx-auto flex w-full justify-start py-1 mt-2'>
-      <h3 className='mr-3 md:flex items-center justify-center text-xl font-semibold text-untele hidden'>
+    <div className='mx-auto mt-2 flex w-full justify-start py-1'>
+      <h3 className='text-untele mr-3 hidden items-center justify-center text-xl font-semibold md:flex'>
         Share this Post |
       </h3>
-      <div className='flex items-center justify-center space-x-2 rounded-md px-4 flex-wrap'>
+      <div className='flex flex-wrap items-center justify-center space-x-2 rounded-md px-4'>
         <a
           rel='noreferrer'
           target='_blank'
@@ -38,11 +38,7 @@ const SocialShare = ({ url, title }: {url: string, title: string}) => {
         >
           <FaFacebookMessenger className='h-auto w-8  text-[#1877f2]' />
         </a>
-        <a
-          rel='noreferrer'
-          target='_blank'
-          href={`https://twitter.com/intent/tweet?url=${url}`}
-        >
+        <a rel='noreferrer' target='_blank' href={`https://twitter.com/intent/tweet?url=${url}`}>
           <FaTwitterSquare className='h-auto w-8  text-[#1da1f2]' />
         </a>
         <a
@@ -94,21 +90,13 @@ const SocialShare = ({ url, title }: {url: string, title: string}) => {
         >
           <FaTelegram className='h-auto w-8  text-[#0088cc]' />
         </a>
-        <a
-          rel='noreferrer'
-          target='_blank'
-          href={`https://api.whatsapp.com/send/?text=${url}`}
-        >
+        <a rel='noreferrer' target='_blank' href={`https://api.whatsapp.com/send/?text=${url}`}>
           <FaWhatsappSquare className='h-auto w-8  text-[#25d366]' />
         </a>
         <a rel='noreferrer' target='_blank' href={`sms:body=${url}`}>
           <FaSms className='h-auto w-8  text-[#a4c639]' />
         </a>
-        <a
-          rel='noreferrer'
-          target='_blank'
-          href={`mailto:?subject=${title}&body=${url}`}
-        >
+        <a rel='noreferrer' target='_blank' href={`mailto:?subject=${title}&body=${url}`}>
           <MdEmail className='h-auto w-8  text-[#7c8ba4]' />
         </a>
         <button onClick={() => navigator.clipboard.writeText(url)}>

@@ -19,8 +19,6 @@ type Props = {
   };
 };
 
-
-
 export default async function Article({ params: { slug } }: Props) {
   const post = (await getBlogPostBySlug(slug)) as Blog;
 
@@ -155,15 +153,14 @@ export default async function Article({ params: { slug } }: Props) {
 
 // Call the Sanity Fetch Function for the Blog List
 async function getBlogPostBySlug(slug: string) {
-  try{
-
+  try {
     // Fetch blog data from Sanity
     const post = await sanityFetch({
       query: queryBlogPostBySlug,
       params: { slug },
       tags: ['blog'],
     });
-    
+
     return post || [];
   } catch (error) {
     console.log('Failed to fetch blog post:', error);
