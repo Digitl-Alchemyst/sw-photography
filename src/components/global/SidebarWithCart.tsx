@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import SocialLinks from './SocialLinks';
 import CartIcon from '@/components/printShop/CartIcon';
-import ShoppingCart from '@/components/printShop/ShoppingCart';
+import EnhancedShoppingCart from '@/components/ecommerce/EnhancedShoppingCart';
 import { usePrintShop } from '@/contexts/PrintShopContext';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 
@@ -17,6 +17,11 @@ const NavLinks = [
     id: 2,
     title: 'Gallery',
     url: '/gallery',
+  },
+  {
+    id: 3,
+    title: 'Shop',
+    url: '/shop',
   },
   {
     id: 5,
@@ -55,15 +60,15 @@ const SidebarWithCart = () => {
             </Link>
           ))}
         </div>
-        
+
         {/* Cart Icon */}
         <div className='mt-auto px-16 pb-8'>
           <CartIcon />
         </div>
       </div>
 
-      {/* Shopping Cart */}
-      <ShoppingCart isOpen={isCartOpen} onClose={closeCart} />
+      {/* Enhanced Shopping Cart */}
+      <EnhancedShoppingCart isOpen={isCartOpen} onClose={closeCart} />
     </>
   );
 };

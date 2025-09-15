@@ -14,6 +14,7 @@ import GTMIFrame from '@/components/analytics/GTMIFrame';
 import { GoogleTagManager } from '@next/third-parties/google';
 import GASVerify from '@/lib/util/googleAdSense';
 import { PrintShopProvider } from '@/contexts/PrintShopContext';
+import { ClerkProvider } from '@clerk/nextjs';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -80,18 +81,20 @@ export default function RootLayout({
         {process.env.NODE_ENV === 'production' && process.env.GTM_ID && (
           <>{/* <GTMIFrame GTM_ID={process.env.GTM_ID} /> */}</>
         )}
-        <PrintShopProvider>
-          <div className='flex h-screen w-screen flex-1 flex-col'>
-            <div className='flex flex-1'>
-              {process.env.NODE_ENV === 'production' && <>{/* <GoogleAdSense /> */}</>}
-              <SidebarWithCart />
-              <MobileNavWithCart />
-              {children}
-              {draftMode().isEnabled && <VisualEditing />}
+        <ClerkProvider>
+          <PrintShopProvider>
+            <div className='flex h-screen w-screen flex-1 flex-col'>
+              <div className='flex flex-1'>
+                {process.env.NODE_ENV === 'production' && <>{/* <GoogleAdSense /> */}</>}
+                <SidebarWithCart />
+                <MobileNavWithCart />
+                {children}
+                {draftMode().isEnabled && <VisualEditing />}
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </PrintShopProvider>
+          </PrintShopProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

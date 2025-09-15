@@ -2,16 +2,17 @@
 
 import { GrGallery } from 'react-icons/gr';
 import { ImBlog } from 'react-icons/im';
-import { FaHome, FaUser, FaEnvelope } from 'react-icons/fa';
+import { FaHome, FaUser, FaEnvelope, FaShoppingBag } from 'react-icons/fa';
 import Link from 'next/link';
 import CartIcon from '@/components/printShop/CartIcon';
-import ShoppingCart from '@/components/printShop/ShoppingCart';
+import EnhancedShoppingCart from '@/components/ecommerce/EnhancedShoppingCart';
 import { usePrintShop } from '@/contexts/PrintShopContext';
 
 //  Navigation Menu Links
 const navLinks = [
   { name: 'home', path: '/', icon: <FaHome /> },
   { name: 'gallery', path: '/gallery', icon: <GrGallery /> },
+  { name: 'shop', path: '/shop', icon: <FaShoppingBag /> },
   { name: 'blog', path: '/blog', icon: <ImBlog /> },
   { name: 'about', path: '/about', icon: <FaUser /> },
   {
@@ -43,7 +44,7 @@ const MobileNavWithCart = () => {
               </Link>
             );
           })}
-          
+
           {/* Cart Icon */}
           <div className='text-steelpolished-600'>
             <CartIcon />
@@ -51,8 +52,8 @@ const MobileNavWithCart = () => {
         </div>
       </nav>
 
-      {/* Shopping Cart */}
-      <ShoppingCart isOpen={isCartOpen} onClose={closeCart} />
+      {/* Enhanced Shopping Cart */}
+      <EnhancedShoppingCart isOpen={isCartOpen} onClose={closeCart} />
     </>
   );
 };

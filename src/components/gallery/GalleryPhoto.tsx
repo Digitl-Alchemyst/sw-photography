@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { ShoppingCart } from 'lucide-react';
 import urlForImage from '@/lib/util/urlForImage';
 import { PhotoData } from '@/components/lightbox/PhotoLightbox';
+import { usePrintShop } from '@/contexts/PrintShopContext';
 
 interface GalleryPhotoProps {
   photo: PhotoData;
@@ -31,6 +33,7 @@ export default function GalleryPhoto({
 }: GalleryPhotoProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const { addToCart } = usePrintShop();
 
   const handleClick = () => {
     onClick(index);
@@ -38,6 +41,61 @@ export default function GalleryPhoto({
 
   const handleImageLoad = () => {
     setIsLoaded(true);
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent opening lightbox
+
+    if (!photo.printOptions?.available) return;
+
+    // Create a mock print product from the photo
+    const printProduct = {
+      id: `photo-${photo._id || index}`,
+      type: 'print' as const,
+      name: photo.title || `Gallery Photo ${index + 1}`,
+      slug: `gallery-photo-${photo._id || index}`,
+      description: `High-quality print of ${photo.title || 'gallery photo'}`,
+      shortDescription: photo.title || `Gallery Photo ${index + 1}`,
+      price: photo.printOptions.basePrice || 25,
+      isActive: true,
+      isFeatured: false,
+      images: [
+        {
+          id: '1',
+          url: urlForImage(photo as any)?.url() || '',
+          alt: photo.alt || 'Gallery photo',
+          isPrimary: true,
+          sortOrder: 0,
+        },
+      ],
+      categories: ['prints', 'gallery'],
+      tags: photo.tags || [],
+      seo: {
+        metaTitle: `${photo.title || 'Gallery Photo'} Print`,
+        metaDescription: `High-quality print of ${photo.title || 'gallery photo'}`,
+        keywords: photo.tags || [],
+        slug: `gallery-photo-${photo._id || index}`,
+      },
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      variants: [],
+    };
+
+    // Add to cart with default size and material
+    addToCart(printProduct as any, 1, {
+      size: {
+        id: '8x10',
+        name: '8" x 10"',
+        dimensions: '8x10',
+        price: photo.printOptions.basePrice || 25,
+      },
+      material: {
+        id: 'standard',
+        name: 'Standard Paper',
+        description: 'High-quality photo paper',
+        priceMultiplier: 1.0,
+      },
+    });
   };
 
   return (
@@ -119,10 +177,17 @@ export default function GalleryPhoto({
             </div>
           )}
           {photo.printOptions?.available && (
-            <div className='mt-1'>
-              <span className='rounded bg-steelpolished-400/30 px-1 py-0.5 text-xs text-steelpolished-200'>
+            <div className='mt-2 flex items-center gap-2'>
+              <span className='rounded bg-steelpolished-400/30 px-2 py-1 text-xs text-steelpolished-200'>
                 Available for Print
               </span>
+              <button
+                onClick={handleAddToCart}
+                className='flex items-center gap-1 rounded bg-accent/80 px-2 py-1 text-xs text-white transition-colors hover:bg-accent'
+              >
+                <ShoppingCart size={12} />
+                Add to Cart
+              </button>
             </div>
           )}
         </motion.div>

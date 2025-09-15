@@ -1,3 +1,20 @@
+// Base Product Types
+export type ProductType = 'print' | 'digital_preset' | 'digital_lut' | 'digital_bundle';
+
+export interface BaseProduct {
+  id: string;
+  type: ProductType;
+  name: string;
+  description: string;
+  price: number;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  tags?: string[];
+  category?: string;
+}
+
+// Print Product Types
 export interface PrintSize {
   id: string;
   name: string;
@@ -13,18 +30,85 @@ export interface PrintMaterial {
   priceMultiplier: number;
 }
 
-export interface PrintProduct {
+export interface PrintVariant {
+  id: string;
+  size: PrintSize;
+  material: PrintMaterial;
+  price: number;
+  isAvailable: boolean;
+}
+
+export interface PrintProduct extends BaseProduct {
+  type: 'print';
   photoId: string;
   photoTitle: string;
   photoUrl: string;
-  size: PrintSize;
-  material: PrintMaterial;
-  quantity: number;
-  totalPrice: number;
+  photoAlt?: string;
+  variants: PrintVariant[];
+  galleryInfo?: {
+    galleryId: string;
+    galleryTitle: string;
+    gallerySlug: string;
+  };
 }
 
-export interface CartItem extends PrintProduct {
+// Digital Product Types
+export interface DigitalFile {
   id: string;
+  name: string;
+  url: string;
+  size: number; // in bytes
+  format: string;
+  downloadCount?: number;
+}
+
+export interface PresetProduct extends BaseProduct {
+  type: 'digital_preset';
+  presetType: 'lightroom' | 'photoshop' | 'capture_one' | 'luminar';
+  compatibleVersions: string[];
+  files: DigitalFile[];
+  previewImages: string[];
+  sampleImages?: string[];
+}
+
+export interface LUTProduct extends BaseProduct {
+  type: 'digital_lut';
+  lutType: 'video' | 'photo' | 'universal';
+  format: 'cube' | '3dl' | 'look' | 'multiple';
+  files: DigitalFile[];
+  previewImages: string[];
+  compatibleSoftware: string[];
+}
+
+export interface BundleProduct extends BaseProduct {
+  type: 'digital_bundle';
+  bundleType: 'preset_pack' | 'lut_pack' | 'mixed';
+  includedProducts: string[]; // Product IDs
+  bundleDiscount: number; // Percentage discount
+  files: DigitalFile[];
+  previewImages: string[];
+}
+
+// Union type for all products
+export type Product = PrintProduct | PresetProduct | LUTProduct | BundleProduct;
+
+// Cart and Order Types
+export interface CartItemVariant {
+  variantId?: string; // For print products
+  size?: PrintSize;
+  material?: PrintMaterial;
+}
+
+export interface CartItem {
+  id: string;
+  productId: string;
+  productType: ProductType;
+  productName: string;
+  productImage: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+  variant?: CartItemVariant;
   addedAt: Date;
 }
 
@@ -33,27 +117,94 @@ export interface PrintShopConfig {
   apiKey?: string;
   baseUrl?: string;
   webhookUrl?: string;
+  digitalDelivery?: {
+    enabled: boolean;
+    downloadLinkExpiry: number; // hours
+    maxDownloads: number;
+  };
 }
 
-export interface OrderDetails {
-  items: CartItem[];
+// Customer and Order Types
+export interface Customer {
+  id: string;
+  email: string;
+  name: string;
+  createdAt: Date;
+  totalOrders: number;
+  totalSpent: number;
+}
+
+export interface ShippingAddress {
+  name: string;
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  phone?: string;
+}
+
+export interface OrderItem extends CartItem {
+  orderId: string;
+  fulfillmentStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'digital_delivered';
+  trackingNumber?: string;
+  downloadLinks?: DigitalDownloadLink[];
+}
+
+export interface DigitalDownloadLink {
+  id: string;
+  orderId: string;
+  customerId: string; // Clerk user ID or guest email
+  productId: string;
+  productName: string;
+  productType: ProductType;
+  token: string;
+  downloadUrl: string;
+  expiresAt: Date;
+  maxDownloads: number;
+  downloadCount: number;
+  isActive: boolean;
+  createdAt: Date;
+  files: DigitalFile[];
+}
+
+export interface Order {
+  id: string;
+  orderNumber: string;
+  customerId?: string;
+  customerEmail: string;
+  status: 'pending' | 'processing' | 'completed' | 'cancelled' | 'refunded';
+  items: OrderItem[];
   subtotal: number;
   shipping: number;
   tax: number;
   total: number;
-  customerInfo: {
-    name: string;
-    email: string;
-    address: {
-      street: string;
-      city: string;
-      state: string;
-      zipCode: string;
-      country: string;
-    };
+  currency: string;
+  paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
+  paymentMethod?: string;
+  paymentIntentId?: string;
+  shippingAddress?: ShippingAddress;
+  billingAddress?: ShippingAddress;
+  notes?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  completedAt?: Date;
+  digitalDelivery?: {
+    delivered: boolean;
+    deliveredAt?: Date;
+    downloadLinks: DigitalDownloadLink[];
   };
 }
 
+export interface OrderDetails extends Order {
+  customerInfo: {
+    name: string;
+    email: string;
+    address?: ShippingAddress;
+  };
+}
+
+// Product Configuration Constants
 export const PRINT_SIZES: PrintSize[] = [
   {
     id: '5x7',
@@ -138,3 +289,62 @@ export const PRINT_MATERIALS: PrintMaterial[] = [
     priceMultiplier: 2.5,
   },
 ];
+
+// Digital Product Categories
+export const PRESET_CATEGORIES = [
+  'Portrait',
+  'Landscape',
+  'Wedding',
+  'Street Photography',
+  'Film Emulation',
+  'Black & White',
+  'Vintage',
+  'Moody',
+  'Bright & Airy',
+  'Cinematic',
+] as const;
+
+export const LUT_CATEGORIES = [
+  'Cinematic',
+  'Film Emulation',
+  'Color Grading',
+  'Vintage',
+  'Modern',
+  'Black & White',
+  'Teal & Orange',
+  'Warm Tones',
+  'Cool Tones',
+  'High Contrast',
+] as const;
+
+// Product Type Configurations
+export const PRODUCT_TYPE_CONFIG = {
+  print: {
+    name: 'Print',
+    description: 'High-quality physical prints of photographs',
+    icon: '🖼️',
+    requiresShipping: true,
+    isDigital: false,
+  },
+  digital_preset: {
+    name: 'Lightroom Preset',
+    description: 'Professional photo editing presets',
+    icon: '🎨',
+    requiresShipping: false,
+    isDigital: true,
+  },
+  digital_lut: {
+    name: 'Video LUT',
+    description: 'Color grading lookup tables for video',
+    icon: '🎬',
+    requiresShipping: false,
+    isDigital: true,
+  },
+  digital_bundle: {
+    name: 'Digital Bundle',
+    description: 'Curated collections of digital products',
+    icon: '📦',
+    requiresShipping: false,
+    isDigital: true,
+  },
+} as const;

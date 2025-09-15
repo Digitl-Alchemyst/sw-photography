@@ -1,14 +1,13 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { CartItem, PrintProduct } from '@/types/printShop';
-import { getPrintShopService } from '@/lib/printShop/printShopService';
+import { CartItem, Product, CartItemVariant } from '@/types/printShop';
+import { getCartService, CartSummary } from '@/lib/ecommerce/cartService';
 
 interface PrintShopContextType {
   cart: CartItem[];
-  cartCount: number;
-  cartTotal: number;
-  addToCart: (product: PrintProduct) => void;
+  cartSummary: CartSummary;
+  addToCart: (product: Product, quantity?: number, variant?: CartItemVariant) => void;
   removeFromCart: (itemId: string) => void;
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
@@ -16,6 +15,7 @@ interface PrintShopContextType {
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
+  validateCart: () => { isValid: boolean; errors: string[] };
 }
 
 const PrintShopContext = createContext<PrintShopContextType | undefined>(undefined);
@@ -26,53 +26,75 @@ interface PrintShopProviderProps {
 
 export function PrintShopProvider({ children }: PrintShopProviderProps) {
   const [cart, setCart] = useState<CartItem[]>([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
+  const [cartSummary, setCartSummary] = useState<CartSummary>({
+    itemCount: 0,
+    totalQuantity: 0,
+    subtotal: 0,
+    estimatedTax: 0,
+    estimatedShipping: 0,
+    total: 0,
+    hasPhysicalItems: false,
+    hasDigitalItems: false,
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  const printShopService = getPrintShopService();
+  const cartService = getCartService();
 
-  // Load cart data on mount
+  // Load cart data on mount and subscribe to changes
   useEffect(() => {
     updateCartState();
-  }, []);
+
+    const unsubscribe = cartService.subscribe((updatedCart) => {
+      setCart(updatedCart);
+      setCartSummary(cartService.getCartSummary());
+    });
+
+    return unsubscribe;
+  }, [cartService]);
 
   const updateCartState = () => {
-    const currentCart = printShopService.getCart();
-    const currentCount = printShopService.getCartCount();
-    const currentTotal = printShopService.getCartTotal();
+    const currentCart = cartService.getCart();
+    const currentSummary = cartService.getCartSummary();
 
     setCart(currentCart);
-    setCartCount(currentCount);
-    setCartTotal(currentTotal);
+    setCartSummary(currentSummary);
   };
 
-  const addToCart = (product: PrintProduct) => {
-    printShopService.addToCart(product);
-    updateCartState();
-    
-    // Show a brief notification or open cart
-    setIsCartOpen(true);
-    setTimeout(() => setIsCartOpen(false), 3000); // Auto-close after 3 seconds
+  const addToCart = (product: Product, quantity: number = 1, variant?: CartItemVariant) => {
+    try {
+      cartService.addItem(product, quantity, variant);
+
+      // Show cart briefly for user feedback
+      setIsCartOpen(true);
+      setTimeout(() => setIsCartOpen(false), 3000);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      // You could show a toast notification here
+    }
   };
 
   const removeFromCart = (itemId: string) => {
-    printShopService.removeFromCart(itemId);
-    updateCartState();
+    cartService.removeItem(itemId);
   };
 
   const updateQuantity = (itemId: string, quantity: number) => {
-    if (quantity <= 0) {
-      removeFromCart(itemId);
-    } else {
-      printShopService.updateCartItemQuantity(itemId, quantity);
-      updateCartState();
+    try {
+      if (quantity <= 0) {
+        cartService.removeItem(itemId);
+      } else {
+        cartService.updateQuantity(itemId, quantity);
+      }
+    } catch (error) {
+      console.error('Error updating quantity:', error);
     }
   };
 
   const clearCart = () => {
-    printShopService.clearCart();
-    updateCartState();
+    cartService.clearCart();
+  };
+
+  const validateCart = () => {
+    return cartService.validateCart();
   };
 
   const openCart = () => setIsCartOpen(true);
@@ -81,8 +103,7 @@ export function PrintShopProvider({ children }: PrintShopProviderProps) {
 
   const value: PrintShopContextType = {
     cart,
-    cartCount,
-    cartTotal,
+    cartSummary,
     addToCart,
     removeFromCart,
     updateQuantity,
@@ -91,13 +112,10 @@ export function PrintShopProvider({ children }: PrintShopProviderProps) {
     openCart,
     closeCart,
     toggleCart,
+    validateCart,
   };
 
-  return (
-    <PrintShopContext.Provider value={value}>
-      {children}
-    </PrintShopContext.Provider>
-  );
+  return <PrintShopContext.Provider value={value}>{children}</PrintShopContext.Provider>;
 }
 
 export function usePrintShop(): PrintShopContextType {

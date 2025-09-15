@@ -9,6 +9,10 @@ import policies from './policies';
 import youtube from './youtube';
 import instagram from './instagram';
 import twitterX from './twitterX';
+import product from './product';
+import productCategory from './productCategory';
+import order from './order';
+import customer from './customer';
 
 export const schemaTypes = [
   blog,
@@ -16,6 +20,10 @@ export const schemaTypes = [
   author,
   blogCategory,
   galleryCategory,
+  product,
+  productCategory,
+  order,
+  customer,
   blockContent,
   twitterX,
   instagram,
