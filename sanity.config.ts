@@ -23,9 +23,7 @@ export default defineConfig({
   apiVersion: apiVersion,
 
   plugins: [
-    structureTool({
-      // defaultDocumentNode: getDefaultDocumentNode,
-    }),
+    structureTool({}),
     presentationTool({
       previewUrl: {
         draftMode: {

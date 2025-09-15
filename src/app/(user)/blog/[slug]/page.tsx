@@ -1,3 +1,4 @@
+// photography
 import { client } from '@/l/sanity/client';
 import { groq } from 'next-sanity';
 import sanityFetch from '@/l/sanity/fetch';
@@ -20,7 +21,7 @@ type Props = {
 };
 
 export default async function Article({ params: { slug } }: Props) {
-  const post = (await getBlogPostBySlug(slug)) as Blog;
+  const post = await getBlogPostBySlug(slug) as Blog;
 
   return (
     <>
