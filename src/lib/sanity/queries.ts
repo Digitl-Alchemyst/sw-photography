@@ -69,15 +69,103 @@ export const queryGalleryListByCategory = groq`
     title,
     slug,
     tripDate,
+    galleryType,
+    "photoCount": count(galleryPhotos),
   } | order(_createdAt desc)
 `;
 
-// Get a specific Gallery by its slug
+// Get a specific Gallery by its slug with comprehensive data
 export const queryGalleryBySlug = groq`
     *[_type == "gallery" && slug.current == $slug][0] {
       ...,
       author->,
+      galleryCategories[]->,
+      galleryPhotos[] {
+        ...,
+        asset->,
+        location,
+        dateTaken,
+        tags,
+        photographerInfo {
+          photographer->,
+          assistants,
+          credits
+        },
+        cameraSettings,
+        printOptions {
+          ...,
+          pricingTiers[] {
+            size,
+            material,
+            price,
+            available
+          }
+        }
+      },
+      photoshootDetails,
+      eventDetails,
+      showcaseDetails,
+      layoutSettings,
+      seoSettings {
+        ...,
+        socialImage {
+          asset->
+        }
+      }
     }`;
+
+// Get gallery list with enhanced metadata
+export const queryGalleryList = groq`
+  *[_type=='gallery'] {
+    mainImage,
+    author->,
+    galleryCategories[]->,
+    _createdAt,
+    snippet,
+    title,
+    slug,
+    tripDate,
+    galleryType,
+    "photoCount": count(galleryPhotos),
+    layoutSettings,
+  } | order(_createdAt desc)
+`;
+
+// Get galleries by type
+export const queryGalleriesByType = groq`
+  *[_type == 'gallery' && galleryType == $galleryType] {
+    mainImage,
+    author->,
+    galleryCategories[]->,
+    _createdAt,
+    snippet,
+    title,
+    slug,
+    tripDate,
+    galleryType,
+    "photoCount": count(galleryPhotos),
+    photoshootDetails,
+    eventDetails,
+    showcaseDetails,
+  } | order(_createdAt desc)
+`;
+
+// Get featured galleries for homepage
+export const queryFeaturedGalleries = groq`
+  *[_type == 'gallery' && defined(galleryPhotos) && count(galleryPhotos) > 0] {
+    mainImage,
+    author->,
+    title,
+    slug,
+    galleryType,
+    snippet,
+    "featuredPhoto": galleryPhotos[0] {
+      ...,
+      asset->
+    },
+    "photoCount": count(galleryPhotos),
+  } | order(_createdAt desc)[0...6]
+`;
 
 export const queryPhotographers = groq`
   *[_type=='author'] {
@@ -93,10 +181,18 @@ export const queryGalleryMetadata = groq`
       title,
       slug,
       keywords,
+      galleryType,
+      seoSettings {
+        metaTitle,
+        metaDescription,
+        socialImage {
+          asset->
+        }
+      },
+      "photoCount": count(galleryPhotos),
     }`;
 
-    
-    export const queryGalleryCatMetadata = groq`
+export const queryGalleryCatMetadata = groq`
     *[_type == "galleryCategory" && slug.current == $slug][0] {
       featuredImage,
       author->,
@@ -105,8 +201,8 @@ export const queryGalleryMetadata = groq`
       slug,
       keywords,
       }`;
-      
-      export const queryBlogMetadata = groq`
+
+export const queryBlogMetadata = groq`
           *[_type == "blog" && slug.current == $slug][0] {
             title,
             mainImage,

@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/app/globals.css';
 import Footer from '@/c/global/Footer';
-import Sidebar from '@/c/global/Sidebar';
-import MobileNav from '@/components/global/MobileNav';
+import SidebarWithCart from '@/components/global/SidebarWithCart';
+import MobileNavWithCart from '@/components/global/MobileNavWithCart';
 import { VisualEditing } from 'next-sanity';
 import { draftMode } from 'next/headers';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -13,6 +13,7 @@ import GTM from '@/components/analytics/GTM';
 import GTMIFrame from '@/components/analytics/GTMIFrame';
 import { GoogleTagManager } from '@next/third-parties/google';
 import GASVerify from '@/lib/util/googleAdSense';
+import { PrintShopProvider } from '@/contexts/PrintShopContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -79,16 +80,18 @@ export default function RootLayout({
         {process.env.NODE_ENV === 'production' && process.env.GTM_ID && (
           <>{/* <GTMIFrame GTM_ID={process.env.GTM_ID} /> */}</>
         )}
-        <div className='flex h-screen w-screen flex-1 flex-col'>
-          <div className='flex flex-1 '>
-            {process.env.NODE_ENV === 'production' && <>{/* <GoogleAdSense /> */}</>}
-            <Sidebar />
-            <MobileNav />
-            {children}
-            {draftMode().isEnabled && <VisualEditing />}
+        <PrintShopProvider>
+          <div className='flex h-screen w-screen flex-1 flex-col'>
+            <div className='flex flex-1'>
+              {process.env.NODE_ENV === 'production' && <>{/* <GoogleAdSense /> */}</>}
+              <SidebarWithCart />
+              <MobileNavWithCart />
+              {children}
+              {draftMode().isEnabled && <VisualEditing />}
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
+        </PrintShopProvider>
       </body>
     </html>
   );

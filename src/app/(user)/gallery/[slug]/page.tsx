@@ -1,13 +1,17 @@
 import { client } from '@/l/sanity/client';
 import { queryGalleryBySlug } from '@/lib/sanity/queries';
 import sanityFetch from '@/lib/sanity/fetch';
-import Image from 'next/image';
-import Link from 'next/link';
-import urlForImage from '@/lib/util/urlForImage';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import formatDate from '@/lib/util/formatDate';
 import { groq } from 'next-sanity';
 import resolveHref from '@/lib/util/resolveHref';
+import GalleryTypeRouter from '@/components/gallery/GalleryTypeRouter';
+import { PopulatedGallery } from '@/types/gallery';
+import {
+  getGalleryDisplayTitle,
+  getGalleryTypeMetadata,
+  getGalleryStats,
+} from '@/lib/gallery/galleryUtils';
 // import blurredImgUrl from '@/lib/util/getBase64';
 
 export { generateMetadata } from '@/lib/util/generateGalleryMetadata';
@@ -19,73 +23,68 @@ type Props = {
 };
 
 export default async function Gallery({ params: { slug } }: Props) {
-  const gallery = (await getGalleryBySlug(slug)) as Gallery;
-  const galleryPhotos = gallery.galleryPhotos;
+  const gallery = (await getGalleryBySlug(slug)) as PopulatedGallery;
+
+  if (!gallery) {
+    return (
+      <main className='w-full bg-steeldark-600 text-steelpolished-400'>
+        <div className='mx-auto flex h-64 w-full items-center justify-center'>
+          <p>Gallery not found.</p>
+        </div>
+      </main>
+    );
+  }
+
+  const typeMetadata = getGalleryTypeMetadata(gallery);
+  const stats = getGalleryStats(gallery);
 
   return (
     <main className='w-full bg-steeldark-600 text-steelpolished-400'>
       {/* Main Container  */}
       <div className='mx-auto flex h-full w-full flex-col items-center justify-center space-y-8 bg-gradient-to-l from-steelpolished-300/10 to-steeldark-900 px-4 py-6'>
         {/* Header */}
-        <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
-          - {gallery.title} -
-        </h1>
+        <div className='space-y-4 text-center'>
+          <div className='flex items-center justify-center gap-3'>
+            <span className='text-4xl'>{typeMetadata.icon}</span>
+            <h1 className={`text-center text-7xl font-bold ${headerFontStyle.className}`}>
+              - {gallery.title} -
+            </h1>
+          </div>
+          <div className='text-lg text-steelpolished-500'>
+            {typeMetadata.type} • {stats.totalPhotos} photos
+            {stats.printablePhotos > 0 && ` • ${stats.printablePhotos} available for print`}
+          </div>
+        </div>
+
         <div className='w-full'>
           <hr className='mb-8 border-accent' />
           {/* Sub Container  */}
-          <section className='mx-auto flex w-full flex-col items-center justify-center px-8 '>
-            <div className='flex w-full items-center justify-between px-6 py-4'>
-              <div>
-                <p>Photographed By: {gallery.author.name}</p>
+          <section className='mx-auto flex w-full flex-col items-center justify-center px-8'>
+            {/* Gallery Info */}
+            <div className='mb-6 flex w-full items-start justify-between px-6 py-4'>
+              <div className='space-y-2'>
                 <p>
-                  {formatDate(gallery.tripDate)}
-                  {}
+                  <strong>Photographed By:</strong> {gallery.author?.name}
                 </p>
+                {gallery.tripDate && (
+                  <p>
+                    <strong>Date:</strong> {formatDate(gallery.tripDate)}
+                  </p>
+                )}
+                {gallery.galleryCategories && gallery.galleryCategories.length > 0 && (
+                  <p>
+                    <strong>Categories:</strong>{' '}
+                    {gallery.galleryCategories.map((cat) => cat.title).join(', ')}
+                  </p>
+                )}
               </div>
-              <p>{gallery.snippet}</p>
+              <div className='max-w-md text-right'>
+                {gallery.snippet && <p className='text-steelpolished-500'>{gallery.snippet}</p>}
+              </div>
             </div>
 
             {/* Gallery Photos */}
-            <div className='grid h-full w-full auto-rows-auto grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-3 xxl:grid-cols-4'>
-              {galleryPhotos?.map((photo) => {
-                const refString = photo.asset._ref;
-                const resolutionParts = refString.split('-')[2].split('x');
-                const width = parseInt(resolutionParts[0]);
-                const height = parseInt(resolutionParts[1]);
-
-                const aspectRatio = height / width;
-
-                const galleryHeight = Math.ceil(170 * aspectRatio);
-
-                const photoSpans = Math.round(galleryHeight / 10) + 1;
-
-                return (
-                  <div
-                    key={photo.asset._ref}
-                    className='flex justify-center'
-                    style={{ gridRowEnd: `span ${photoSpans}` }}
-                  >
-                    <Link
-                      href={urlForImage(photo as any)?.url() || ''}
-                      target='_blank'
-                      className='grid-place-content-center'
-                    >
-                      <div className='group overflow-hidden '>
-                        <Image
-                          src={urlForImage(photo as any)?.url() || ''}
-                          width={535}
-                          height={galleryHeight}
-                          priority={true}
-                          sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
-                          alt='gallery photo'
-                          className='group:hover-opacity-50 w-full rounded-md transition-all duration-75 ease-in-out'
-                        />
-                      </div>
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
+            <GalleryTypeRouter gallery={gallery} className='w-full' />
           </section>
         </div>
       </div>
@@ -119,6 +118,5 @@ export async function generateStaticParams() {
 
   return slugRoutes.map((slug: string | undefined) => ({
     slug,
-    path: resolveHref('gallerycategory', slug),
   }));
 }
