@@ -164,7 +164,8 @@ export default function PhotoLightbox({
   const bind = useGesture({
     onDrag: ({ direction: [dx], distance, cancel }) => {
       // Only handle horizontal swipes
-      if (distance > 50) {
+      const swipeDistance = Math.sqrt(distance[0] ** 2 + distance[1] ** 2);
+      if (swipeDistance > 50) {
         if (dx > 0 && currentIndex > 0) {
           // Swipe right - go to previous
           handlePrevious();
@@ -234,7 +235,7 @@ export default function PhotoLightbox({
             )}
 
             {/* Image Container */}
-            <div className='relative flex h-full w-full items-center justify-center'>
+            <div className='relative flex h-full w-full items-center justify-center' {...bind()}>
               <motion.div
                 key={currentIndex}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -242,7 +243,6 @@ export default function PhotoLightbox({
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
                 className='relative max-h-[90vh] max-w-[90vw] touch-none'
-                {...bind()}
               >
                 {isLoading && (
                   <div className='absolute inset-0 flex items-center justify-center'>

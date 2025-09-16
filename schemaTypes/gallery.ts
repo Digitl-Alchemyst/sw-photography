@@ -764,7 +764,7 @@ export default defineType({
         event: 'Event',
         showcase: 'Showcase',
       };
-      const typeLabel = typeLabels[galleryType] || 'Gallery';
+      const typeLabel = typeLabels[galleryType as keyof typeof typeLabels] || 'Gallery';
       const count = photoCount ? photoCount.length : 0;
 
       return {

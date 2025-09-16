@@ -69,7 +69,7 @@ export class CustomerService {
           createdAt,
           updatedAt
         }`,
-        { clerkId }
+        { clerkId },
       );
 
       return customer || null;
@@ -82,7 +82,10 @@ export class CustomerService {
   /**
    * Create a new customer record
    */
-  static async createCustomer(clerkId: string, userData: Partial<CustomerData>): Promise<CustomerData | null> {
+  static async createCustomer(
+    clerkId: string,
+    userData: Partial<CustomerData>,
+  ): Promise<CustomerData | null> {
     try {
       const customerData = {
         _type: 'customer',
@@ -111,7 +114,7 @@ export class CustomerService {
       };
 
       const result = await client.create(customerData);
-      return result as CustomerData;
+      return result as unknown as CustomerData;
     } catch (error) {
       console.error('Error creating customer:', error);
       return null;
@@ -121,7 +124,10 @@ export class CustomerService {
   /**
    * Update customer data
    */
-  static async updateCustomer(customerId: string, updates: Partial<CustomerData>): Promise<CustomerData | null> {
+  static async updateCustomer(
+    customerId: string,
+    updates: Partial<CustomerData>,
+  ): Promise<CustomerData | null> {
     try {
       const result = await client
         .patch(customerId)
@@ -131,7 +137,7 @@ export class CustomerService {
         })
         .commit();
 
-      return result as CustomerData;
+      return result as unknown as CustomerData;
     } catch (error) {
       console.error('Error updating customer:', error);
       return null;
@@ -142,15 +148,14 @@ export class CustomerService {
    * Add or update customer address
    */
   static async updateCustomerAddress(
-    customerId: string, 
-    address: CustomerAddress, 
-    addressIndex?: number
+    customerId: string,
+    address: CustomerAddress,
+    addressIndex?: number,
   ): Promise<CustomerData | null> {
     try {
-      const customer = await client.fetch(
-        `*[_type == "customer" && _id == $customerId][0]`,
-        { customerId }
-      );
+      const customer = await client.fetch(`*[_type == "customer" && _id == $customerId][0]`, {
+        customerId,
+      });
 
       if (!customer) {
         throw new Error('Customer not found');
@@ -170,7 +175,10 @@ export class CustomerService {
       if (address.isDefault) {
         addresses = addresses.map((addr: CustomerAddress, index: number) => ({
           ...addr,
-          isDefault: addr.type === address.type ? index === (addressIndex ?? addresses.length - 1) : addr.isDefault
+          isDefault:
+            addr.type === address.type
+              ? index === (addressIndex ?? addresses.length - 1)
+              : addr.isDefault,
         }));
       }
 
@@ -182,7 +190,7 @@ export class CustomerService {
         })
         .commit();
 
-      return result as CustomerData;
+      return result as unknown as CustomerData;
     } catch (error) {
       console.error('Error updating customer address:', error);
       return null;
@@ -193,14 +201,13 @@ export class CustomerService {
    * Update customer preferences
    */
   static async updateCustomerPreferences(
-    customerId: string, 
-    preferences: Partial<CustomerPreferences>
+    customerId: string,
+    preferences: Partial<CustomerPreferences>,
   ): Promise<CustomerData | null> {
     try {
-      const customer = await client.fetch(
-        `*[_type == "customer" && _id == $customerId][0]`,
-        { customerId }
-      );
+      const customer = await client.fetch(`*[_type == "customer" && _id == $customerId][0]`, {
+        customerId,
+      });
 
       if (!customer) {
         throw new Error('Customer not found');
@@ -219,7 +226,7 @@ export class CustomerService {
         })
         .commit();
 
-      return result as CustomerData;
+      return result as unknown as CustomerData;
     } catch (error) {
       console.error('Error updating customer preferences:', error);
       return null;
@@ -230,15 +237,14 @@ export class CustomerService {
    * Update customer statistics (called when orders are placed)
    */
   static async updateCustomerStats(
-    customerId: string, 
-    orderValue: number, 
-    orderDate: string
+    customerId: string,
+    orderValue: number,
+    orderDate: string,
   ): Promise<CustomerData | null> {
     try {
-      const customer = await client.fetch(
-        `*[_type == "customer" && _id == $customerId][0]`,
-        { customerId }
-      );
+      const customer = await client.fetch(`*[_type == "customer" && _id == $customerId][0]`, {
+        customerId,
+      });
 
       if (!customer) {
         throw new Error('Customer not found');
@@ -269,7 +275,7 @@ export class CustomerService {
         })
         .commit();
 
-      return result as CustomerData;
+      return result as unknown as CustomerData;
     } catch (error) {
       console.error('Error updating customer stats:', error);
       return null;
@@ -296,7 +302,7 @@ export class CustomerService {
             totalPrice
           }
         }`,
-        { customerId, limit }
+        { customerId, limit },
       );
 
       return orders;
@@ -326,7 +332,7 @@ export class CustomerService {
  */
 export function useCustomer() {
   const { user, isLoaded } = useUser();
-  
+
   const getCustomerData = async (): Promise<CustomerData | null> => {
     if (!isLoaded || !user) {
       return null;

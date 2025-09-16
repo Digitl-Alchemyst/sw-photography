@@ -1,15 +1,24 @@
 import sanityFetch from '@/lib/sanity/fetch';
-import { queryPhotographers } from '@/lib/sanity/queries';
+import { queryFeaturedGalleries } from '@/lib/sanity/queries';
 import { headerFontStyle } from '@/lib/util/headerFontStyles';
 import FeaturedPhotosGrid from './FeaturedPhotosGrid';
 import Link from 'next/link';
 
-export default async function FeaturedPortfolio() {
-  const photographers = await getPhotographer();
-  const photographer = photographers[0];
+async function getFeaturedGalleries() {
+  return await sanityFetch({
+    query: queryFeaturedGalleries,
+    tags: ['gallery'],
+  });
+}
 
-  // Get featured photos, limit to 6 for optimal display
-  const featuredPhotos = photographer.featuredPhotos?.slice(0, 6) || [];
+export default async function FeaturedPortfolio() {
+  const featuredGalleries = await getFeaturedGalleries();
+
+  // Extract featured photos from galleries, limit to 6 for optimal display
+  const featuredPhotos = (featuredGalleries as any[])
+    .slice(0, 6)
+    .map((gallery: any) => gallery.featuredPhoto)
+    .filter(Boolean);
 
   if (!featuredPhotos.length) {
     return null;
@@ -43,13 +52,4 @@ export default async function FeaturedPortfolio() {
       </div>
     </section>
   );
-}
-
-// Call the Sanity Fetch Function for the Photographer Information
-async function getPhotographer(): Promise<Author[]> {
-  const photographer: Author[] = await sanityFetch({
-    query: queryPhotographers,
-    tags: ['author'],
-  });
-  return photographer;
 }

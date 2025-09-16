@@ -1,7 +1,7 @@
 // E-commerce System Types for Photography Portfolio
 // Comprehensive type definitions for digital products, enhanced print products, and order management
 
-import { PrintSize, PrintMaterial, ProductType } from './printShop';
+import { PrintSize, PrintMaterial, ProductType, Order } from './printShop';
 
 // Product Management Types
 export interface ProductCategory {

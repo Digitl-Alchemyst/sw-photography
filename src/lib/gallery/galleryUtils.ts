@@ -11,17 +11,34 @@ import {
 import urlForImage from '@/lib/util/urlForImage';
 
 /**
+ * Helper function to safely get author data from populated or unpopulated gallery
+ */
+function getAuthorData(gallery: PopulatedGallery | Gallery) {
+  if ('author' in gallery && gallery.author) {
+    // Check if it's a populated gallery (has name property)
+    if (typeof gallery.author === 'object' && 'name' in gallery.author) {
+      return gallery.author as any;
+    }
+  }
+  return null;
+}
+
+/**
  * Type guards for gallery types
  */
-export function isPhotoshootGallery(gallery: Gallery): gallery is PhotoshootGallery {
+export function isPhotoshootGallery(
+  gallery: Gallery | PopulatedGallery,
+): gallery is PhotoshootGallery {
   return gallery.galleryType === 'photoshoot';
 }
 
-export function isEventGallery(gallery: Gallery): gallery is EventGallery {
+export function isEventGallery(gallery: Gallery | PopulatedGallery): gallery is EventGallery {
   return gallery.galleryType === 'event';
 }
 
-export function isShowcaseGallery(gallery: Gallery): gallery is ShowcaseGallery {
+export function isShowcaseGallery(
+  gallery: Gallery | PopulatedGallery,
+): gallery is ShowcaseGallery {
   return gallery.galleryType === 'showcase';
 }
 
@@ -84,7 +101,7 @@ export function getGalleryTypeClasses(galleryType: Gallery['galleryType']): stri
 /**
  * Transform gallery photos to lightbox format
  */
-export function transformPhotosForLightbox(gallery: PopulatedGallery): LightboxPhoto[] {
+export function transformPhotosForLightbox(gallery: PopulatedGallery | Gallery): LightboxPhoto[] {
   return gallery.galleryPhotos.map((photo, index) => ({
     id: photo._key || `photo-${index}`,
     src: urlForImage(photo.asset)?.width(1920).height(1080).url() || '',
@@ -103,10 +120,10 @@ export function transformPhotosForLightbox(gallery: PopulatedGallery): LightboxP
     tags: photo.tags,
     cameraSettings: photo.cameraSettings,
     printOptions: photo.printOptions,
-    photographer: gallery.author
+    photographer: getAuthorData(gallery)
       ? {
-          name: gallery.author.name,
-          slug: gallery.author.slug.current,
+          name: getAuthorData(gallery)!.name,
+          slug: getAuthorData(gallery)!.slug.current,
         }
       : undefined,
     gallery: {
@@ -134,7 +151,7 @@ export function getGalleryDisplayTitle(gallery: Gallery): string {
 /**
  * Get gallery description based on type and content
  */
-export function getGalleryDescription(gallery: PopulatedGallery): string {
+export function getGalleryDescription(gallery: PopulatedGallery | Gallery): string {
   if (gallery.seoSettings?.metaDescription) {
     return gallery.seoSettings.metaDescription;
   }
@@ -145,7 +162,7 @@ export function getGalleryDescription(gallery: PopulatedGallery): string {
 
   // Generate description based on gallery type
   const photoCount = gallery.galleryPhotos.length;
-  const photographer = gallery.author?.name || 'Unknown photographer';
+  const photographer = getAuthorData(gallery)?.name || 'Unknown photographer';
 
   switch (gallery.galleryType) {
     case 'photoshoot':
@@ -168,7 +185,7 @@ export function getGalleryDescription(gallery: PopulatedGallery): string {
 /**
  * Get structured data for SEO
  */
-export function getGalleryStructuredData(gallery: PopulatedGallery) {
+export function getGalleryStructuredData(gallery: PopulatedGallery | Gallery) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
   const galleryUrl = `${baseUrl}/gallery/${gallery.slug.current}`;
 
@@ -180,7 +197,7 @@ export function getGalleryStructuredData(gallery: PopulatedGallery) {
     url: galleryUrl,
     author: {
       '@type': 'Person',
-      name: gallery.author?.name,
+      name: getAuthorData(gallery)?.name,
     },
     datePublished: gallery.publishedAt,
     dateModified: gallery._updatedAt,
@@ -193,7 +210,7 @@ export function getGalleryStructuredData(gallery: PopulatedGallery) {
       dateCreated: photo.dateTaken,
       creator: {
         '@type': 'Person',
-        name: gallery.author?.name,
+        name: getAuthorData(gallery)?.name,
       },
     })),
   };
@@ -202,7 +219,7 @@ export function getGalleryStructuredData(gallery: PopulatedGallery) {
 /**
  * Filter photos by availability for print
  */
-export function getAvailablePrintPhotos(gallery: PopulatedGallery): LightboxPhoto[] {
+export function getAvailablePrintPhotos(gallery: PopulatedGallery | Gallery): LightboxPhoto[] {
   const allPhotos = transformPhotosForLightbox(gallery);
   return allPhotos.filter((photo) => photo.printOptions?.available);
 }
@@ -210,7 +227,7 @@ export function getAvailablePrintPhotos(gallery: PopulatedGallery): LightboxPhot
 /**
  * Get gallery statistics
  */
-export function getGalleryStats(gallery: PopulatedGallery) {
+export function getGalleryStats(gallery: PopulatedGallery | Gallery) {
   const totalPhotos = gallery.galleryPhotos.length;
   const printablePhotos = gallery.galleryPhotos.filter(
     (photo) => photo.printOptions?.available,
@@ -273,7 +290,7 @@ export function sortPhotosByGalleryType(
 /**
  * Get gallery type-specific metadata for display
  */
-export function getGalleryTypeMetadata(gallery: PopulatedGallery) {
+export function getGalleryTypeMetadata(gallery: PopulatedGallery | Gallery) {
   switch (gallery.galleryType) {
     case 'photoshoot':
       return {

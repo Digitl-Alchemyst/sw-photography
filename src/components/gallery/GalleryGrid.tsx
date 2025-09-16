@@ -4,7 +4,12 @@ import { useMemo } from 'react';
 import GalleryPhoto from './GalleryPhoto';
 import PhotoLightbox, { PhotoData } from '@/components/lightbox/PhotoLightbox';
 import useLightbox from '@/hooks/useLightbox';
-import { PopulatedGallery, GalleryDisplayConfig } from '@/types/gallery';
+import {
+  PopulatedGallery,
+  Gallery,
+  GalleryDisplayConfig,
+  GalleryGridProps,
+} from '@/types/gallery';
 import {
   transformPhotosForLightbox,
   getDefaultDisplayConfig,
@@ -13,13 +18,25 @@ import {
   getGalleryTypeMetadata,
 } from '@/lib/gallery/galleryUtils';
 
-interface GalleryGridProps {
-  gallery: PopulatedGallery;
-  displayConfig?: Partial<GalleryDisplayConfig>;
-  className?: string;
+// Using the interface from types/gallery.ts
+
+// Helper function to safely get author name from populated or unpopulated gallery
+function getAuthorName(gallery: PopulatedGallery | Gallery): string | undefined {
+  if ('author' in gallery && gallery.author) {
+    // Check if it's a populated gallery (has name property)
+    if (typeof gallery.author === 'object' && 'name' in gallery.author) {
+      return (gallery.author as any).name;
+    }
+  }
+  return undefined;
 }
 
-export default function GalleryGrid({ gallery, displayConfig, className = '' }: GalleryGridProps) {
+export default function GalleryGrid({
+  gallery,
+  photos,
+  displayConfig,
+  className = '',
+}: GalleryGridProps) {
   const lightbox = useLightbox();
 
   // Get display configuration
@@ -43,6 +60,25 @@ export default function GalleryGrid({ gallery, displayConfig, className = '' }: 
 
   // Transform and sort gallery photos with enhanced metadata
   const photoData: PhotoData[] = useMemo(() => {
+    // Use provided photos if available, otherwise use gallery photos
+    if (photos && photos.length > 0) {
+      return photos.map((photo) => ({
+        asset: photo.src
+          ? { _ref: photo.src, _type: 'reference' }
+          : { _ref: '', _type: 'reference' },
+        alt: photo.alt || 'Gallery photo',
+        title: photo.title,
+        location: photo.location,
+        dateTaken: photo.dateTaken,
+        description: photo.description,
+        tags: photo.tags,
+        photographer: photo.photographer?.name || getAuthorName(gallery),
+        gallery: photo.gallery,
+        cameraSettings: photo.cameraSettings,
+        printOptions: photo.printOptions,
+      }));
+    }
+
     if (!gallery.galleryPhotos?.length) return [];
 
     return gallery.galleryPhotos.map((photo) => ({
@@ -53,7 +89,7 @@ export default function GalleryGrid({ gallery, displayConfig, className = '' }: 
       dateTaken: photo.dateTaken,
       description: photo.description,
       tags: photo.tags,
-      photographer: photo.photographerInfo?.photographer?.name || gallery.author?.name,
+      photographer: getAuthorName(gallery),
       gallery: {
         title: gallery.title,
         slug: gallery.slug.current,
@@ -79,8 +115,6 @@ export default function GalleryGrid({ gallery, displayConfig, className = '' }: 
         limitedEdition: photo.printOptions?.limitedEdition,
         editionSize: photo.printOptions?.editionSize,
         printsSold: photo.printOptions?.printsSold,
-        basePrice: photo.printOptions?.basePrice || 25,
-        sizes: photo.printOptions?.sizes || ['8x10', '11x14', '16x20', '20x24'],
         pricingTiers: photo.printOptions?.pricingTiers,
         printDescription: photo.printOptions?.printDescription,
         printId: photo.printOptions?.printId,
@@ -89,7 +123,7 @@ export default function GalleryGrid({ gallery, displayConfig, className = '' }: 
         shippingNotes: photo.printOptions?.shippingNotes,
       },
     }));
-  }, [gallery]);
+  }, [gallery, photos]);
 
   const handlePhotoClick = (index: number) => {
     lightbox.openLightbox(photoData, index);
@@ -158,7 +192,7 @@ export default function GalleryGrid({ gallery, displayConfig, className = '' }: 
         onNavigate={lightbox.navigateToPhoto}
         galleryTitle={gallery.title}
         galleryDate={gallery.tripDate}
-        photographer={gallery.author?.name}
+        photographer={getAuthorName(gallery)}
       />
     </>
   );

@@ -1,18 +1,13 @@
 'use client';
 
-import { PopulatedGallery, TypedGallery } from '@/types/gallery';
-import {
-  isPhotoshootGallery,
-  isEventGallery,
-  isShowcaseGallery,
-} from '@/lib/gallery/galleryUtils';
+import { PopulatedGallery, Gallery, TypedGallery } from '@/types/gallery';
 import PhotoshootGallery from './PhotoshootGallery';
 import EventGallery from './EventGallery';
 import ShowcaseGallery from './ShowcaseGallery';
 import GalleryGrid from './GalleryGrid';
 
 interface GalleryTypeRouterProps {
-  gallery: PopulatedGallery;
+  gallery: PopulatedGallery | Gallery;
   className?: string;
 }
 
@@ -22,16 +17,16 @@ interface GalleryTypeRouterProps {
  */
 export default function GalleryTypeRouter({ gallery, className = '' }: GalleryTypeRouterProps) {
   // Type-safe routing based on gallery type
-  if (isPhotoshootGallery(gallery)) {
-    return <PhotoshootGallery gallery={gallery} className={className} />;
+  if (gallery.galleryType === 'photoshoot') {
+    return <PhotoshootGallery gallery={gallery as any} className={className} />;
   }
 
-  if (isEventGallery(gallery)) {
-    return <EventGallery gallery={gallery} className={className} />;
+  if (gallery.galleryType === 'event') {
+    return <EventGallery gallery={gallery as any} className={className} />;
   }
 
-  if (isShowcaseGallery(gallery)) {
-    return <ShowcaseGallery gallery={gallery} className={className} />;
+  if (gallery.galleryType === 'showcase') {
+    return <ShowcaseGallery gallery={gallery as any} className={className} />;
   }
 
   // Fallback to generic gallery grid for unknown types or legacy galleries

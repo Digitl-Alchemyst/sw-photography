@@ -50,13 +50,13 @@ export default function GalleryPhoto({
 
     // Create a mock print product from the photo
     const printProduct = {
-      id: `photo-${photo._id || index}`,
+      id: `photo-${index}`,
       type: 'print' as const,
       name: photo.title || `Gallery Photo ${index + 1}`,
-      slug: `gallery-photo-${photo._id || index}`,
+      slug: `gallery-photo-${index}`,
       description: `High-quality print of ${photo.title || 'gallery photo'}`,
       shortDescription: photo.title || `Gallery Photo ${index + 1}`,
-      price: photo.printOptions.basePrice || 25,
+      price: 25, // Default price since basePrice is not in PrintOptions
       isActive: true,
       isFeatured: false,
       images: [
@@ -74,7 +74,7 @@ export default function GalleryPhoto({
         metaTitle: `${photo.title || 'Gallery Photo'} Print`,
         metaDescription: `High-quality print of ${photo.title || 'gallery photo'}`,
         keywords: photo.tags || [],
-        slug: `gallery-photo-${photo._id || index}`,
+        slug: `gallery-photo-${index}`,
       },
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -87,7 +87,7 @@ export default function GalleryPhoto({
         id: '8x10',
         name: '8" x 10"',
         dimensions: '8x10',
-        price: photo.printOptions.basePrice || 25,
+        price: 25, // Default price since basePrice is not in PrintOptions
       },
       material: {
         id: 'standard',

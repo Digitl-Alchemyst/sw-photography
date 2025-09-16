@@ -1,12 +1,12 @@
 'use client';
 
-import { 
-  PrintProduct, 
-  CartItem, 
-  OrderDetails, 
+import {
+  PrintProduct,
+  CartItem,
+  OrderDetails,
   PrintShopConfig,
   PRINT_SIZES,
-  PRINT_MATERIALS 
+  PRINT_MATERIALS,
 } from '@/types/printShop';
 
 class PrintShopService {
@@ -39,11 +39,23 @@ class PrintShopService {
     }
   }
 
-  addToCart(product: PrintProduct): CartItem {
+  addToCart(product: PrintProduct, quantity: number = 1): CartItem {
     const cartItem: CartItem = {
-      ...product,
-      id: `${product.photoId}-${product.size.id}-${product.material.id}-${Date.now()}`,
+      id: `${product.photoId}-${Date.now()}`,
+      productId: product.id,
+      productType: product.type,
+      productName: product.name,
+      productImage: product.images[0]?.url || '',
+      quantity,
+      unitPrice: product.price,
+      totalPrice: product.price * quantity,
       addedAt: new Date(),
+      // Print-specific properties
+      photoId: product.photoId,
+      photoTitle: product.photoTitle,
+      photoUrl: product.photoUrl,
+      photoAlt: product.photoAlt,
+      galleryInfo: product.galleryInfo,
     };
 
     this.cart.push(cartItem);
@@ -53,8 +65,8 @@ class PrintShopService {
 
   removeFromCart(itemId: string): boolean {
     const initialLength = this.cart.length;
-    this.cart = this.cart.filter(item => item.id !== itemId);
-    
+    this.cart = this.cart.filter((item) => item.id !== itemId);
+
     if (this.cart.length !== initialLength) {
       this.saveCartToStorage();
       return true;
@@ -63,10 +75,10 @@ class PrintShopService {
   }
 
   updateCartItemQuantity(itemId: string, quantity: number): boolean {
-    const item = this.cart.find(item => item.id === itemId);
+    const item = this.cart.find((item) => item.id === itemId);
     if (item && quantity > 0) {
       item.quantity = quantity;
-      item.totalPrice = this.calculateItemPrice(item.size, item.material, quantity);
+      item.totalPrice = item.unitPrice * quantity;
       this.saveCartToStorage();
       return true;
     }
@@ -92,20 +104,22 @@ class PrintShopService {
 
   // Price Calculation
   calculateItemPrice(size: any, material: any, quantity: number): number {
-    const sizeData = PRINT_SIZES.find(s => s.id === size.id) || PRINT_SIZES[0];
-    const materialData = PRINT_MATERIALS.find(m => m.id === material.id) || PRINT_MATERIALS[0];
-    
+    const sizeData = PRINT_SIZES.find((s) => s.id === size.id) || PRINT_SIZES[0];
+    const materialData = PRINT_MATERIALS.find((m) => m.id === material.id) || PRINT_MATERIALS[0];
+
     const basePrice = sizeData.price;
     const materialPrice = basePrice * materialData.priceMultiplier;
     return Math.round(materialPrice * quantity * 100) / 100; // Round to 2 decimal places
   }
 
   // Print Shop Integration
-  async createPrintOrder(orderDetails: OrderDetails): Promise<{ success: boolean; orderId?: string; error?: string }> {
+  async createPrintOrder(
+    orderDetails: OrderDetails,
+  ): Promise<{ success: boolean; orderId?: string; error?: string }> {
     try {
       // This is where you would integrate with actual print services
       // For now, we'll simulate the process
-      
+
       switch (this.config.provider) {
         case 'printful':
           return await this.createPrintfulOrder(orderDetails);
@@ -120,43 +134,49 @@ class PrintShopService {
       console.error('Error creating print order:', error);
       return {
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error occurred'
+        error: error instanceof Error ? error.message : 'Unknown error occurred',
       };
     }
   }
 
-  private async createPrintfulOrder(orderDetails: OrderDetails): Promise<{ success: boolean; orderId?: string; error?: string }> {
+  private async createPrintfulOrder(
+    orderDetails: OrderDetails,
+  ): Promise<{ success: boolean; orderId?: string; error?: string }> {
     // Simulate Printful API integration
     // In a real implementation, you would make API calls to Printful
     console.log('Creating Printful order:', orderDetails);
-    
+
     // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     return {
       success: true,
       orderId: `PF-${Date.now()}`,
     };
   }
 
-  private async createPrintifyOrder(orderDetails: OrderDetails): Promise<{ success: boolean; orderId?: string; error?: string }> {
+  private async createPrintifyOrder(
+    orderDetails: OrderDetails,
+  ): Promise<{ success: boolean; orderId?: string; error?: string }> {
     // Simulate Printify API integration
     console.log('Creating Printify order:', orderDetails);
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     return {
       success: true,
       orderId: `PY-${Date.now()}`,
     };
   }
 
-  private async createCustomOrder(orderDetails: OrderDetails): Promise<{ success: boolean; orderId?: string; error?: string }> {
+  private async createCustomOrder(
+    orderDetails: OrderDetails,
+  ): Promise<{ success: boolean; orderId?: string; error?: string }> {
     // Simulate custom print service integration
     console.log('Creating custom order:', orderDetails);
-    
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     return {
       success: true,
       orderId: `CS-${Date.now()}`,
@@ -189,10 +209,10 @@ export function getPrintShopService(): PrintShopService {
       baseUrl: process.env.NEXT_PUBLIC_PRINT_SHOP_URL || '',
       apiKey: process.env.NEXT_PUBLIC_PRINT_SHOP_API_KEY || '',
     };
-    
+
     printShopInstance = new PrintShopService(config);
   }
-  
+
   return printShopInstance;
 }
 

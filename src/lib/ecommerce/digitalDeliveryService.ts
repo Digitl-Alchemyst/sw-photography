@@ -1,4 +1,4 @@
-import { DigitalDownloadLink, Order, Product } from '@/types/printShop';
+import { DigitalDownloadLink, DigitalFile, Order, Product } from '@/types/printShop';
 
 export interface DigitalDeliveryConfig {
   maxDownloads: number;
@@ -44,7 +44,7 @@ export class DigitalDeliveryService {
         const downloadLink: DigitalDownloadLink = {
           id: `dl_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
           orderId: order.id,
-          customerId: order.customer?.clerkId || order.guestCustomer?.email || 'guest',
+          customerId: order.customerId || order.customerEmail || 'guest',
           productId: item.productId,
           productName: item.productName,
           productType: item.productType,
@@ -237,43 +237,41 @@ export class DigitalDeliveryService {
     return token;
   }
 
-  private async getProductFiles(
-    productId: string,
-    productType: string,
-  ): Promise<
-    Array<{
-      name: string;
-      size: number;
-      type: string;
-      url: string;
-    }>
-  > {
+  private async getProductFiles(productId: string, productType: string): Promise<DigitalFile[]> {
     // Mock implementation - in production, fetch from database/storage
     const mockFiles = {
       digital_preset: [
         {
+          id: 'preset_pack_1',
           name: 'Preset_Pack.zip',
           size: 2048000,
+          format: 'zip',
           type: 'application/zip',
           url: '/files/presets/preset_pack.zip',
         },
         {
+          id: 'preset_guide_1',
           name: 'Installation_Guide.pdf',
           size: 512000,
+          format: 'pdf',
           type: 'application/pdf',
           url: '/files/guides/installation.pdf',
         },
       ],
       digital_lut: [
         {
+          id: 'lut_pack_1',
           name: 'Cinematic_LUTs.zip',
           size: 5120000,
+          format: 'zip',
           type: 'application/zip',
           url: '/files/luts/cinematic_luts.zip',
         },
         {
+          id: 'lut_guide_1',
           name: 'Usage_Guide.pdf',
           size: 768000,
+          format: 'pdf',
           type: 'application/pdf',
           url: '/files/guides/lut_usage.pdf',
         },

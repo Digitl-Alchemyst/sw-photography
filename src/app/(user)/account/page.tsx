@@ -162,16 +162,19 @@ export default function AccountPage() {
     );
   }
 
-  const displayCustomer = customerData || {
-    firstName: user.firstName || 'User',
-    lastName: user.lastName || '',
-    email: user.emailAddresses[0]?.emailAddress || '',
-    joinDate: new Date(user.createdAt || Date.now()),
+  const displayCustomer = {
+    firstName: customerData?.firstName || user.firstName || 'User',
+    lastName: customerData?.lastName || user.lastName || '',
+    email: customerData?.email || user.emailAddresses[0]?.emailAddress || '',
+    joinDate: customerData
+      ? new Date(customerData.createdAt)
+      : new Date(user.createdAt || Date.now()),
     totalOrders: customerData?.stats?.totalOrders || 0,
     totalSpent: customerData?.stats?.totalSpent || 0,
     lastOrderDate: customerData?.stats?.lastOrderDate
       ? new Date(customerData.stats.lastOrderDate)
       : new Date(),
+    phone: customerData?.phone,
   };
 
   return (
@@ -542,7 +545,9 @@ export default function AccountPage() {
                   <label className='mb-2 block text-sm font-medium text-steelpolished-400'>
                     Phone
                   </label>
-                  <p className='text-steelpolished-300'>{customerData?.phone || 'Not provided'}</p>
+                  <p className='text-steelpolished-300'>
+                    {displayCustomer.phone || 'Not provided'}
+                  </p>
                 </div>
               </div>
             </div>

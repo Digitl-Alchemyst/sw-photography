@@ -303,7 +303,7 @@ export default defineType({
       hidden: ({ document }) => {
         // Hide if order only contains digital products
         const items = document?.items || [];
-        return items.every((item: any) => item.productType !== 'print');
+        return Array.isArray(items) && items.every((item: any) => item.productType !== 'print');
       },
     }),
     defineField({
@@ -422,7 +422,7 @@ export default defineType({
       hidden: ({ document }) => {
         // Show only if order contains digital products
         const items = document?.items || [];
-        return !items.some((item: any) => item.productType !== 'print');
+        return !Array.isArray(items) || !items.some((item: any) => item.productType !== 'print');
       },
     }),
     defineField({

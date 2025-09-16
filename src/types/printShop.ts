@@ -1,17 +1,47 @@
 // Base Product Types
 export type ProductType = 'print' | 'digital_preset' | 'digital_lut' | 'digital_bundle';
 
+export interface ProductImage {
+  id: string;
+  url: string;
+  alt: string;
+  isPrimary: boolean;
+  sortOrder: number;
+}
+
+export interface ProductSEO {
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string[];
+  slug: string;
+}
+
 export interface BaseProduct {
   id: string;
   type: ProductType;
   name: string;
+  slug: string;
   description: string;
+  shortDescription?: string;
   price: number;
+  compareAtPrice?: number; // For showing discounts
   isActive: boolean;
+  isFeatured: boolean;
+  stockQuantity?: number; // For limited digital products
+  images: ProductImage[];
+  categories?: string[]; // Category IDs
+  tags?: string[];
+  seo?: ProductSEO;
   createdAt: Date;
   updatedAt: Date;
-  tags?: string[];
-  category?: string;
+  publishedAt?: Date;
+  vendor?: string;
+  weight?: number; // For shipping calculations
+  dimensions?: {
+    length: number;
+    width: number;
+    height: number;
+  };
 }
 
 // Print Product Types
@@ -59,6 +89,7 @@ export interface DigitalFile {
   url: string;
   size: number; // in bytes
   format: string;
+  type: string; // MIME type
   downloadCount?: number;
 }
 
@@ -110,6 +141,18 @@ export interface CartItem {
   totalPrice: number;
   variant?: CartItemVariant;
   addedAt: Date;
+  // Print-specific properties
+  photoId?: string;
+  photoTitle?: string;
+  photoUrl?: string;
+  photoAlt?: string;
+  size?: PrintSize;
+  material?: PrintMaterial;
+  galleryInfo?: {
+    galleryId: string;
+    galleryTitle: string;
+    gallerySlug: string;
+  };
 }
 
 export interface PrintShopConfig {

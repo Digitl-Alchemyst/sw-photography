@@ -72,7 +72,14 @@ export interface PricingTier {
 
 export interface PhotoshootDetails {
   clientName?: string;
-  shootType?: 'portrait' | 'fashion' | 'commercial' | 'headshots' | 'lifestyle' | 'beauty' | 'editorial';
+  shootType?:
+    | 'portrait'
+    | 'fashion'
+    | 'commercial'
+    | 'headshots'
+    | 'lifestyle'
+    | 'beauty'
+    | 'editorial';
   stylingNotes?: string;
   makeupArtist?: string;
   locationDetails?: {
@@ -84,7 +91,16 @@ export interface PhotoshootDetails {
 
 export interface EventDetails {
   eventName?: string;
-  eventType?: 'wedding' | 'corporate' | 'birthday' | 'anniversary' | 'conference' | 'concert' | 'festival' | 'graduation' | 'other';
+  eventType?:
+    | 'wedding'
+    | 'corporate'
+    | 'birthday'
+    | 'anniversary'
+    | 'conference'
+    | 'concert'
+    | 'festival'
+    | 'graduation'
+    | 'other';
   venue?: string;
   eventDate?: string;
   duration?: string;
@@ -245,8 +261,8 @@ export interface LightboxPhoto {
 
 // Gallery grid component props
 export interface GalleryGridProps {
-  gallery: PopulatedGallery;
-  photos: LightboxPhoto[];
+  gallery: PopulatedGallery | Gallery;
+  photos?: LightboxPhoto[];
   displayConfig?: Partial<GalleryDisplayConfig>;
   className?: string;
 }

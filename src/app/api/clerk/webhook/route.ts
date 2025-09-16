@@ -6,11 +6,14 @@ import { client } from '@/lib/sanity/client';
 
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
 
-if (!webhookSecret) {
-  throw new Error('Please add CLERK_WEBHOOK_SECRET to your environment variables');
-}
-
 export async function POST(req: NextRequest) {
+  // Check if webhook secret is available
+  if (!webhookSecret) {
+    return new Response('Webhook secret not configured', {
+      status: 500,
+    });
+  }
+
   // Get the headers
   const headerPayload = headers();
   const svix_id = headerPayload.get('svix-id');
@@ -29,7 +32,7 @@ export async function POST(req: NextRequest) {
   const body = JSON.stringify(payload);
 
   // Create a new Svix instance with your secret.
-  const wh = new Webhook(webhookSecret);
+  const wh = new Webhook(webhookSecret!);
 
   let evt: WebhookEvent;
 
@@ -119,7 +122,7 @@ async function handleUserUpdated(userData: any) {
     // Find the customer by Clerk ID
     const existingCustomer = await client.fetch(
       `*[_type == "customer" && clerkId == $clerkId][0]`,
-      { clerkId: userData.id }
+      { clerkId: userData.id },
     );
 
     if (!existingCustomer) {
@@ -138,10 +141,7 @@ async function handleUserUpdated(userData: any) {
       updatedAt: new Date().toISOString(),
     };
 
-    const result = await client
-      .patch(existingCustomer._id)
-      .set(updateData)
-      .commit();
+    const result = await client.patch(existingCustomer._id).set(updateData).commit();
 
     console.log('Customer updated in Sanity:', result._id);
   } catch (error) {
@@ -157,7 +157,7 @@ async function handleUserDeleted(userData: any) {
     // Find the customer by Clerk ID
     const existingCustomer = await client.fetch(
       `*[_type == "customer" && clerkId == $clerkId][0]`,
-      { clerkId: userData.id }
+      { clerkId: userData.id },
     );
 
     if (!existingCustomer) {
