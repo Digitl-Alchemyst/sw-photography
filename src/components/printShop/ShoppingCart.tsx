@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Trash2, ShoppingBag } from 'lucide-react';
+import Image from 'next/image';
 import { usePrintShop } from '@/contexts/PrintShopContext';
 
 interface ShoppingCartProps {
@@ -76,9 +77,11 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
                         {/* Item Header */}
                         <div className='flex items-start gap-3'>
                           <div className='h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-steeldark-700'>
-                            <img
-                              src={item.photoUrl}
-                              alt={item.photoTitle}
+                            <Image
+                              src={item.photoUrl || '/placeholder-product.jpg'}
+                              alt={item.photoTitle || 'Product image'}
+                              width={64}
+                              height={64}
                               className='h-full w-full object-cover'
                             />
                           </div>

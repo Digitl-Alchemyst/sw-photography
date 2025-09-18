@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { PhotoData } from '@/components/lightbox/PhotoLightbox';
+import { PhotoData } from '@/types/lightbox';
 
 export interface UseLightboxReturn {
   isOpen: boolean;
@@ -34,11 +34,14 @@ export default function useLightbox(): UseLightboxReturn {
     }, 300);
   }, []);
 
-  const navigateToPhoto = useCallback((index: number) => {
-    if (index >= 0 && index < photos.length) {
-      setCurrentIndex(index);
-    }
-  }, [photos.length]);
+  const navigateToPhoto = useCallback(
+    (index: number) => {
+      if (index >= 0 && index < photos.length) {
+        setCurrentIndex(index);
+      }
+    },
+    [photos.length],
+  );
 
   const nextPhoto = useCallback(() => {
     if (currentIndex < photos.length - 1) {

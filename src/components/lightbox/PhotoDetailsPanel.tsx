@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, Camera, ShoppingCart, X, Tag, User, Award } from 'lucide-react';
-import { PhotoData } from './PhotoLightbox';
+import { PhotoData } from '@/types/lightbox';
 import PrintOrderModal from '@/components/printShop/PrintOrderModal';
 
 interface PhotoDetailsPanelProps {

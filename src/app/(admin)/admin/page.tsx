@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
-import { 
-  DollarSign, 
-  Package, 
-  ShoppingCart, 
-  Users, 
-  TrendingUp, 
+import {
+  DollarSign,
+  Package,
+  ShoppingCart,
+  Users,
+  TrendingUp,
   Download,
   Eye,
-  Plus
+  Plus,
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -83,19 +83,19 @@ const topProducts = [
     name: 'Mountain Sunrise Print',
     type: 'print',
     sales: 23,
-    revenue: 575.00,
+    revenue: 575.0,
   },
   {
     name: 'Moody Portrait Presets',
     type: 'digital_preset',
     sales: 18,
-    revenue: 522.00,
+    revenue: 522.0,
   },
   {
     name: 'Cinematic LUTs Pack',
     type: 'digital_lut',
     sales: 12,
-    revenue: 468.00,
+    revenue: 468.0,
   },
 ];
 
@@ -121,18 +121,18 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className='flex items-center justify-between'>
         <div>
-          <h1 className="text-3xl font-bold text-steelpolished-400">Dashboard</h1>
-          <p className="text-steelpolished-500 mt-1">
-            Welcome back! Here's what's happening with your store.
+          <h1 className='text-3xl font-bold text-steelpolished-400'>Dashboard</h1>
+          <p className='mt-1 text-steelpolished-500'>
+            Welcome back! Here&apos;s what&apos;s happening with your store.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <Link href="/admin/products/new">
-            <button className="flex items-center gap-2 bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent/90 transition-colors">
+        <div className='flex items-center gap-3'>
+          <Link href='/admin/products/new'>
+            <button className='flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-white transition-colors hover:bg-accent/90'>
               <Plus size={16} />
               Add Product
             </button>
@@ -141,67 +141,73 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
             <div
               key={stat.name}
-              className="bg-steeldark-800 border border-steeldark-600 rounded-lg p-6"
+              className='rounded-lg border border-steeldark-600 bg-steeldark-800 p-6'
             >
-              <div className="flex items-center justify-between">
+              <div className='flex items-center justify-between'>
                 <div>
-                  <p className="text-steelpolished-500 text-sm font-medium">{stat.name}</p>
-                  <p className="text-2xl font-bold text-steelpolished-400 mt-1">{stat.value}</p>
+                  <p className='text-sm font-medium text-steelpolished-500'>{stat.name}</p>
+                  <p className='mt-1 text-2xl font-bold text-steelpolished-400'>{stat.value}</p>
                 </div>
-                <div className="p-3 bg-accent/10 rounded-lg">
-                  <Icon size={24} className="text-accent" />
+                <div className='rounded-lg bg-accent/10 p-3'>
+                  <Icon size={24} className='text-accent' />
                 </div>
               </div>
-              <div className="mt-4 flex items-center">
-                <TrendingUp size={16} className="text-green-400 mr-1" />
-                <span className="text-green-400 text-sm font-medium">{stat.change}</span>
-                <span className="text-steelpolished-500 text-sm ml-1">from last month</span>
+              <div className='mt-4 flex items-center'>
+                <TrendingUp size={16} className='mr-1 text-green-400' />
+                <span className='text-sm font-medium text-green-400'>{stat.change}</span>
+                <span className='ml-1 text-sm text-steelpolished-500'>from last month</span>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
         {/* Recent Orders */}
-        <div className="bg-steeldark-800 border border-steeldark-600 rounded-lg">
-          <div className="p-6 border-b border-steeldark-600">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-steelpolished-400">Recent Orders</h2>
-              <Link href="/admin/orders">
-                <button className="text-accent hover:text-accent/80 text-sm font-medium">
+        <div className='rounded-lg border border-steeldark-600 bg-steeldark-800'>
+          <div className='border-b border-steeldark-600 p-6'>
+            <div className='flex items-center justify-between'>
+              <h2 className='text-xl font-semibold text-steelpolished-400'>Recent Orders</h2>
+              <Link href='/admin/orders'>
+                <button className='text-sm font-medium text-accent hover:text-accent/80'>
                   View All
                 </button>
               </Link>
             </div>
           </div>
-          <div className="p-6">
-            <div className="space-y-4">
+          <div className='p-6'>
+            <div className='space-y-4'>
               {recentOrders.map((order) => (
                 <div
                   key={order.id}
-                  className="flex items-center justify-between p-4 bg-steeldark-700/50 rounded-lg"
+                  className='flex items-center justify-between rounded-lg bg-steeldark-700/50 p-4'
                 >
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="font-medium text-steelpolished-400">{order.id}</span>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(order.status)}`}>
+                  <div className='flex-1'>
+                    <div className='mb-1 flex items-center gap-3'>
+                      <span className='font-medium text-steelpolished-400'>{order.id}</span>
+                      <span
+                        className={`rounded-full px-2 py-1 text-xs font-medium ${getStatusColor(order.status)}`}
+                      >
                         {order.status}
                       </span>
                     </div>
-                    <p className="text-sm text-steelpolished-500">{order.customer}</p>
-                    <p className="text-xs text-steelpolished-600">{order.items} items • {order.date}</p>
+                    <p className='text-sm text-steelpolished-500'>{order.customer}</p>
+                    <p className='text-xs text-steelpolished-600'>
+                      {order.items} items • {order.date}
+                    </p>
                   </div>
-                  <div className="text-right">
-                    <p className="font-medium text-steelpolished-400">{formatPrice(order.total)}</p>
-                    <button className="text-accent hover:text-accent/80 text-sm">
-                      <Eye size={14} className="inline mr-1" />
+                  <div className='text-right'>
+                    <p className='font-medium text-steelpolished-400'>
+                      {formatPrice(order.total)}
+                    </p>
+                    <button className='text-sm text-accent hover:text-accent/80'>
+                      <Eye size={14} className='mr-1 inline' />
                       View
                     </button>
                   </div>
@@ -212,38 +218,40 @@ export default function AdminDashboard() {
         </div>
 
         {/* Top Products */}
-        <div className="bg-steeldark-800 border border-steeldark-600 rounded-lg">
-          <div className="p-6 border-b border-steeldark-600">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-steelpolished-400">Top Products</h2>
-              <Link href="/admin/analytics">
-                <button className="text-accent hover:text-accent/80 text-sm font-medium">
+        <div className='rounded-lg border border-steeldark-600 bg-steeldark-800'>
+          <div className='border-b border-steeldark-600 p-6'>
+            <div className='flex items-center justify-between'>
+              <h2 className='text-xl font-semibold text-steelpolished-400'>Top Products</h2>
+              <Link href='/admin/analytics'>
+                <button className='text-sm font-medium text-accent hover:text-accent/80'>
                   View Analytics
                 </button>
               </Link>
             </div>
           </div>
-          <div className="p-6">
-            <div className="space-y-4">
+          <div className='p-6'>
+            <div className='space-y-4'>
               {topProducts.map((product, index) => (
                 <div
                   key={product.name}
-                  className="flex items-center justify-between p-4 bg-steeldark-700/50 rounded-lg"
+                  className='flex items-center justify-between rounded-lg bg-steeldark-700/50 p-4'
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center">
-                      <span className="text-accent font-medium text-sm">#{index + 1}</span>
+                  <div className='flex items-center gap-3'>
+                    <div className='flex h-8 w-8 items-center justify-center rounded-lg bg-accent/10'>
+                      <span className='text-sm font-medium text-accent'>#{index + 1}</span>
                     </div>
                     <div>
-                      <p className="font-medium text-steelpolished-400">{product.name}</p>
-                      <p className="text-sm text-steelpolished-500">
+                      <p className='font-medium text-steelpolished-400'>{product.name}</p>
+                      <p className='text-sm text-steelpolished-500'>
                         {product.type.replace('_', ' ').replace('digital ', '')}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <p className="font-medium text-steelpolished-400">{formatPrice(product.revenue)}</p>
-                    <p className="text-sm text-steelpolished-500">{product.sales} sales</p>
+                  <div className='text-right'>
+                    <p className='font-medium text-steelpolished-400'>
+                      {formatPrice(product.revenue)}
+                    </p>
+                    <p className='text-sm text-steelpolished-500'>{product.sales} sales</p>
                   </div>
                 </div>
               ))}
@@ -253,46 +261,46 @@ export default function AdminDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-steeldark-800 border border-steeldark-600 rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-steelpolished-400 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Link href="/admin/products/new">
-            <div className="p-4 bg-steeldark-700/50 rounded-lg hover:bg-steeldark-700 transition-colors cursor-pointer">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-accent/10 rounded-lg">
-                  <Plus size={20} className="text-accent" />
+      <div className='rounded-lg border border-steeldark-600 bg-steeldark-800 p-6'>
+        <h2 className='mb-4 text-xl font-semibold text-steelpolished-400'>Quick Actions</h2>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+          <Link href='/admin/products/new'>
+            <div className='cursor-pointer rounded-lg bg-steeldark-700/50 p-4 transition-colors hover:bg-steeldark-700'>
+              <div className='flex items-center gap-3'>
+                <div className='rounded-lg bg-accent/10 p-2'>
+                  <Plus size={20} className='text-accent' />
                 </div>
                 <div>
-                  <h3 className="font-medium text-steelpolished-400">Add New Product</h3>
-                  <p className="text-sm text-steelpolished-500">Create a new product listing</p>
+                  <h3 className='font-medium text-steelpolished-400'>Add New Product</h3>
+                  <p className='text-sm text-steelpolished-500'>Create a new product listing</p>
                 </div>
               </div>
             </div>
           </Link>
 
-          <Link href="/admin/orders">
-            <div className="p-4 bg-steeldark-700/50 rounded-lg hover:bg-steeldark-700 transition-colors cursor-pointer">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <ShoppingCart size={20} className="text-blue-400" />
+          <Link href='/admin/orders'>
+            <div className='cursor-pointer rounded-lg bg-steeldark-700/50 p-4 transition-colors hover:bg-steeldark-700'>
+              <div className='flex items-center gap-3'>
+                <div className='rounded-lg bg-blue-500/10 p-2'>
+                  <ShoppingCart size={20} className='text-blue-400' />
                 </div>
                 <div>
-                  <h3 className="font-medium text-steelpolished-400">Manage Orders</h3>
-                  <p className="text-sm text-steelpolished-500">Process and track orders</p>
+                  <h3 className='font-medium text-steelpolished-400'>Manage Orders</h3>
+                  <p className='text-sm text-steelpolished-500'>Process and track orders</p>
                 </div>
               </div>
             </div>
           </Link>
 
-          <Link href="/admin/analytics">
-            <div className="p-4 bg-steeldark-700/50 rounded-lg hover:bg-steeldark-700 transition-colors cursor-pointer">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-green-500/10 rounded-lg">
-                  <TrendingUp size={20} className="text-green-400" />
+          <Link href='/admin/analytics'>
+            <div className='cursor-pointer rounded-lg bg-steeldark-700/50 p-4 transition-colors hover:bg-steeldark-700'>
+              <div className='flex items-center gap-3'>
+                <div className='rounded-lg bg-green-500/10 p-2'>
+                  <TrendingUp size={20} className='text-green-400' />
                 </div>
                 <div>
-                  <h3 className="font-medium text-steelpolished-400">View Analytics</h3>
-                  <p className="text-sm text-steelpolished-500">Check sales and performance</p>
+                  <h3 className='font-medium text-steelpolished-400'>View Analytics</h3>
+                  <p className='text-sm text-steelpolished-500'>Check sales and performance</p>
                 </div>
               </div>
             </div>
@@ -301,27 +309,27 @@ export default function AdminDashboard() {
       </div>
 
       {/* System Status */}
-      <div className="bg-steeldark-800 border border-steeldark-600 rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-steelpolished-400 mb-4">System Status</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="flex items-center justify-between p-3 bg-steeldark-700/50 rounded-lg">
-            <span className="text-steelpolished-500">Payment Gateway</span>
-            <span className="flex items-center gap-2 text-green-400">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+      <div className='rounded-lg border border-steeldark-600 bg-steeldark-800 p-6'>
+        <h2 className='mb-4 text-xl font-semibold text-steelpolished-400'>System Status</h2>
+        <div className='grid grid-cols-1 gap-4 md:grid-cols-3'>
+          <div className='flex items-center justify-between rounded-lg bg-steeldark-700/50 p-3'>
+            <span className='text-steelpolished-500'>Payment Gateway</span>
+            <span className='flex items-center gap-2 text-green-400'>
+              <div className='h-2 w-2 rounded-full bg-green-400' />
               Online
             </span>
           </div>
-          <div className="flex items-center justify-between p-3 bg-steeldark-700/50 rounded-lg">
-            <span className="text-steelpolished-500">Digital Delivery</span>
-            <span className="flex items-center gap-2 text-green-400">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+          <div className='flex items-center justify-between rounded-lg bg-steeldark-700/50 p-3'>
+            <span className='text-steelpolished-500'>Digital Delivery</span>
+            <span className='flex items-center gap-2 text-green-400'>
+              <div className='h-2 w-2 rounded-full bg-green-400' />
               Active
             </span>
           </div>
-          <div className="flex items-center justify-between p-3 bg-steeldark-700/50 rounded-lg">
-            <span className="text-steelpolished-500">Print Shop</span>
-            <span className="flex items-center gap-2 text-yellow-400">
-              <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+          <div className='flex items-center justify-between rounded-lg bg-steeldark-700/50 p-3'>
+            <span className='text-steelpolished-500'>Print Shop</span>
+            <span className='flex items-center gap-2 text-yellow-400'>
+              <div className='h-2 w-2 rounded-full bg-yellow-400' />
               Setup Required
             </span>
           </div>

@@ -7,65 +7,7 @@ import urlForImage from '@/lib/util/urlForImage';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGesture } from '@use-gesture/react';
 import PhotoDetailsPanel from './PhotoDetailsPanel';
-
-export interface PhotoData {
-  asset: {
-    _ref: string;
-  };
-  alt?: string;
-  title?: string;
-  location?:
-    | string
-    | {
-        venue?: string;
-        city?: string;
-        state?: string;
-        country?: string;
-      };
-  dateTaken?: string;
-  description?: string;
-  tags?: string[];
-  photographer?: string;
-  gallery?: {
-    title: string;
-    slug: string;
-    type: 'photoshoot' | 'event' | 'showcase';
-  };
-  cameraSettings?: {
-    camera?: string;
-    lens?: string;
-    focalLength?: string;
-    aperture?: string;
-    shutterSpeed?: string;
-    iso?: string;
-    flashUsed?: boolean;
-    flashDetails?: string;
-    shootingMode?: 'manual' | 'aperture_priority' | 'shutter_priority' | 'program' | 'auto';
-    meteringMode?: 'matrix' | 'center_weighted' | 'spot';
-    whiteBalance?: 'auto' | 'daylight' | 'cloudy' | 'tungsten' | 'fluorescent' | 'custom';
-    fileFormat?: 'raw' | 'jpeg' | 'raw_jpeg';
-  };
-  printOptions?: {
-    available: boolean;
-    featured?: boolean;
-    limitedEdition?: boolean;
-    editionSize?: number;
-    printsSold?: number;
-    basePrice?: number;
-    sizes?: string[];
-    pricingTiers?: Array<{
-      size: string;
-      material: string;
-      price: number;
-      available: boolean;
-    }>;
-    printDescription?: string;
-    printId?: string;
-    printfulId?: string;
-    printifyId?: string;
-    shippingNotes?: string;
-  };
-}
+import { PhotoData } from '@/types/lightbox';
 
 interface PhotoLightboxProps {
   photos: PhotoData[];
@@ -246,7 +188,7 @@ export default function PhotoLightbox({
               >
                 {isLoading && (
                   <div className='absolute inset-0 flex items-center justify-center'>
-                    <div className='h-8 w-8 animate-spin rounded-full border-2 border-steelpolished-400 border-t-transparent'></div>
+                    <div className='h-8 w-8 animate-spin rounded-full border-2 border-steelpolished-400 border-t-transparent' />
                   </div>
                 )}
 

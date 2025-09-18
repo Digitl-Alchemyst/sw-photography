@@ -2,7 +2,8 @@
 
 import { useMemo } from 'react';
 import GalleryPhoto from './GalleryPhoto';
-import PhotoLightbox, { PhotoData } from '@/components/lightbox/PhotoLightbox';
+import PhotoLightbox from '@/components/lightbox/PhotoLightbox';
+import { PhotoData } from '@/types/lightbox';
 import useLightbox from '@/hooks/useLightbox';
 import {
   PopulatedGallery,

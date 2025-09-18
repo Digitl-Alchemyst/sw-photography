@@ -6,7 +6,7 @@ import { client } from '@/lib/sanity/client';
 
 const webhookSecret = process.env.CLERK_WEBHOOK_SECRET;
 
-export async function POST(req: NextRequest) {
+async function POST(req: NextRequest) {
   // Check if webhook secret is available
   if (!webhookSecret) {
     return new Response('Webhook secret not configured', {
@@ -180,3 +180,6 @@ async function handleUserDeleted(userData: any) {
     throw error;
   }
 }
+
+// eslint-disable-next-line import/prefer-default-export
+export { POST };

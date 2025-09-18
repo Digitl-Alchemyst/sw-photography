@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ShoppingCart } from 'lucide-react';
 import urlForImage from '@/lib/util/urlForImage';
-import { PhotoData } from '@/components/lightbox/PhotoLightbox';
+import { PhotoData } from '@/types/lightbox';
 import { usePrintShop } from '@/contexts/PrintShopContext';
 
 interface GalleryPhotoProps {

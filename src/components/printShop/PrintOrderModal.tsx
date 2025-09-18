@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, ShoppingCart } from 'lucide-react';
-import { PhotoData } from '@/components/lightbox/PhotoLightbox';
+import Image from 'next/image';
+import { PhotoData } from '@/types/lightbox';
 import {
   PRINT_SIZES,
   PRINT_MATERIALS,
@@ -130,9 +131,11 @@ export default function PrintOrderModal({ photo, isOpen, onClose }: PrintOrderMo
               {/* Photo Preview */}
               <div className='flex gap-4'>
                 <div className='h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-steeldark-700'>
-                  <img
-                    src={urlForImage(photo as any)?.url() || ''}
+                  <Image
+                    src={urlForImage(photo as any)?.url() || '/placeholder-product.jpg'}
                     alt={photo.alt || 'Photo preview'}
+                    width={96}
+                    height={96}
                     className='h-full w-full object-cover'
                   />
                 </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useUser } from '@clerk/nextjs';
 import {
@@ -22,13 +22,7 @@ export default function AccountDownloadsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (user) {
-      loadDownloadLinks();
-    }
-  }, [user]);
-
-  const loadDownloadLinks = async () => {
+  const loadDownloadLinks = useCallback(async () => {
     if (!user) return;
 
     setLoading(true);
@@ -42,7 +36,13 @@ export default function AccountDownloadsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      loadDownloadLinks();
+    }
+  }, [user, loadDownloadLinks]);
 
   const formatTimeRemaining = (expiresAt: Date): string => {
     const now = new Date();
@@ -96,7 +96,7 @@ export default function AccountDownloadsPage() {
         <main className='min-h-screen w-full bg-steeldark-600 text-steelpolished-400'>
           <div className='mx-auto max-w-6xl px-6 py-12'>
             <div className='text-center'>
-              <div className='mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent'></div>
+              <div className='mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent' />
               <h1 className='mb-2 text-2xl font-bold text-steelpolished-400'>Loading Downloads</h1>
               <p className='text-steelpolished-500'>
                 Please wait while we fetch your download history...
@@ -145,8 +145,8 @@ export default function AccountDownloadsPage() {
               <Package size={64} className='mx-auto mb-6 text-steelpolished-500' />
               <h2 className='mb-4 text-2xl font-bold text-steelpolished-400'>No Downloads Yet</h2>
               <p className='mx-auto mb-8 max-w-md text-steelpolished-500'>
-                You haven't purchased any digital products yet. Browse our collection of presets
-                and LUTs to get started.
+                You haven&apos;t purchased any digital products yet. Browse our collection of
+                presets and LUTs to get started.
               </p>
               <Link href='/shop'>
                 <button className='rounded-lg bg-accent px-6 py-3 text-white transition-colors hover:bg-accent/90'>
@@ -303,7 +303,7 @@ export default function AccountDownloadsPage() {
                   >
                     support@swphotography.com
                   </a>{' '}
-                  and we'll help you out.
+                  and we&apos;ll help you out.
                 </p>
               </div>
             </div>

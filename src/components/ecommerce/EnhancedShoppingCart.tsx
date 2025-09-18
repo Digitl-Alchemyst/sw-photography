@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Plus, Minus, Trash2, ShoppingBag, Package, Download, CreditCard } from 'lucide-react';
+import Image from 'next/image';
 import { usePrintShop } from '@/contexts/PrintShopContext';
 import { PRODUCT_TYPE_CONFIG } from '@/types/printShop';
 
@@ -98,13 +99,12 @@ export default function EnhancedShoppingCart({ isOpen, onClose }: EnhancedShoppi
                         {/* Item Header */}
                         <div className='flex items-start gap-3'>
                           <div className='h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg bg-steeldark-700'>
-                            <img
-                              src={item.productImage}
+                            <Image
+                              src={item.productImage || '/placeholder-product.jpg'}
                               alt={item.productName}
+                              width={64}
+                              height={64}
                               className='h-full w-full object-cover'
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src = '/placeholder-product.jpg';
-                              }}
                             />
                           </div>
                           <div className='min-w-0 flex-1'>

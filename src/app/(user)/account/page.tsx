@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useUser, SignOutButton } from '@clerk/nextjs';
 import {
   User,
@@ -134,7 +135,7 @@ export default function AccountPage() {
       <main className='min-h-screen w-full bg-steeldark-600 text-steelpolished-400'>
         <div className='flex min-h-screen items-center justify-center'>
           <div className='text-center'>
-            <div className='mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent'></div>
+            <div className='mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-accent border-t-transparent' />
             <p className='text-steelpolished-500'>Loading...</p>
           </div>
         </div>
@@ -232,9 +233,11 @@ export default function AccountPage() {
               <div className='mb-4 flex items-center gap-4'>
                 <div className='flex h-16 w-16 items-center justify-center rounded-full bg-accent'>
                   {user.imageUrl ? (
-                    <img
+                    <Image
                       src={user.imageUrl}
                       alt='Profile'
+                      width={64}
+                      height={64}
                       className='h-full w-full rounded-full object-cover'
                     />
                   ) : (

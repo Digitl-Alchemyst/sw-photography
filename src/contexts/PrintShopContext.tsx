@@ -1,6 +1,13 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  ReactNode,
+} from 'react';
 import { CartItem, Product, CartItemVariant } from '@/types/printShop';
 import { getCartService, CartSummary } from '@/lib/ecommerce/cartService';
 
@@ -40,6 +47,14 @@ export function PrintShopProvider({ children }: PrintShopProviderProps) {
 
   const cartService = getCartService();
 
+  const updateCartState = useCallback(() => {
+    const currentCart = cartService.getCart();
+    const currentSummary = cartService.getCartSummary();
+
+    setCart(currentCart);
+    setCartSummary(currentSummary);
+  }, [cartService]);
+
   // Load cart data on mount and subscribe to changes
   useEffect(() => {
     updateCartState();
@@ -50,15 +65,7 @@ export function PrintShopProvider({ children }: PrintShopProviderProps) {
     });
 
     return unsubscribe;
-  }, [cartService]);
-
-  const updateCartState = () => {
-    const currentCart = cartService.getCart();
-    const currentSummary = cartService.getCartSummary();
-
-    setCart(currentCart);
-    setCartSummary(currentSummary);
-  };
+  }, [cartService, updateCartState]);
 
   const addToCart = (product: Product, quantity: number = 1, variant?: CartItemVariant) => {
     try {
